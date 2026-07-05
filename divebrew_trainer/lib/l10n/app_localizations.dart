@@ -325,6 +325,96 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'세션 완료. 수고했어요'**
   String get voiceSessionFinished;
+
+  /// No description provided for @onboardingTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'시작하기 전에,\n저와 약속 하나만 해요'**
+  String get onboardingTitle;
+
+  /// No description provided for @onboardingIntro.
+  ///
+  /// In ko, this message translates to:
+  /// **'저도 매번 지키는 네 가지예요. 함께 지켜야 훈련을 시작할 수 있어요.'**
+  String get onboardingIntro;
+
+  /// No description provided for @onboardingDryOnly.
+  ///
+  /// In ko, this message translates to:
+  /// **'물 밖에서만 훈련할게요'**
+  String get onboardingDryOnly;
+
+  /// No description provided for @onboardingDryOnlyDetail.
+  ///
+  /// In ko, this message translates to:
+  /// **'이 앱은 드라이(물 밖) 전용이에요. 저도 물속 연습은 꼭 교육받고 버디와 함께해요.'**
+  String get onboardingDryOnlyDetail;
+
+  /// No description provided for @onboardingNoHyperventilation.
+  ///
+  /// In ko, this message translates to:
+  /// **'몰아쉬기(과호흡)는 하지 않을게요'**
+  String get onboardingNoHyperventilation;
+
+  /// No description provided for @onboardingNoHyperventilationDetail.
+  ///
+  /// In ko, this message translates to:
+  /// **'저도 급하게 몰아쉬던 시절이 있었는데, 편안한 호흡이 더 오래 더 안전하게 가더라고요.'**
+  String get onboardingNoHyperventilationDetail;
+
+  /// No description provided for @onboardingSeatedOnLand.
+  ///
+  /// In ko, this message translates to:
+  /// **'앉거나 누워서, 땅 위에서만 할게요'**
+  String get onboardingSeatedOnLand;
+
+  /// No description provided for @onboardingSeatedOnLandDetail.
+  ///
+  /// In ko, this message translates to:
+  /// **'저도 항상 소파에 앉아서 해요. 서서 하다 어지러우면 크게 다칠 수 있거든요.'**
+  String get onboardingSeatedOnLandDetail;
+
+  /// No description provided for @onboardingStopWhenDizzy.
+  ///
+  /// In ko, this message translates to:
+  /// **'조금이라도 어지러우면 바로 멈출게요'**
+  String get onboardingStopWhenDizzy;
+
+  /// No description provided for @onboardingStopWhenDizzyDetail.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록보다 몸이 먼저예요. 저도 이상하다 싶으면 그날 훈련은 접어요.'**
+  String get onboardingStopWhenDizzyDetail;
+
+  /// No description provided for @onboardingAgreeButton.
+  ///
+  /// In ko, this message translates to:
+  /// **'네, 약속할게요'**
+  String get onboardingAgreeButton;
+
+  /// No description provided for @safetyReminder1.
+  ///
+  /// In ko, this message translates to:
+  /// **'오늘도 앉아서, 물 밖에서 해요. 저도 소파에서 하고 있어요.'**
+  String get safetyReminder1;
+
+  /// No description provided for @safetyReminder2.
+  ///
+  /// In ko, this message translates to:
+  /// **'시작 전 몰아쉬기 금지예요. 편안한 호흡 몇 번이면 충분해요.'**
+  String get safetyReminder2;
+
+  /// No description provided for @safetyReminder3.
+  ///
+  /// In ko, this message translates to:
+  /// **'어지러우면 바로 중단 버튼이에요. 기록은 다음에 또 세우면 돼요.'**
+  String get safetyReminder3;
+
+  /// No description provided for @safetyReminder4.
+  ///
+  /// In ko, this message translates to:
+  /// **'숨참기는 절대 물속에서 연습하지 않아요. 저도 바다는 버디랑만 가요.'**
+  String get safetyReminder4;
 }
 
 class _AppLocalizationsDelegate

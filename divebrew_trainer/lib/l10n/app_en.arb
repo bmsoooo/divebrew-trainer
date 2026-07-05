@@ -88,5 +88,20 @@
   "sessionStart": "Start session",
   "voiceHoldStart": "Hold your breath",
   "voiceBreathe": "Breathe",
-  "voiceSessionFinished": "Session complete. Well done"
+  "voiceSessionFinished": "Session complete. Well done",
+  "onboardingTitle": "Before we start,\nlet's make a promise",
+  "onboardingIntro": "Four things I keep every single session. We both need to keep them to train.",
+  "onboardingDryOnly": "I'll only train out of the water",
+  "onboardingDryOnlyDetail": "This app is dry-training only. Even I only practice in water with proper training and a buddy.",
+  "onboardingNoHyperventilation": "I won't hyperventilate",
+  "onboardingNoHyperventilationDetail": "I used to over-breathe too — relaxed breathing takes you further, safely.",
+  "onboardingSeatedOnLand": "I'll sit or lie down, on land only",
+  "onboardingSeatedOnLandDetail": "I always do this on my couch. Standing up and getting dizzy can hurt you badly.",
+  "onboardingStopWhenDizzy": "I'll stop the moment I feel dizzy",
+  "onboardingStopWhenDizzyDetail": "Your body comes before any record. When something feels off, I call it a day.",
+  "onboardingAgreeButton": "Yes, I promise",
+  "safetyReminder1": "Seated, out of the water — that's how I'm doing it today too.",
+  "safetyReminder2": "No heavy over-breathing before we start. A few relaxed breaths are enough.",
+  "safetyReminder3": "Feeling dizzy? That's what the stop button is for. Records can wait.",
+  "safetyReminder4": "Never practice breath-holds in water. Even I only go with a buddy."
 }

@@ -45,6 +45,15 @@ class Sessions extends Table {
   TextColumn get note => text().nullable()();
 }
 
+/// 앱 설정 key-value 저장소 (안전 동의 여부 등).
+class Settings extends Table {
+  TextColumn get key => text()();
+  TextColumn get value => text()();
+
+  @override
+  Set<Column> get primaryKey => {key};
+}
+
 /// 종류별 개인 최고 기록 (PB).
 class PersonalBests extends Table {
   TextColumn get type => textEnum<TableType>()();

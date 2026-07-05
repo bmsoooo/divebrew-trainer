@@ -48,15 +48,23 @@ class _SessionScreenState extends State<SessionScreen> {
   String get _voiceLang =>
       Localizations.localeOf(context).languageCode == 'ko' ? 'ko-KR' : 'en-US';
 
+  /// 세션 누적 수 기반 안전 리마인더 로테이션 인덱스 (0~3).
+  int _reminderIndex = 0;
+
   Future<void> _start() async {
     final table = await (widget.db.select(widget.db.trainingTables)
           ..where((t) => t.id.equals(widget.tableId)))
         .getSingle();
+    final sessionCount = await widget.db
+        .customSelect('SELECT COUNT(*) AS c FROM sessions')
+        .getSingle()
+        .then((row) => row.read<int>('c'));
     if (!mounted) return;
 
     final engine = SessionEngine(rounds: table.rounds);
     engine.start();
     setState(() {
+      _reminderIndex = sessionCount % 4;
       _engine = engine;
       _startedAt = DateTime.now();
     });
@@ -159,6 +167,22 @@ class _SessionScreenState extends State<SessionScreen> {
               l10n.sessionRoundProgress(engine.currentRound, engine.totalRounds),
               style: Theme.of(context).textTheme.titleMedium,
             ),
+            // 세션 시작 리마인더 — 첫 라운드 준비 호흡 동안 1줄 로테이션 (A4).
+            if (engine.currentRound == 1 && !isHolding)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+                child: Text(
+                  '⚠️ ${switch (_reminderIndex) {
+                    0 => l10n.safetyReminder1,
+                    1 => l10n.safetyReminder2,
+                    2 => l10n.safetyReminder3,
+                    _ => l10n.safetyReminder4,
+                  }}',
+                  key: const ValueKey('safety-reminder'),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
             const Spacer(),
             Text(
               isHolding ? l10n.sessionPhaseHolding : l10n.sessionPhasePreparing,

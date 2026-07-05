@@ -133,4 +133,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get voiceSessionFinished => 'Session complete. Well done';
+
+  @override
+  String get onboardingTitle => 'Before we start,\nlet\'s make a promise';
+
+  @override
+  String get onboardingIntro =>
+      'Four things I keep every single session. We both need to keep them to train.';
+
+  @override
+  String get onboardingDryOnly => 'I\'ll only train out of the water';
+
+  @override
+  String get onboardingDryOnlyDetail =>
+      'This app is dry-training only. Even I only practice in water with proper training and a buddy.';
+
+  @override
+  String get onboardingNoHyperventilation => 'I won\'t hyperventilate';
+
+  @override
+  String get onboardingNoHyperventilationDetail =>
+      'I used to over-breathe too — relaxed breathing takes you further, safely.';
+
+  @override
+  String get onboardingSeatedOnLand => 'I\'ll sit or lie down, on land only';
+
+  @override
+  String get onboardingSeatedOnLandDetail =>
+      'I always do this on my couch. Standing up and getting dizzy can hurt you badly.';
+
+  @override
+  String get onboardingStopWhenDizzy => 'I\'ll stop the moment I feel dizzy';
+
+  @override
+  String get onboardingStopWhenDizzyDetail =>
+      'Your body comes before any record. When something feels off, I call it a day.';
+
+  @override
+  String get onboardingAgreeButton => 'Yes, I promise';
+
+  @override
+  String get safetyReminder1 =>
+      'Seated, out of the water — that\'s how I\'m doing it today too.';
+
+  @override
+  String get safetyReminder2 =>
+      'No heavy over-breathing before we start. A few relaxed breaths are enough.';
+
+  @override
+  String get safetyReminder3 =>
+      'Feeling dizzy? That\'s what the stop button is for. Records can wait.';
+
+  @override
+  String get safetyReminder4 =>
+      'Never practice breath-holds in water. Even I only go with a buddy.';
 }
