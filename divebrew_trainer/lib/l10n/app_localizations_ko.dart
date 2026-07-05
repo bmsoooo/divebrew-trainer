@@ -82,4 +82,46 @@ class AppLocalizationsKo extends AppLocalizations {
   String tableRoundsSummary(int count, String duration) {
     return '$count라운드 · $duration';
   }
+
+  @override
+  String sessionRoundProgress(int current, int total) {
+    return '라운드 $current/$total';
+  }
+
+  @override
+  String get sessionPhasePreparing => '준비 호흡';
+
+  @override
+  String get sessionPhaseHolding => '숨참기';
+
+  @override
+  String get sessionContractionTap => '컨트랙션';
+
+  @override
+  String get sessionEndHoldEarly => '숨 쉬었어요';
+
+  @override
+  String get sessionStop => '중단';
+
+  @override
+  String get sessionFinished => '세션 완료!';
+
+  @override
+  String get sessionStopped => '세션을 중단했어요';
+
+  @override
+  String sessionResultRound(int number, int holdSec) {
+    return '라운드 $number: $holdSec초';
+  }
+
+  @override
+  String sessionResultContractions(int count) {
+    return '컨트랙션 $count회';
+  }
+
+  @override
+  String get sessionBackHome => '홈으로';
+
+  @override
+  String get sessionStart => '세션 시작';
 }

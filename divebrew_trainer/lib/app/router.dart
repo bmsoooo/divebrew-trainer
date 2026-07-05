@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/database.dart';
 import '../features/home/home_screen.dart';
+import '../features/session/session_screen.dart';
 import '../features/tables/table_edit_screen.dart';
 import '../features/tables/table_list_screen.dart';
 
@@ -19,6 +20,13 @@ GoRouter createRouter(AppDatabase db) => GoRouter(
         GoRoute(
           path: '/tables/new',
           builder: (context, state) => TableEditScreen(db: db),
+        ),
+        GoRoute(
+          path: '/session/:tableId',
+          builder: (context, state) => SessionScreen(
+            db: db,
+            tableId: int.parse(state.pathParameters['tableId']!),
+          ),
         ),
         GoRoute(
           path: '/tables/edit/:id',

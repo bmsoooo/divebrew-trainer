@@ -16,7 +16,9 @@
   "tableEditRound": "Round {number}",
   "@tableEditRound": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "tableEditBreathSec": "Breathe (sec)",
@@ -27,7 +29,9 @@
   "tableEditTotalDuration": "Total duration: {duration}",
   "@tableEditTotalDuration": {
     "placeholders": {
-      "duration": {"type": "String"}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "tableEditNeedName": "Please enter a table name",
@@ -35,8 +39,51 @@
   "tableRoundsSummary": "{count} rounds · {duration}",
   "@tableRoundsSummary": {
     "placeholders": {
-      "count": {"type": "int"},
-      "duration": {"type": "String"}
+      "count": {
+        "type": "int"
+      },
+      "duration": {
+        "type": "String"
+      }
     }
-  }
+  },
+  "sessionRoundProgress": "Round {current}/{total}",
+  "@sessionRoundProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionPhasePreparing": "Breathe",
+  "sessionPhaseHolding": "Hold",
+  "sessionContractionTap": "Contraction",
+  "sessionEndHoldEarly": "I breathed",
+  "sessionStop": "Stop",
+  "sessionFinished": "Session complete!",
+  "sessionStopped": "Session stopped",
+  "sessionResultRound": "Round {number}: {holdSec}s",
+  "@sessionResultRound": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "holdSec": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionResultContractions": "{count} contractions",
+  "@sessionResultContractions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionBackHome": "Home",
+  "sessionStart": "Start session"
 }

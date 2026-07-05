@@ -82,4 +82,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String tableRoundsSummary(int count, String duration) {
     return '$count rounds · $duration';
   }
+
+  @override
+  String sessionRoundProgress(int current, int total) {
+    return 'Round $current/$total';
+  }
+
+  @override
+  String get sessionPhasePreparing => 'Breathe';
+
+  @override
+  String get sessionPhaseHolding => 'Hold';
+
+  @override
+  String get sessionContractionTap => 'Contraction';
+
+  @override
+  String get sessionEndHoldEarly => 'I breathed';
+
+  @override
+  String get sessionStop => 'Stop';
+
+  @override
+  String get sessionFinished => 'Session complete!';
+
+  @override
+  String get sessionStopped => 'Session stopped';
+
+  @override
+  String sessionResultRound(int number, int holdSec) {
+    return 'Round $number: ${holdSec}s';
+  }
+
+  @override
+  String sessionResultContractions(int count) {
+    return '$count contractions';
+  }
+
+  @override
+  String get sessionBackHome => 'Home';
+
+  @override
+  String get sessionStart => 'Start session';
 }

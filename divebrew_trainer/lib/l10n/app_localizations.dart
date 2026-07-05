@@ -235,6 +235,78 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'{count}라운드 · {duration}'**
   String tableRoundsSummary(int count, String duration);
+
+  /// No description provided for @sessionRoundProgress.
+  ///
+  /// In ko, this message translates to:
+  /// **'라운드 {current}/{total}'**
+  String sessionRoundProgress(int current, int total);
+
+  /// No description provided for @sessionPhasePreparing.
+  ///
+  /// In ko, this message translates to:
+  /// **'준비 호흡'**
+  String get sessionPhasePreparing;
+
+  /// No description provided for @sessionPhaseHolding.
+  ///
+  /// In ko, this message translates to:
+  /// **'숨참기'**
+  String get sessionPhaseHolding;
+
+  /// No description provided for @sessionContractionTap.
+  ///
+  /// In ko, this message translates to:
+  /// **'컨트랙션'**
+  String get sessionContractionTap;
+
+  /// No description provided for @sessionEndHoldEarly.
+  ///
+  /// In ko, this message translates to:
+  /// **'숨 쉬었어요'**
+  String get sessionEndHoldEarly;
+
+  /// No description provided for @sessionStop.
+  ///
+  /// In ko, this message translates to:
+  /// **'중단'**
+  String get sessionStop;
+
+  /// No description provided for @sessionFinished.
+  ///
+  /// In ko, this message translates to:
+  /// **'세션 완료!'**
+  String get sessionFinished;
+
+  /// No description provided for @sessionStopped.
+  ///
+  /// In ko, this message translates to:
+  /// **'세션을 중단했어요'**
+  String get sessionStopped;
+
+  /// No description provided for @sessionResultRound.
+  ///
+  /// In ko, this message translates to:
+  /// **'라운드 {number}: {holdSec}초'**
+  String sessionResultRound(int number, int holdSec);
+
+  /// No description provided for @sessionResultContractions.
+  ///
+  /// In ko, this message translates to:
+  /// **'컨트랙션 {count}회'**
+  String sessionResultContractions(int count);
+
+  /// No description provided for @sessionBackHome.
+  ///
+  /// In ko, this message translates to:
+  /// **'홈으로'**
+  String get sessionBackHome;
+
+  /// No description provided for @sessionStart.
+  ///
+  /// In ko, this message translates to:
+  /// **'세션 시작'**
+  String get sessionStart;
 }
 
 class _AppLocalizationsDelegate

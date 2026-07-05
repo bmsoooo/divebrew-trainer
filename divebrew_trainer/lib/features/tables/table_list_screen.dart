@@ -48,9 +48,15 @@ class TableListScreen extends StatelessWidget {
                     table.rounds.length,
                     _formatDuration(totalDurationSec(table.rounds)),
                   )),
-                  onTap: table.isPreset
+                  trailing: table.isPreset
                       ? null
-                      : () => context.go('/tables/edit/${table.id}'),
+                      : IconButton(
+                          key: ValueKey('edit-${table.id}'),
+                          icon: const Icon(Icons.edit_outlined),
+                          onPressed: () =>
+                              context.go('/tables/edit/${table.id}'),
+                        ),
+                  onTap: () => context.go('/session/${table.id}'),
                 ),
             ],
           );

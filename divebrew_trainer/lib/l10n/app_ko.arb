@@ -16,7 +16,9 @@
   "tableEditRound": "라운드 {number}",
   "@tableEditRound": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "tableEditBreathSec": "준비 호흡(초)",
@@ -27,7 +29,9 @@
   "tableEditTotalDuration": "총 훈련 시간: {duration}",
   "@tableEditTotalDuration": {
     "placeholders": {
-      "duration": {"type": "String"}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "tableEditNeedName": "테이블 이름을 입력해주세요",
@@ -35,8 +39,51 @@
   "tableRoundsSummary": "{count}라운드 · {duration}",
   "@tableRoundsSummary": {
     "placeholders": {
-      "count": {"type": "int"},
-      "duration": {"type": "String"}
+      "count": {
+        "type": "int"
+      },
+      "duration": {
+        "type": "String"
+      }
     }
-  }
+  },
+  "sessionRoundProgress": "라운드 {current}/{total}",
+  "@sessionRoundProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionPhasePreparing": "준비 호흡",
+  "sessionPhaseHolding": "숨참기",
+  "sessionContractionTap": "컨트랙션",
+  "sessionEndHoldEarly": "숨 쉬었어요",
+  "sessionStop": "중단",
+  "sessionFinished": "세션 완료!",
+  "sessionStopped": "세션을 중단했어요",
+  "sessionResultRound": "라운드 {number}: {holdSec}초",
+  "@sessionResultRound": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "holdSec": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionResultContractions": "컨트랙션 {count}회",
+  "@sessionResultContractions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionBackHome": "홈으로",
+  "sessionStart": "세션 시작"
 }
