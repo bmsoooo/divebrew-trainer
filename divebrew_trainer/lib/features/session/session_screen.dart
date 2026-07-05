@@ -1,4 +1,4 @@
-// 세션 실행 화면 — 대형 타이머, 라운드 진행, 컨트랙션 탭, 1탭 중단 (A4: 중단 버튼 상시 노출·확인 팝업 없음)
+// 세션 실행 화면 — 대형 타이머, 라운드 타임라인, 일시정지/재개, 컨트랙션 탭, 1탭 중단 (A4: 중단 버튼 상시 노출·확인 팝업 없음)
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../data/database.dart';
 import '../../data/models.dart';
+import '../tables/round_timeline.dart';
 import 'session_engine.dart';
 import 'voice_guide.dart';
 import 'wake_lock.dart';
@@ -71,6 +72,10 @@ class _SessionScreenState extends State<SessionScreen> {
       _startedAt = DateTime.now();
     });
     _wakeLock.acquire();
+    _startTimer();
+  }
+
+  void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _onTick());
   }
 
@@ -86,8 +91,10 @@ class _SessionScreenState extends State<SessionScreen> {
     if (engine.phase != phaseBefore) _announcePhase(engine.phase);
     if (!engine.isRunning) {
       _timer?.cancel();
-      _wakeLock.release();
-      _saveIfNeeded(completed: engine.phase == SessionPhase.finished);
+      if (!engine.isActive) {
+        _wakeLock.release();
+        _saveIfNeeded(completed: engine.phase == SessionPhase.finished);
+      }
     }
     setState(() {});
   }
@@ -101,6 +108,19 @@ class _SessionScreenState extends State<SessionScreen> {
       _ => null,
     };
     if (text != null) _voice.speak(text, lang: _voiceLang);
+  }
+
+  void _pause() {
+    _timer?.cancel();
+    _engine?.pause();
+    _voice.stop();
+    setState(() {});
+  }
+
+  void _resume() {
+    _engine?.resume();
+    _startTimer();
+    setState(() {});
   }
 
   void _stop() {
@@ -149,7 +169,7 @@ class _SessionScreenState extends State<SessionScreen> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    if (!engine.isRunning) {
+    if (!engine.isActive) {
       return _ResultView(
         engine: engine,
         finished: engine.phase == SessionPhase.finished,
@@ -157,6 +177,7 @@ class _SessionScreenState extends State<SessionScreen> {
     }
 
     final isHolding = engine.phase == SessionPhase.holding;
+    final isPaused = engine.phase == SessionPhase.paused;
 
     return Scaffold(
       body: SafeArea(
@@ -168,7 +189,7 @@ class _SessionScreenState extends State<SessionScreen> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             // 세션 시작 리마인더 — 첫 라운드 준비 호흡 동안 1줄 로테이션 (A4).
-            if (engine.currentRound == 1 && !isHolding)
+            if (engine.currentRound == 1 && !isHolding && !isPaused)
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
                 child: Text(
@@ -183,7 +204,27 @@ class _SessionScreenState extends State<SessionScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
-            const Spacer(),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                children: [
+                  RoundTimeline(
+                    rounds: engine.rounds,
+                    results: engine.results,
+                    currentRoundIndex: engine.currentRound - 1,
+                  ),
+                ],
+              ),
+            ),
+            if (isPaused)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  l10n.sessionPausedLabel,
+                  key: const ValueKey('paused-label'),
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
             Text(
               isHolding ? l10n.sessionPhaseHolding : l10n.sessionPhasePreparing,
               key: const ValueKey('phase-label'),
@@ -195,7 +236,7 @@ class _SessionScreenState extends State<SessionScreen> {
               key: const ValueKey('timer'),
               style: Theme.of(context).textTheme.displayLarge,
             ),
-            const Spacer(),
+            const SizedBox(height: 24),
             if (isHolding) ...[
               FilledButton.tonal(
                 key: const ValueKey('contraction-tap'),
@@ -211,24 +252,39 @@ class _SessionScreenState extends State<SessionScreen> {
                 onPressed: _endHoldEarly,
                 child: Text(l10n.sessionEndHoldEarly),
               ),
+              const SizedBox(height: 12),
             ],
-            const SizedBox(height: 24),
-            // 안전 요구사항: 중단 버튼 상시 노출, 확인 팝업 없이 1탭 종료.
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: OutlinedButton(
-                  key: const ValueKey('stop-session'),
-                  onPressed: _stop,
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.error,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      key: ValueKey(isPaused ? 'resume-session' : 'pause-session'),
+                      onPressed: isPaused ? _resume : _pause,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child:
+                            Text(isPaused ? l10n.sessionResume : l10n.sessionPause),
+                      ),
+                    ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Text(l10n.sessionStop),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    // 안전 요구사항: 중단 버튼 상시 노출, 확인 팝업 없이 1탭 종료.
+                    child: OutlinedButton(
+                      key: const ValueKey('stop-session'),
+                      onPressed: _stop,
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.error,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(l10n.sessionStop),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             const SizedBox(height: 24),

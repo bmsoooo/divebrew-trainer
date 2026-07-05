@@ -145,4 +145,91 @@ void main() {
     expect(e.phase, SessionPhase.finished);
     expect(e.results.single.actualHoldSec, 1);
   });
+
+  group('일시정지/재개', () {
+    test('일시정지 중에는 tick이 시간을 흘리지 않는다', () {
+      final e = started(twoRounds);
+      tickN(e, 3); // 준비 종료 → 홀드 진입, 남은 2초
+      e.tick(); // 홀드 1초 경과, 남은 1초
+
+      e.pause();
+      expect(e.phase, SessionPhase.paused);
+      expect(e.remainingSec, 1);
+
+      e.tick();
+      e.tick();
+      expect(e.phase, SessionPhase.paused);
+      expect(e.remainingSec, 1);
+    });
+
+    test('재개하면 일시정지 전 단계에서 그대로 이어진다', () {
+      final e = started(twoRounds);
+      tickN(e, 3);
+      e.tick();
+
+      e.pause();
+      e.resume();
+      expect(e.phase, SessionPhase.holding);
+      expect(e.remainingSec, 1);
+
+      e.tick();
+      expect(e.phase, SessionPhase.preparing);
+      expect(e.results.single.actualHoldSec, 2);
+    });
+
+    test('일시정지 중 컨트랙션 탭은 무시된다', () {
+      final e = started(twoRounds);
+      tickN(e, 3);
+      e.pause();
+      e.tapContraction();
+      e.resume();
+
+      expect(e.results, isEmpty);
+      e.tick();
+      e.tick();
+      expect(e.results.single.contractionAtMs, isEmpty);
+    });
+
+    test('일시정지 중에도 중단 가능 — 홀드 부분 결과 보존', () {
+      final e = started(twoRounds);
+      tickN(e, 3);
+      e.tick(); // 홀드 1초 경과
+      e.pause();
+      e.stop();
+
+      expect(e.phase, SessionPhase.stopped);
+      expect(e.results.single.actualHoldSec, 1);
+      expect(e.isActive, isFalse);
+    });
+
+    test('준비 호흡 중 일시정지 후 중단 — 결과 없이 종료', () {
+      final e = started(twoRounds);
+      e.pause();
+      e.stop();
+
+      expect(e.phase, SessionPhase.stopped);
+      expect(e.results, isEmpty);
+    });
+
+    test('실행 중이 아니면 pause는 무시된다', () {
+      final e = SessionEngine(rounds: twoRounds);
+      e.pause();
+      expect(e.phase, SessionPhase.idle);
+    });
+
+    test('일시정지 상태가 아니면 resume은 무시된다', () {
+      final e = started(twoRounds);
+      e.resume();
+      expect(e.phase, SessionPhase.preparing);
+    });
+
+    test('isActive는 실행 중·일시정지 모두 true, 종료 상태는 false', () {
+      final e = started(twoRounds);
+      expect(e.isActive, isTrue);
+      e.pause();
+      expect(e.isActive, isTrue);
+      e.stop();
+      expect(e.isActive, isFalse);
+    });
+  });
 }
