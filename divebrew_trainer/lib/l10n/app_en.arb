@@ -131,5 +131,9 @@
   "backupExport": "Export data",
   "backupImport": "Import data",
   "backupImportDone": "Data imported",
-  "backupImportFailed": "Couldn't read that backup file. Please check it"
+  "backupImportFailed": "Couldn't read that backup file. Please check it",
+  "tableDetailStart": "Start",
+  "sessionPause": "Pause",
+  "sessionResume": "Resume",
+  "sessionPausedLabel": "Paused"
 }

@@ -481,6 +481,30 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'백업 파일을 읽지 못했어요. 파일을 확인해주세요'**
   String get backupImportFailed;
+
+  /// No description provided for @tableDetailStart.
+  ///
+  /// In ko, this message translates to:
+  /// **'시작하기'**
+  String get tableDetailStart;
+
+  /// No description provided for @sessionPause.
+  ///
+  /// In ko, this message translates to:
+  /// **'일시정지'**
+  String get sessionPause;
+
+  /// No description provided for @sessionResume.
+  ///
+  /// In ko, this message translates to:
+  /// **'재개'**
+  String get sessionResume;
+
+  /// No description provided for @sessionPausedLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'일시정지됨'**
+  String get sessionPausedLabel;
 }
 
 class _AppLocalizationsDelegate

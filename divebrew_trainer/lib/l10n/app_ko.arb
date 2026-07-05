@@ -131,5 +131,9 @@
   "backupExport": "기록 내보내기",
   "backupImport": "기록 가져오기",
   "backupImportDone": "기록을 가져왔어요",
-  "backupImportFailed": "백업 파일을 읽지 못했어요. 파일을 확인해주세요"
+  "backupImportFailed": "백업 파일을 읽지 못했어요. 파일을 확인해주세요",
+  "tableDetailStart": "시작하기",
+  "sessionPause": "일시정지",
+  "sessionResume": "재개",
+  "sessionPausedLabel": "일시정지됨"
 }

@@ -226,4 +226,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get backupImportFailed =>
       'Couldn\'t read that backup file. Please check it';
+
+  @override
+  String get tableDetailStart => 'Start';
+
+  @override
+  String get sessionPause => 'Pause';
+
+  @override
+  String get sessionResume => 'Resume';
+
+  @override
+  String get sessionPausedLabel => 'Paused';
 }

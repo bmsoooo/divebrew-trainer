@@ -219,4 +219,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get backupImportFailed => '백업 파일을 읽지 못했어요. 파일을 확인해주세요';
+
+  @override
+  String get tableDetailStart => '시작하기';
+
+  @override
+  String get sessionPause => '일시정지';
+
+  @override
+  String get sessionResume => '재개';
+
+  @override
+  String get sessionPausedLabel => '일시정지됨';
 }
