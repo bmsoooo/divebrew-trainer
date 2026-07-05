@@ -2,10 +2,12 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
+import 'models.dart';
+import 'tables.dart';
+
 part 'database.g.dart';
 
-// 테이블은 다음 체크리스트 항목(데이터 모델)에서 추가한다.
-@DriftDatabase(tables: [])
+@DriftDatabase(tables: [TrainingTables, Sessions, PersonalBests])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 

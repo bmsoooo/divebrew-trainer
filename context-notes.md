@@ -81,6 +81,11 @@
 **D17. GitHub 저장소 연결 (2026-07-05)**
 - `bmsoooo/divebrew-trainer` (public), gh CLI 인증 완료. 루트 `.gitignore`로 `.claude/settings.local.json`·`.DS_Store` 제외.
 
+**D18. 데이터 모델 = M1 웹 범위 3종만 (TrainingTable/Session/PersonalBest)**
+- DiveLog는 M5, heartRateSeries는 M4에서 추가 — 웹 단계 선행 구현 금지 원칙(A1) 적용.
+- rounds/results는 JSON 문자열 컬럼 + drift TypeConverter (라운드 수 가변이라 정규화 테이블보다 단순). 컨트랙션은 홀드 시작 기준 ms 오프셋 리스트.
+- PB는 type을 PK로 종류별 1건 upsert.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후
