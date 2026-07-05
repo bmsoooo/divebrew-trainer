@@ -66,6 +66,21 @@
 
 - 프로젝트 위치: `divebrew_trainer/` (프로젝트 루트 하위, `--platforms web --org com.divebrew`)
 
+## 2026-07-05 — GitHub 연결 + dart HTTP hang 우회 확립
+
+**D15. 이 개발 머신에서 dart HTTP 클라이언트는 신뢰 불가 — curl 프리페치 + `pub get --offline`이 공식 우회 경로**
+- 증상: 샌드박스 여부와 무관하게 `pub get`(및 `--example` 하위 호출, sqlite3 훅 다운로드 등) dart HTTP를 쓰는 모든 다운로드가 소켓 0개·CPU 0% 상태로 무한 대기. curl은 항상 정상.
+- 우회 절차: ① `curl https://pub.dev/api/archives/<pkg>-<ver>.tar.gz` 다운로드 → ② `~/.pub-cache/hosted/pub.dev/<pkg>-<ver>/`에 압축 해제 → ③ sha256을 `~/.pub-cache/hosted-hashes/pub.dev/<pkg>-<ver>.sha256`에 **줄바꿈 없이**(printf '%s') 기록 → ④ `flutter pub get --offline`.
+- 주의: 해시 파일에 trailing newline이 있으면 "wrong hash - redownloading" 오류.
+- hang된 `dart pub ... --example` 좀비 프로세스가 남으니 발견 시 kill.
+
+**D16. sqlite3 3.x 네이티브 훅 = pubspec `hooks.user_defines.sqlite3.source: system`으로 다운로드 회피**
+- drift 2.34 → sqlite3 ^3.1.5는 빌드 훅으로 GitHub에서 바이너리를 받는데 D15 증상으로 hang. `source: system` 지정 시 macOS 시스템 libsqlite3를 dlopen (dyld 공유 캐시라 ls로는 안 보여도 정상 로드).
+- build_runner는 Dart 3.10에서 훅 있는 의존성의 AOT 컴파일 불가 → `--force-jit` 필수.
+
+**D17. GitHub 저장소 연결 (2026-07-05)**
+- `bmsoooo/divebrew-trainer` (public), gh CLI 인증 완료. 루트 `.gitignore`로 `.claude/settings.local.json`·`.DS_Store` 제외.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후

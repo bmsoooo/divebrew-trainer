@@ -9,7 +9,7 @@
 - [ ] "divebrew trainer" 스토어·상표 중복 확인 (M3 전까지)
 
 ## M1. 웹 MVP 코어 (Flutter Web)
-- [ ] Flutter 프로젝트 셋업 (웹 타깃 우선, drift WASM, 라우팅)
+- [x] Flutter 프로젝트 셋업 (웹 타깃 우선, drift WASM, 라우팅) — flutter test·build web 통과 (2026-07-05)
 - [ ] 데이터 모델 구현 → verify: 모델 단위 테스트 통과
 - [ ] CO2/O2 프리셋 테이블 + 커스텀 편집 화면 → verify: 라운드 추가/삭제/저장 테스트
 - [ ] PB 기반 테이블 자동 생성 로직 → verify: PB 입력값별 산출 테스트
