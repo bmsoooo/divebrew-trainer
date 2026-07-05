@@ -86,6 +86,14 @@
 - rounds/results는 JSON 문자열 컬럼 + drift TypeConverter (라운드 수 가변이라 정규화 테이블보다 단순). 컨트랙션은 홀드 시작 기준 ms 오프셋 리스트.
 - PB는 type을 PK로 종류별 1건 upsert.
 
+**D19. 프리셋 6종 초기값은 임시 — 운영자(프리다이버) 튜닝 대상**
+- CO2 입문 45s 홀드 6R / 중급 90s 8R / 상급 120s 8R (준비 호흡 10s씩 점감), O2는 준비 120s 고정에 홀드 점증. 구조 규칙(CO2 홀드 고정·호흡 점감, O2 호흡 고정·홀드 점증)은 테스트로 고정, 수치는 `lib/data/presets.dart`에서 수정.
+- 프리셋은 목록에서 편집 진입 불가(isPreset), 시드는 멱등.
+
+**D20. l10n은 gen-l10n 직접 출력 방식 (lib/l10n/ 생성, synthetic package 아님)**
+- Flutter 3.38에서 `flutter_gen` synthetic import 대신 `lib/l10n/app_localizations.dart` 상대 import. 생성 파일 3개는 커밋 대상.
+- 상태 관리 패키지 없이 AppDatabase를 생성자 주입 (테스트에서 인메모리 교체 용이). 필요해지기 전까지 provider류 도입하지 않음.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후

@@ -1,0 +1,42 @@
+{
+  "@@locale": "en",
+  "appTitle": "divebrew trainer",
+  "homeQuickStart": "Quick start",
+  "homeTables": "Training tables",
+  "tableListTitle": "Training tables",
+  "tableListNewCustom": "Create custom table",
+  "tableTypeCo2": "CO2",
+  "tableTypeO2": "O2",
+  "tableTypeStatic": "Static",
+  "tableTypeCustom": "Custom",
+  "tableEditTitleNew": "New custom table",
+  "tableEditTitleEdit": "Edit table",
+  "tableEditName": "Table name",
+  "tableEditNameHint": "e.g. My CO2 table",
+  "tableEditRound": "Round {number}",
+  "@tableEditRound": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "tableEditBreathSec": "Breathe (sec)",
+  "tableEditHoldSec": "Hold (sec)",
+  "tableEditAddRound": "Add round",
+  "tableEditRemoveRound": "Remove round",
+  "tableEditSave": "Save",
+  "tableEditTotalDuration": "Total duration: {duration}",
+  "@tableEditTotalDuration": {
+    "placeholders": {
+      "duration": {"type": "String"}
+    }
+  },
+  "tableEditNeedName": "Please enter a table name",
+  "tableEditNeedRound": "Please add at least one round",
+  "tableRoundsSummary": "{count} rounds · {duration}",
+  "@tableRoundsSummary": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "duration": {"type": "String"}
+    }
+  }
+}

@@ -1,13 +1,31 @@
-// go_router 기반 앱 라우팅 정의 (MVP 6화면의 뼈대, 현재는 홈만 구현)
+// go_router 기반 앱 라우팅 정의 (MVP 6화면의 뼈대)
 import 'package:go_router/go_router.dart';
 
+import '../data/database.dart';
 import '../features/home/home_screen.dart';
+import '../features/tables/table_edit_screen.dart';
+import '../features/tables/table_list_screen.dart';
 
-final appRouter = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomeScreen(),
-    ),
-  ],
-);
+GoRouter createRouter(AppDatabase db) => GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: '/tables',
+          builder: (context, state) => TableListScreen(db: db),
+        ),
+        GoRoute(
+          path: '/tables/new',
+          builder: (context, state) => TableEditScreen(db: db),
+        ),
+        GoRoute(
+          path: '/tables/edit/:id',
+          builder: (context, state) => TableEditScreen(
+            db: db,
+            tableId: int.parse(state.pathParameters['id']!),
+          ),
+        ),
+      ],
+    );

@@ -1,0 +1,42 @@
+{
+  "@@locale": "ko",
+  "appTitle": "divebrew trainer",
+  "homeQuickStart": "빠른 시작",
+  "homeTables": "훈련 테이블",
+  "tableListTitle": "훈련 테이블",
+  "tableListNewCustom": "커스텀 테이블 만들기",
+  "tableTypeCo2": "CO2",
+  "tableTypeO2": "O2",
+  "tableTypeStatic": "스태틱",
+  "tableTypeCustom": "커스텀",
+  "tableEditTitleNew": "새 커스텀 테이블",
+  "tableEditTitleEdit": "테이블 편집",
+  "tableEditName": "테이블 이름",
+  "tableEditNameHint": "예: 내 CO2 테이블",
+  "tableEditRound": "라운드 {number}",
+  "@tableEditRound": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "tableEditBreathSec": "준비 호흡(초)",
+  "tableEditHoldSec": "숨참기(초)",
+  "tableEditAddRound": "라운드 추가",
+  "tableEditRemoveRound": "라운드 삭제",
+  "tableEditSave": "저장",
+  "tableEditTotalDuration": "총 훈련 시간: {duration}",
+  "@tableEditTotalDuration": {
+    "placeholders": {
+      "duration": {"type": "String"}
+    }
+  },
+  "tableEditNeedName": "테이블 이름을 입력해주세요",
+  "tableEditNeedRound": "라운드를 1개 이상 추가해주세요",
+  "tableRoundsSummary": "{count}라운드 · {duration}",
+  "@tableRoundsSummary": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "duration": {"type": "String"}
+    }
+  }
+}
