@@ -94,6 +94,11 @@
 - Flutter 3.38에서 `flutter_gen` synthetic import 대신 `lib/l10n/app_localizations.dart` 상대 import. 생성 파일 3개는 커밋 대상.
 - 상태 관리 패키지 없이 AppDatabase를 생성자 주입 (테스트에서 인메모리 교체 용이). 필요해지기 전까지 provider류 도입하지 않음.
 
+**D21. M1 코드 항목 전체 구현 완료 + 데스크톱 브라우저 스모크 통과 (2026-07-05)**
+- 실브라우저(데스크톱 Chrome)에서 확인: drift WASM 시드·조회, 라우팅, l10n(ko), 세션 타이머 카운트다운, 새로고침 후 목록 유지.
+- 남은 M1 검증: 음성 가이드·Wake Lock **iOS Safari 실기기 검증 대기** (M2 배포 URL로 확인 예정). 마일스톤 M1 최종 verify(모바일 브라우저 1세션 완주)도 동일 시점.
+- 음성/Wake Lock은 SessionScreen에 생성자 주입 — 테스트는 fake로 검증.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후
