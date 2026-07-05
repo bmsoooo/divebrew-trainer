@@ -54,16 +54,16 @@ class TableListScreen extends StatelessWidget {
                           key: ValueKey('edit-${table.id}'),
                           icon: const Icon(Icons.edit_outlined),
                           onPressed: () =>
-                              context.go('/tables/edit/${table.id}'),
+                              context.push('/tables/edit/${table.id}'),
                         ),
-                  onTap: () => context.go('/session/${table.id}'),
+                  onTap: () => context.push('/tables/${table.id}'),
                 ),
             ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.go('/tables/new'),
+        onPressed: () => context.push('/tables/new'),
         icon: const Icon(Icons.add),
         label: Text(l10n.tableListNewCustom),
       ),
