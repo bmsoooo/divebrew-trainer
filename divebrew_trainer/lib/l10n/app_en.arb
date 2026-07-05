@@ -127,5 +127,9 @@
   },
   "historyStoppedBadge": "Stopped",
   "historyPbChartTitle": "Best hold per session",
-  "homeHistory": "History"
+  "homeHistory": "History",
+  "backupExport": "Export data",
+  "backupImport": "Import data",
+  "backupImportDone": "Data imported",
+  "backupImportFailed": "Couldn't read that backup file. Please check it"
 }

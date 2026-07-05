@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 
 import '../../app/theme.dart';
+import '../../data/backup.dart';
 import '../../data/database.dart';
+import '../../data/file_transfer.dart';
 import '../../data/models.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -37,7 +39,40 @@ class _HistoryScreenState extends State<HistoryScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.historyTitle)),
+      appBar: AppBar(
+        title: Text(l10n.historyTitle),
+        actions: [
+          IconButton(
+            key: const ValueKey('export-backup'),
+            tooltip: l10n.backupExport,
+            icon: const Icon(Icons.file_download_outlined),
+            onPressed: () async {
+              final json = await exportToJson(widget.db);
+              final stamp =
+                  DateTime.now().toIso8601String().split('T').first;
+              await saveTextFile('divebrew_trainer_$stamp.json', json);
+            },
+          ),
+          IconButton(
+            key: const ValueKey('import-backup'),
+            tooltip: l10n.backupImport,
+            icon: const Icon(Icons.file_upload_outlined),
+            onPressed: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              final content = await pickTextFile();
+              if (content == null) return;
+              try {
+                await importFromJson(widget.db, content);
+                messenger.showSnackBar(
+                    SnackBar(content: Text(l10n.backupImportDone)));
+              } on FormatException {
+                messenger.showSnackBar(
+                    SnackBar(content: Text(l10n.backupImportFailed)));
+              }
+            },
+          ),
+        ],
+      ),
       body: StreamBuilder<List<SessionWithTable>>(
         stream: widget.db.watchSessionsWithTable(),
         builder: (context, snapshot) {

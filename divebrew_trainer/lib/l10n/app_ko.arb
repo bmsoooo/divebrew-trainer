@@ -127,5 +127,9 @@
   },
   "historyStoppedBadge": "중단",
   "historyPbChartTitle": "세션별 최고 홀드 추이",
-  "homeHistory": "기록 보기"
+  "homeHistory": "기록 보기",
+  "backupExport": "기록 내보내기",
+  "backupImport": "기록 가져오기",
+  "backupImportDone": "기록을 가져왔어요",
+  "backupImportFailed": "백업 파일을 읽지 못했어요. 파일을 확인해주세요"
 }

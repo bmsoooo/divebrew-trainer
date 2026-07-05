@@ -457,6 +457,30 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'기록 보기'**
   String get homeHistory;
+
+  /// No description provided for @backupExport.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록 내보내기'**
+  String get backupExport;
+
+  /// No description provided for @backupImport.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록 가져오기'**
+  String get backupImport;
+
+  /// No description provided for @backupImportDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록을 가져왔어요'**
+  String get backupImportDone;
+
+  /// No description provided for @backupImportFailed.
+  ///
+  /// In ko, this message translates to:
+  /// **'백업 파일을 읽지 못했어요. 파일을 확인해주세요'**
+  String get backupImportFailed;
 }
 
 class _AppLocalizationsDelegate

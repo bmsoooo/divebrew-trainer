@@ -213,4 +213,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeHistory => 'History';
+
+  @override
+  String get backupExport => 'Export data';
+
+  @override
+  String get backupImport => 'Import data';
+
+  @override
+  String get backupImportDone => 'Data imported';
+
+  @override
+  String get backupImportFailed =>
+      'Couldn\'t read that backup file. Please check it';
 }

@@ -207,4 +207,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get homeHistory => '기록 보기';
+
+  @override
+  String get backupExport => '기록 내보내기';
+
+  @override
+  String get backupImport => '기록 가져오기';
+
+  @override
+  String get backupImportDone => '기록을 가져왔어요';
+
+  @override
+  String get backupImportFailed => '백업 파일을 읽지 못했어요. 파일을 확인해주세요';
 }
