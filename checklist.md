@@ -12,7 +12,7 @@
 - [x] Flutter 프로젝트 셋업 (웹 타깃 우선, drift WASM, 라우팅) — flutter test·build web 통과 (2026-07-05)
 - [x] 데이터 모델 구현 → verify: 모델 단위 테스트 통과 — 7건 통과 (2026-07-05)
 - [x] CO2/O2 프리셋 테이블 + 커스텀 편집 화면 → verify: 라운드 추가/삭제/저장 테스트 — 위젯 테스트 5건 포함 16건 통과 (2026-07-05)
-- [ ] PB 기반 테이블 자동 생성 로직 → verify: PB 입력값별 산출 테스트
+- [x] PB 기반 테이블 자동 생성 로직 → verify: PB 입력값별 산출 테스트 — 6건 통과 (2026-07-05)
 - [ ] 세션 타이머 엔진 (준비→홀드→회복 상태 머신) → verify: 상태 전이 단위 테스트
 - [ ] 음성 가이드 추상화 계층 + 웹 구현(Web Speech API, 한/영) → verify: iOS Safari·Android Chrome 재생 확인
 - [ ] Wake Lock 세션 중 화면 유지 → verify: iOS Safari에서 10분 세션 동안 화면 꺼지지 않음
