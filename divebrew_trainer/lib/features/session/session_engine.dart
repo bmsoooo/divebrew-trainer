@@ -1,0 +1,106 @@
+// 세션 타이머 상태 머신 — 준비 호흡→숨참기 라운드 진행, 컨트랙션 기록, 1탭 중단 (Timer 미내장, tick 주입식)
+import '../../data/models.dart';
+
+enum SessionPhase { idle, preparing, holding, finished, stopped }
+
+/// 훈련 세션의 상태 머신. UI(또는 테스트)가 1초 단위로 [tick]을 호출해 진행한다.
+/// 안전 요구사항(A4): [stop]은 어떤 상태에서든 즉시 종료하며 확인 절차가 없다.
+class SessionEngine {
+  final List<Round> rounds;
+
+  SessionPhase _phase = SessionPhase.idle;
+  int _roundIndex = 0;
+  int _remainingSec = 0;
+  int _heldSec = 0;
+  final List<RoundResult> _results = [];
+  final List<int> _contractionAtMs = [];
+
+  SessionEngine({required this.rounds}) {
+    assert(rounds.isNotEmpty);
+  }
+
+  SessionPhase get phase => _phase;
+
+  /// 현재 라운드 (1-based).
+  int get currentRound => _roundIndex + 1;
+
+  int get totalRounds => rounds.length;
+
+  /// 현재 단계의 남은 시간(초).
+  int get remainingSec => _remainingSec;
+
+  /// 지금까지 확정된 라운드 결과.
+  List<RoundResult> get results => List.unmodifiable(_results);
+
+  bool get isRunning =>
+      _phase == SessionPhase.preparing || _phase == SessionPhase.holding;
+
+  /// 세션 시작 — 1라운드 준비 호흡부터.
+  void start() {
+    if (_phase != SessionPhase.idle) return;
+    _phase = SessionPhase.preparing;
+    _remainingSec = rounds[0].breathSec;
+  }
+
+  /// 1초 경과. 남은 시간이 0이 되는 시점에 단계를 전이한다.
+  void tick() {
+    if (!isRunning) return;
+
+    _remainingSec--;
+    if (_phase == SessionPhase.holding) _heldSec++;
+    if (_remainingSec > 0) return;
+
+    if (_phase == SessionPhase.preparing) {
+      _phase = SessionPhase.holding;
+      _remainingSec = rounds[_roundIndex].holdSec;
+      _heldSec = 0;
+      _contractionAtMs.clear();
+    } else {
+      _finishHold();
+    }
+  }
+
+  /// 홀드 중 컨트랙션 탭 — 홀드 시작 기준 경과 ms를 기록.
+  /// [atMs]를 주지 않으면 tick 기반 경과 초를 ms로 환산해 기록한다.
+  void tapContraction({int? atMs}) {
+    if (_phase != SessionPhase.holding) return;
+    _contractionAtMs.add(atMs ?? _heldSec * 1000);
+  }
+
+  /// 홀드 조기 종료 ("숨 쉬었어요") — 실제 홀드 시간으로 결과 확정 후 다음 라운드로.
+  void endHoldEarly() {
+    if (_phase != SessionPhase.holding) return;
+    _finishHold();
+  }
+
+  /// 즉시 중단 — 진행 중이던 홀드는 실제 시간으로 기록 (부분 결과 보존).
+  void stop() {
+    if (!isRunning) return;
+    if (_phase == SessionPhase.holding && _heldSec > 0) {
+      _recordCurrentHold();
+    }
+    _phase = SessionPhase.stopped;
+    _remainingSec = 0;
+  }
+
+  void _finishHold() {
+    _recordCurrentHold();
+    if (_roundIndex + 1 >= rounds.length) {
+      _phase = SessionPhase.finished;
+      _remainingSec = 0;
+    } else {
+      _roundIndex++;
+      _phase = SessionPhase.preparing;
+      _remainingSec = rounds[_roundIndex].breathSec;
+    }
+  }
+
+  void _recordCurrentHold() {
+    _results.add(RoundResult(
+      round: _roundIndex + 1,
+      actualHoldSec: _heldSec,
+      contractionAtMs: List.of(_contractionAtMs),
+    ));
+    _contractionAtMs.clear();
+  }
+}
