@@ -99,7 +99,14 @@
 - 남은 M1 검증: 음성 가이드·Wake Lock **iOS Safari 실기기 검증 대기** (M2 배포 URL로 확인 예정). 마일스톤 M1 최종 verify(모바일 브라우저 1세션 완주)도 동일 시점.
 - 음성/Wake Lock은 SessionScreen에 생성자 주입 — 테스트는 fake로 검증.
 
+**D22. M2 구현 완료 + GitHub Pages 배포 (2026-07-05)**
+- 배포 URL: https://bmsoooo.github.io/divebrew-trainer/ (gh-pages 브랜치, base-href /divebrew-trainer/). 배포 절차: `flutter build web --base-href "/divebrew-trainer/"` → build/web을 gh-pages에 force push.
+- Pages는 COOP/COEP 헤더가 없어 drift가 IndexedDB 스토리지로 폴백 — 기록 유지에 문제 없음.
+- 디자인 시스템 적용: Deep Ocean(#0A2342)/Espresso(#3C2A21)/Snorkel Yellow(#FFC300), Pretendard 4웨이트(assets/fonts, OFL), 그라데이션 금지, 문구는 1인칭 경험형 해요체.
+- fl_chart 1.2.0 — D15 curl 프리페치로 설치. drift watch()를 쓰는 위젯 테스트는 종료 전 `pumpWidget(SizedBox()) + pump(1s)`로 keep-alive 타이머 소진 필수 (안 하면 "Timer still pending" 실패).
+- 남은 실기기 검증(아이폰 Safari에서 배포 URL로): 음성 가이드 재생, Wake Lock 10분, PWA 홈 화면 추가, M1 마일스톤 verify(1세션 완주+새로고침 기록 유지).
+- 웹 배포처 = GitHub Pages로 결정 (미해결 항목 해소).
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후
-- 웹 배포처(정적 호스팅) — M2 시점 결정
