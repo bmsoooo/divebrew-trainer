@@ -8,12 +8,24 @@ import 'package:go_router/go_router.dart';
 
 import '../../data/database.dart';
 import 'session_engine.dart';
+import 'voice_guide.dart';
+import 'wake_lock.dart';
 
 class SessionScreen extends StatefulWidget {
   final AppDatabase db;
   final int tableId;
 
-  const SessionScreen({super.key, required this.db, required this.tableId});
+  /// 테스트에서 교체 가능. null이면 플랫폼 기본 구현 사용.
+  final VoiceGuide? voiceGuide;
+  final SessionWakeLock? wakeLock;
+
+  const SessionScreen({
+    super.key,
+    required this.db,
+    required this.tableId,
+    this.voiceGuide,
+    this.wakeLock,
+  });
 
   @override
   State<SessionScreen> createState() => _SessionScreenState();
@@ -24,12 +36,17 @@ class _SessionScreenState extends State<SessionScreen> {
   Timer? _timer;
   DateTime? _startedAt;
   bool _saved = false;
+  late final VoiceGuide _voice = widget.voiceGuide ?? createVoiceGuide();
+  late final SessionWakeLock _wakeLock = widget.wakeLock ?? createWakeLock();
 
   @override
   void initState() {
     super.initState();
     _start();
   }
+
+  String get _voiceLang =>
+      Localizations.localeOf(context).languageCode == 'ko' ? 'ko-KR' : 'en-US';
 
   Future<void> _start() async {
     final table = await (widget.db.select(widget.db.trainingTables)
@@ -43,22 +60,44 @@ class _SessionScreenState extends State<SessionScreen> {
       _engine = engine;
       _startedAt = DateTime.now();
     });
+    _wakeLock.acquire();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _onTick());
   }
 
-  void _onTick() {
+  void _onTick() => _runEngineEvent(_engine!.tick);
+
+  void _endHoldEarly() => _runEngineEvent(_engine!.endHoldEarly);
+
+  /// 엔진 이벤트 실행 후 단계 전환 안내·종료 처리를 일괄 수행.
+  void _runEngineEvent(void Function() event) {
     final engine = _engine!;
-    engine.tick();
+    final phaseBefore = engine.phase;
+    event();
+    if (engine.phase != phaseBefore) _announcePhase(engine.phase);
     if (!engine.isRunning) {
       _timer?.cancel();
+      _wakeLock.release();
       _saveIfNeeded(completed: engine.phase == SessionPhase.finished);
     }
     setState(() {});
   }
 
+  void _announcePhase(SessionPhase phase) {
+    final l10n = AppLocalizations.of(context)!;
+    final text = switch (phase) {
+      SessionPhase.holding => l10n.voiceHoldStart,
+      SessionPhase.preparing => l10n.voiceBreathe,
+      SessionPhase.finished => l10n.voiceSessionFinished,
+      _ => null,
+    };
+    if (text != null) _voice.speak(text, lang: _voiceLang);
+  }
+
   void _stop() {
     _engine?.stop();
     _timer?.cancel();
+    _voice.stop();
+    _wakeLock.release();
     _saveIfNeeded(completed: false);
     setState(() {});
   }
@@ -82,6 +121,8 @@ class _SessionScreenState extends State<SessionScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    _voice.stop();
+    _wakeLock.release();
     super.dispose();
   }
 
@@ -143,7 +184,7 @@ class _SessionScreenState extends State<SessionScreen> {
               const SizedBox(height: 12),
               TextButton(
                 key: const ValueKey('end-hold-early'),
-                onPressed: () => setState(engine.endHoldEarly),
+                onPressed: _endHoldEarly,
                 child: Text(l10n.sessionEndHoldEarly),
               ),
             ],

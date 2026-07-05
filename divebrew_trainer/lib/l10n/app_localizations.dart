@@ -307,6 +307,24 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'세션 시작'**
   String get sessionStart;
+
+  /// No description provided for @voiceHoldStart.
+  ///
+  /// In ko, this message translates to:
+  /// **'숨을 참으세요'**
+  String get voiceHoldStart;
+
+  /// No description provided for @voiceBreathe.
+  ///
+  /// In ko, this message translates to:
+  /// **'숨을 쉬세요'**
+  String get voiceBreathe;
+
+  /// No description provided for @voiceSessionFinished.
+  ///
+  /// In ko, this message translates to:
+  /// **'세션 완료. 수고했어요'**
+  String get voiceSessionFinished;
 }
 
 class _AppLocalizationsDelegate

@@ -85,5 +85,8 @@
     }
   },
   "sessionBackHome": "Home",
-  "sessionStart": "Start session"
+  "sessionStart": "Start session",
+  "voiceHoldStart": "Hold your breath",
+  "voiceBreathe": "Breathe",
+  "voiceSessionFinished": "Session complete. Well done"
 }

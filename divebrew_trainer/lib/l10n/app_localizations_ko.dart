@@ -124,4 +124,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sessionStart => '세션 시작';
+
+  @override
+  String get voiceHoldStart => '숨을 참으세요';
+
+  @override
+  String get voiceBreathe => '숨을 쉬세요';
+
+  @override
+  String get voiceSessionFinished => '세션 완료. 수고했어요';
 }

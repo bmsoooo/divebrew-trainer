@@ -124,4 +124,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sessionStart => 'Start session';
+
+  @override
+  String get voiceHoldStart => 'Hold your breath';
+
+  @override
+  String get voiceBreathe => 'Breathe';
+
+  @override
+  String get voiceSessionFinished => 'Session complete. Well done';
 }

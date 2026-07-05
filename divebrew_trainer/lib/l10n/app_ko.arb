@@ -85,5 +85,8 @@
     }
   },
   "sessionBackHome": "홈으로",
-  "sessionStart": "세션 시작"
+  "sessionStart": "세션 시작",
+  "voiceHoldStart": "숨을 참으세요",
+  "voiceBreathe": "숨을 쉬세요",
+  "voiceSessionFinished": "세션 완료. 수고했어요"
 }
