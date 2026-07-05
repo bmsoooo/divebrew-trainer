@@ -1,11 +1,11 @@
 {
-    "name": "divebrew_trainer",
-    "short_name": "divebrew_trainer",
+    "name": "divebrew trainer",
+    "short_name": "divebrew",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0A2342",
+    "theme_color": "#0A2342",
+    "description": "프리다이빙 스태틱(숨참기) 드라이 훈련 앱 — CO2/O2 테이블, 음성 가이드, 기록",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
