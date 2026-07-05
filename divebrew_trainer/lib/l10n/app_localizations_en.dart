@@ -187,4 +187,30 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get safetyReminder4 =>
       'Never practice breath-holds in water. Even I only go with a buddy.';
+
+  @override
+  String get historyTitle => 'History';
+
+  @override
+  String get historyEmpty =>
+      'No sessions yet.\nFinish your first one and it shows up here.';
+
+  @override
+  String historyMaxHold(int sec) {
+    return 'Best ${sec}s';
+  }
+
+  @override
+  String historyRounds(int done, int total) {
+    return '$done/$total rounds';
+  }
+
+  @override
+  String get historyStoppedBadge => 'Stopped';
+
+  @override
+  String get historyPbChartTitle => 'Best hold per session';
+
+  @override
+  String get homeHistory => 'History';
 }

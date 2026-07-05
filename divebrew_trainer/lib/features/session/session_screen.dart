@@ -1,12 +1,12 @@
 // 세션 실행 화면 — 대형 타이머, 라운드 진행, 컨트랙션 탭, 1탭 중단 (A4: 중단 버튼 상시 노출·확인 팝업 없음)
 import 'dart:async';
 
-import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/database.dart';
+import '../../data/models.dart';
 import 'session_engine.dart';
 import 'voice_guide.dart';
 import 'wake_lock.dart';
@@ -35,6 +35,7 @@ class _SessionScreenState extends State<SessionScreen> {
   SessionEngine? _engine;
   Timer? _timer;
   DateTime? _startedAt;
+  TableType? _tableType;
   bool _saved = false;
   late final VoiceGuide _voice = widget.voiceGuide ?? createVoiceGuide();
   late final SessionWakeLock _wakeLock = widget.wakeLock ?? createWakeLock();
@@ -66,6 +67,7 @@ class _SessionScreenState extends State<SessionScreen> {
     setState(() {
       _reminderIndex = sessionCount % 4;
       _engine = engine;
+      _tableType = table.type;
       _startedAt = DateTime.now();
     });
     _wakeLock.acquire();
@@ -115,15 +117,13 @@ class _SessionScreenState extends State<SessionScreen> {
     if (_saved || engine.results.isEmpty) return;
     _saved = true;
 
-    await widget.db.into(widget.db.sessions).insert(
-          SessionsCompanion.insert(
-            tableId: widget.tableId,
-            startedAt: _startedAt!,
-            completedAt:
-                completed ? Value(DateTime.now()) : const Value.absent(),
-            results: engine.results,
-          ),
-        );
+    await widget.db.saveSession(
+      tableId: widget.tableId,
+      type: _tableType!,
+      startedAt: _startedAt!,
+      completedAt: completed ? DateTime.now() : null,
+      results: engine.results,
+    );
   }
 
   @override

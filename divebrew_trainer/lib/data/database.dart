@@ -42,6 +42,53 @@ class AppDatabase extends _$AppDatabase {
         ),
       );
 
+  /// 세션 저장 + 해당 종류 PB가 갱신되면 함께 upsert.
+  Future<int> saveSession({
+    required int tableId,
+    required TableType type,
+    required DateTime startedAt,
+    DateTime? completedAt,
+    required List<RoundResult> results,
+  }) async {
+    final id = await into(sessions).insert(SessionsCompanion.insert(
+      tableId: tableId,
+      startedAt: startedAt,
+      completedAt: Value.absentIfNull(completedAt),
+      results: results,
+    ));
+
+    final maxHold = results.fold(0, (max, r) => r.actualHoldSec > max ? r.actualHoldSec : max);
+    final current = await (select(personalBests)
+          ..where((p) => p.type.equals(type.name)))
+        .getSingleOrNull();
+    if (maxHold > 0 && (current == null || maxHold > current.valueSec)) {
+      await into(personalBests).insertOnConflictUpdate(
+        PersonalBestsCompanion.insert(
+          type: type,
+          valueSec: maxHold,
+          achievedAt: startedAt,
+        ),
+      );
+    }
+    return id;
+  }
+
+  /// 세션 + 테이블 정보 조인 (최신순) — 히스토리 화면용.
+  Stream<List<SessionWithTable>> watchSessionsWithTable() {
+    final query = (select(sessions)
+          ..orderBy([(s) => OrderingTerm.desc(s.startedAt)]))
+        .join([
+      innerJoin(trainingTables, trainingTables.id.equalsExp(sessions.tableId)),
+    ]);
+    return query.watch().map((rows) => [
+          for (final row in rows)
+            SessionWithTable(
+              session: row.readTable(sessions),
+              table: row.readTable(trainingTables),
+            ),
+        ]);
+  }
+
   static QueryExecutor _openConnection() {
     return driftDatabase(
       name: 'divebrew_trainer',
@@ -51,4 +98,12 @@ class AppDatabase extends _$AppDatabase {
       ),
     );
   }
+}
+
+/// 히스토리 화면용 세션+테이블 조인 결과.
+class SessionWithTable {
+  final Session session;
+  final TrainingTable table;
+
+  const SessionWithTable({required this.session, required this.table});
 }

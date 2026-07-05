@@ -2,6 +2,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../data/database.dart';
+import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/session/session_screen.dart';
@@ -25,6 +26,10 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: '/history',
+          builder: (context, state) => HistoryScreen(db: db),
         ),
         GoRoute(
           path: '/tables',

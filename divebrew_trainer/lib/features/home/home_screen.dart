@@ -22,6 +22,11 @@ class HomeScreen extends StatelessWidget {
               onPressed: () => context.go('/tables'),
               child: Text(l10n.homeTables),
             ),
+            const SizedBox(height: 12),
+            OutlinedButton(
+              onPressed: () => context.go('/history'),
+              child: Text(l10n.homeHistory),
+            ),
           ],
         ),
       ),

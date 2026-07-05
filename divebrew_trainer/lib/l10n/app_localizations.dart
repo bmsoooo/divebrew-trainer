@@ -415,6 +415,48 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'숨참기는 절대 물속에서 연습하지 않아요. 저도 바다는 버디랑만 가요.'**
   String get safetyReminder4;
+
+  /// No description provided for @historyTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록'**
+  String get historyTitle;
+
+  /// No description provided for @historyEmpty.
+  ///
+  /// In ko, this message translates to:
+  /// **'아직 기록이 없어요.\n첫 세션을 마치면 여기에 쌓여요.'**
+  String get historyEmpty;
+
+  /// No description provided for @historyMaxHold.
+  ///
+  /// In ko, this message translates to:
+  /// **'최고 {sec}초'**
+  String historyMaxHold(int sec);
+
+  /// No description provided for @historyRounds.
+  ///
+  /// In ko, this message translates to:
+  /// **'{done}/{total}라운드'**
+  String historyRounds(int done, int total);
+
+  /// No description provided for @historyStoppedBadge.
+  ///
+  /// In ko, this message translates to:
+  /// **'중단'**
+  String get historyStoppedBadge;
+
+  /// No description provided for @historyPbChartTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'세션별 최고 홀드 추이'**
+  String get historyPbChartTitle;
+
+  /// No description provided for @homeHistory.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록 보기'**
+  String get homeHistory;
 }
 
 class _AppLocalizationsDelegate

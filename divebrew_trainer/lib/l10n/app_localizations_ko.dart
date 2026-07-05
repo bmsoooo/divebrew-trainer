@@ -182,4 +182,29 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get safetyReminder4 => '숨참기는 절대 물속에서 연습하지 않아요. 저도 바다는 버디랑만 가요.';
+
+  @override
+  String get historyTitle => '기록';
+
+  @override
+  String get historyEmpty => '아직 기록이 없어요.\n첫 세션을 마치면 여기에 쌓여요.';
+
+  @override
+  String historyMaxHold(int sec) {
+    return '최고 $sec초';
+  }
+
+  @override
+  String historyRounds(int done, int total) {
+    return '$done/$total라운드';
+  }
+
+  @override
+  String get historyStoppedBadge => '중단';
+
+  @override
+  String get historyPbChartTitle => '세션별 최고 홀드 추이';
+
+  @override
+  String get homeHistory => '기록 보기';
 }
