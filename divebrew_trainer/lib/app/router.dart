@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data/database.dart';
+import '../features/guide/guide_screen.dart';
 import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
@@ -59,6 +60,12 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
               ),
             ]),
           ],
+        ),
+        // 훈련 가이드 — 전체화면 push (홈·설정에서 진입, 탭바 없음).
+        GoRoute(
+          path: '/guide',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => const GuideScreen(),
         ),
         // 설정 하위 상세 페이지 — 전체화면 push (탭바 없음).
         GoRoute(

@@ -451,4 +451,54 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get termsBody =>
       '다이브로 트레이너는 프리다이빙 스태틱(숨참기)을 물 밖(드라이)에서 연습하기 위한 훈련 보조 도구예요.\n\n이 앱은 의료 기기가 아니고, 안전을 보장하지 않아요. 숨참기 훈련에는 블랙아웃 위험이 있어요. 저도 항상 앉아서, 물 밖에서, 무리하지 않고 해요. 어지럽거나 이상하면 바로 멈춰주세요.\n\n물속·욕조에서는 절대 사용하지 마세요. 이 앱을 사용해 발생한 결과에 대한 책임은 사용자 본인에게 있어요.';
+
+  @override
+  String get tabGuideEntry => '초보자 가이드';
+
+  @override
+  String get guideTitle => '훈련 가이드';
+
+  @override
+  String get homeGuideCard => '프리다이빙 스태틱이 처음이라면';
+
+  @override
+  String get homeGuideCardSub => 'CO2·O2 테이블이 뭔지, 왜 숨참기가 느는지 3분이면 이해돼요';
+
+  @override
+  String get settingsGuide => '훈련 가이드';
+
+  @override
+  String get guideIntroTitle => '스태틱 훈련이 뭐예요?';
+
+  @override
+  String get guideIntroBody =>
+      '스태틱(STA)은 움직이지 않고 숨을 참는 프리다이빙 종목이에요. 이 앱은 물 밖에서(드라이) 편하게 앉아 숨참기를 연습하는 훈련 도구예요.\n\n숨을 참다 보면 답답한 느낌과 함께 배가 꿀렁이는 횡격막 수축이 와요. 이건 산소가 바닥나서가 아니라, 몸에 이산화탄소(CO2)가 쌓이면서 \'숨 쉬어!\' 하고 보내는 신호예요. 훈련은 이 신호를 견디고 몸을 이완하는 연습이에요.\n\n저도 왕초보 때는 1분도 버거웠어요. 매일 조금씩, 무리하지 않고 쌓으면 늘어요.';
+
+  @override
+  String get guideCo2Title => 'CO2 테이블이란?';
+
+  @override
+  String get guideCo2Body =>
+      '숨참기 시간은 그대로 두고, 사이사이 회복 호흡 시간을 점점 줄여가는 훈련이에요.\n\n회복이 짧아질수록 몸에 CO2가 덜 빠진 채로 다음 숨참기에 들어가요. 그래서 \'숨 쉬고 싶은 충동\'을 점점 더 일찍, 더 세게 느끼게 되고, 이걸 반복하면 그 답답함에 대한 내성이 길러져요.\n\n한마디로 \'답답함을 견디는 힘\'을 키우는 훈련이에요. 초반에 충동이 빨리 오는 분에게 특히 좋아요.';
+
+  @override
+  String get guideO2Title => 'O2 테이블이란?';
+
+  @override
+  String get guideO2Body =>
+      '회복 호흡은 넉넉하게 고정하고, 숨참기 시간을 라운드마다 점점 늘려가는 훈련이에요.\n\n충분히 회복한 상태에서 점점 더 오래 참기 때문에, 몸이 낮은 산소 농도에 적응해가요. 실제로 오래 참는 능력 자체를 넓히는 훈련이에요.\n\n보통 CO2 테이블로 충동 내성을 먼저 기른 뒤, O2 테이블로 최대 시간을 늘려가요. 회복이 넉넉해서 CO2 테이블보다 덜 답답해요.';
+
+  @override
+  String get guideWhyTitle => '왜 훈련하면 숨참기가 늘어요?';
+
+  @override
+  String get guideWhyBody =>
+      '세 가지가 함께 작용해요.\n\n1. CO2 내성 — 숨 쉬고 싶은 충동은 대부분 CO2 때문이에요. 훈련으로 이 충동을 견디는 여유가 생기면, 예전 같으면 포기했을 지점을 지나갈 수 있어요.\n\n2. 이완 — 긴장하면 산소를 더 빨리 써요. 몸에 힘 빼는 법을 익히면 같은 산소로 더 오래 버텨요. \'힘을 빼야 뜬다\'는 말이 여기에도 통해요.\n\n3. 저산소 적응 — O2 훈련으로 몸이 낮은 산소에 조금씩 익숙해져요.\n\n폐를 크게 만드는 게 아니라, 몸과 마음이 \'적응\'하는 거예요. 그래서 꾸준함이 재능을 이겨요.';
+
+  @override
+  String get guideSafetyTitle => '딱 하나, 꼭 기억해요';
+
+  @override
+  String get guideSafetyBody =>
+      '빠르게 몰아쉬는 과호흡은 절대 하지 마세요. 과호흡은 CO2를 억지로 날려서 충동을 늦출 뿐, 산소를 늘려주지 않아요. 그래서 \'괜찮은 줄 알았는데 갑자기 정신을 잃는\' 블랙아웃 위험이 커져요.\n\n저는 항상 편안한 호흡 몇 번만 하고, 앉아서, 물 밖에서, 어지러우면 바로 멈춰요. 기록보다 안전이 먼저예요.';
 }

@@ -157,6 +157,44 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(height: 16),
+              // 초보자 가이드 진입 — 신규 사용자가 홈에서 바로 발견하도록.
+              InkWell(
+                key: const ValueKey('home-guide'),
+                borderRadius: BorderRadius.circular(20),
+                onTap: () => context.push('/guide'),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: oceanBorder),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.menu_book_outlined,
+                          color: snorkelYellow, size: 22),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(l10n.homeGuideCard,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    color: foam)),
+                            const SizedBox(height: 3),
+                            Text(l10n.homeGuideCardSub,
+                                style: const TextStyle(
+                                    fontSize: 12.5, color: mist, height: 1.4)),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.chevron_right, color: mist),
+                    ],
+                  ),
+                ),
+              ),
               const Spacer(),
               FutureBuilder<(TrainingTable, String)?>(
                 future: _suggest(l10n),

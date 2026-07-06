@@ -460,4 +460,55 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get termsBody =>
       'divebrew trainer is a training aid for practicing freediving static apnea (breath-holding) out of the water (dry).\n\nThis is not a medical device and guarantees no safety. Breath-hold training carries a real risk of blackout. I always do it seated, out of the water, without pushing. Stop immediately if you feel dizzy or unwell.\n\nNever use it in water or a bathtub. You are responsible for any outcome of using this app.';
+
+  @override
+  String get tabGuideEntry => 'Beginner guide';
+
+  @override
+  String get guideTitle => 'Training guide';
+
+  @override
+  String get homeGuideCard => 'New to freediving static?';
+
+  @override
+  String get homeGuideCardSub =>
+      'What CO2/O2 tables are, and why your breath-hold grows — in 3 minutes';
+
+  @override
+  String get settingsGuide => 'Training guide';
+
+  @override
+  String get guideIntroTitle => 'What is static training?';
+
+  @override
+  String get guideIntroBody =>
+      'Static (STA) is the freediving discipline of holding your breath without moving. This app is a tool for practicing that out of the water (dry), sitting comfortably.\n\nAs you hold, you feel discomfort and your belly twitches with diaphragm contractions. That\'s not your oxygen running out — it\'s carbon dioxide (CO2) building up and signaling \'breathe!\'. Training is practice at tolerating that signal and relaxing your body.\n\nI could barely last a minute as a total beginner. Build it up a little each day, without pushing, and it grows.';
+
+  @override
+  String get guideCo2Title => 'What is a CO2 table?';
+
+  @override
+  String get guideCo2Body =>
+      'Hold time stays the same while the recovery breathing between holds gets shorter each round.\n\nAs recovery shrinks, you start each hold with more CO2 still in your body. So the urge to breathe hits earlier and harder — and repeating that builds your tolerance to that discomfort.\n\nIn short, it trains your ability to endure the urge. Especially good if the urge hits you early.';
+
+  @override
+  String get guideO2Title => 'What is an O2 table?';
+
+  @override
+  String get guideO2Body =>
+      'Recovery breathing stays generous and fixed, while hold time grows each round.\n\nBecause you hold longer and longer from a well-recovered state, your body adapts to lower oxygen levels. It expands your actual capacity to hold.\n\nUsually you build urge tolerance with CO2 tables first, then extend your max with O2 tables. With generous recovery, it feels less uncomfortable than a CO2 table.';
+
+  @override
+  String get guideWhyTitle => 'Why does training grow your hold?';
+
+  @override
+  String get guideWhyBody =>
+      'Three things work together.\n\n1. CO2 tolerance — the urge to breathe is mostly from CO2. When training gives you room to endure it, you can pass the point where you\'d have quit before.\n\n2. Relaxation — tension burns oxygen faster. Learning to let go lets you last longer on the same oxygen. \'You only rise once you stop straining\' applies here too.\n\n3. Low-oxygen adaptation — O2 training gradually accustoms your body to lower oxygen.\n\nIt\'s not about bigger lungs — it\'s your body and mind adapting. That\'s why consistency beats talent.';
+
+  @override
+  String get guideSafetyTitle => 'One thing, always remember';
+
+  @override
+  String get guideSafetyBody =>
+      'Never hyperventilate with fast, heavy breathing. It only flushes out CO2 to delay the urge — it does not add oxygen. That raises the risk of blackout, where you \'feel fine and then suddenly pass out.\'\n\nI always take just a few relaxed breaths, sit down, stay out of the water, and stop the moment I feel dizzy. Safety before any record.';
 }

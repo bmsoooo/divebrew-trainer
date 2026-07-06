@@ -77,6 +77,18 @@ class SettingsScreen extends StatelessWidget {
               handle: l10n.settingsInstagramHandle,
               label: l10n.settingsInstagram,
             ),
+            const SizedBox(height: 12),
+            _GroupedCard(
+              rows: [
+                _SettingRow(
+                  key: const ValueKey('settings-guide'),
+                  icon: Icons.menu_book_outlined,
+                  label: l10n.settingsGuide,
+                  showChevron: true,
+                  onTap: () => context.push('/guide'),
+                ),
+              ],
+            ),
             const SizedBox(height: 24),
             Text(l10n.settingsDataSection, style: utilityLabelStyle),
             const SizedBox(height: 10),
@@ -280,6 +292,7 @@ class _SettingRow extends StatelessWidget {
   final VoidCallback? onTap;
 
   const _SettingRow({
+    super.key,
     this.icon,
     required this.label,
     this.trailing,
