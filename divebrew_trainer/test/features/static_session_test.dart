@@ -9,6 +9,7 @@ import 'package:divebrew_trainer/data/models.dart';
 import 'package:divebrew_trainer/data/presets.dart';
 import 'package:divebrew_trainer/features/session/countdown_view.dart';
 import 'package:divebrew_trainer/features/session/session_screen.dart';
+import 'package:divebrew_trainer/features/session/static_detail_screen.dart';
 import 'package:divebrew_trainer/features/session/static_session_screen.dart';
 import 'package:divebrew_trainer/l10n/app_localizations.dart';
 
@@ -23,7 +24,7 @@ void main() {
     await db.close();
   });
 
-  Widget wrapStatic({int countdown = 0}) {
+  Widget wrapStatic({int countdown = 0, int prep = 0}) {
     final router = GoRouter(
       initialLocation: '/static',
       routes: [
@@ -31,8 +32,8 @@ void main() {
             path: '/', builder: (c, s) => const Scaffold(body: Text('home'))),
         GoRoute(
           path: '/static',
-          builder: (c, s) =>
-              StaticSessionScreen(db: db, countdownSeconds: countdown),
+          builder: (c, s) => StaticSessionScreen(
+              db: db, countdownSeconds: countdown, prepSeconds: prep),
         ),
       ],
     );
@@ -112,7 +113,7 @@ void main() {
     expect(find.text('1'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
 
-    // 카운트다운 끝 → 숨참기 화면.
+    // 카운트다운 끝 → prep:0이라 바로 숨참기 화면.
     expect(find.byType(CountdownView), findsNothing);
     expect(find.byKey(const ValueKey('static-timer')), findsOneWidget);
   });
@@ -150,5 +151,72 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
     expect(find.byType(CountdownView), findsNothing);
     expect(find.byKey(const ValueKey('timer')), findsOneWidget);
+  });
+
+  testWidgets('준비 호흡 1분 카운트다운 후 숨참기로 전환', (tester) async {
+    await seedPresetsIfEmpty(db);
+    await tester.pumpWidget(wrapStatic(prep: 60));
+    await tester.pumpAndSettle();
+
+    // 준비 호흡 단계 — 1:00부터 카운트다운.
+    expect(find.text('준비 호흡'), findsOneWidget);
+    expect(find.text('1:00'), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 3));
+    expect(find.text('0:57'), findsOneWidget);
+    // 아직 숨참기 아님.
+    expect(find.byKey(const ValueKey('static-contraction')), findsNothing);
+
+    // 60초 경과 → 숨참기 시작 (0:00부터 카운트업).
+    await tester.pump(const Duration(seconds: 57));
+    expect(find.text('숨참기'), findsOneWidget);
+    expect(find.text('0:00'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 2));
+    expect(find.text('0:02'), findsOneWidget);
+  });
+
+  testWidgets('준비 호흡 중 "지금 참기 시작"으로 바로 숨참기', (tester) async {
+    await seedPresetsIfEmpty(db);
+    await tester.pumpWidget(wrapStatic(prep: 60));
+    await tester.pumpAndSettle();
+
+    await tester.pump(const Duration(seconds: 5));
+    await tester.tap(find.byKey(const ValueKey('static-skip-prep')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('숨참기'), findsOneWidget);
+    expect(find.byKey(const ValueKey('static-contraction')), findsOneWidget);
+  });
+
+  testWidgets('상세 화면 시작하기 → 세션으로 이동', (tester) async {
+    final router = GoRouter(
+      initialLocation: '/static',
+      routes: [
+        GoRoute(
+            path: '/static', builder: (c, s) => const StaticDetailScreen()),
+        GoRoute(
+          path: '/static/run',
+          builder: (c, s) =>
+              StaticSessionScreen(db: db, countdownSeconds: 0, prepSeconds: 0),
+        ),
+      ],
+    );
+    await tester.pumpWidget(MaterialApp.router(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('ko'),
+      routerConfig: router,
+    ));
+    await tester.pumpAndSettle();
+
+    // 상세 화면 — 아직 세션 아님.
+    expect(find.byKey(const ValueKey('static-detail-start')), findsOneWidget);
+    expect(find.byKey(const ValueKey('static-timer')), findsNothing);
+
+    await seedPresetsIfEmpty(db);
+    await tester.tap(find.byKey(const ValueKey('static-detail-start')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey('static-timer')), findsOneWidget);
   });
 }

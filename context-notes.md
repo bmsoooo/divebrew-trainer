@@ -177,6 +177,15 @@
 **D31. 내 자격증 사진 — 로컬 저장(다이빙 센터 제시용)**
 - 홈 상단 우측 badge 아이콘 → /license. 업로드/보기/교체/삭제. base64로 Settings 테이블(key licenseImageBase64)에 저장, Image.memory로 렌더. 웹 이미지 선택은 `image_picker.dart` 조건부 import(FileReader.readAsArrayBuffer). 비웹 스텁은 M3에서 image_picker로 교체.
 
+## 2026-07-06 — 단발 스테틱 흐름 변경: 상세 화면 + 준비 호흡 1분
+
+**D32. 단발 스테틱도 테이블처럼 상세 화면 경유, 시작 시 준비 호흡 60초 추가**
+- 요청: 홈 스테틱 카드 → 바로 카운트다운 ❌ → 상세 화면 → "시작하기" → 카운트다운. 그리고 카운트다운 뒤 준비 호흡 1분 → 실제 스테틱.
+- 라우팅: `/static` = StaticDetailScreen(상세, 설명+시작하기), `/static/run` = StaticSessionScreen(세션). 홈 카드는 /static 유지(이제 상세로 감).
+- StaticSessionScreen 단계: countdown(3→2→1) → preparing(준비 호흡 60초 카운트다운, "지금 참기 시작"으로 건너뛰기 가능) → holding(열린 숨참기 카운트업) → done. `_StaticPhase` enum으로 관리.
+- 파라미터: `countdownSeconds`(기본 3), `prepSeconds`(기본 60). 테스트는 0으로 각 단계 건너뜀. 준비 호흡 상수 = 60초, 과호흡 유도 UI 없음(A4 준수 — 템포 설정 없이 고정).
+- 준비 중 하단 버튼은 "중단"(pop 복귀), 숨참기 중엔 "완료"(기록). 준비 중 음성 voiceBreathe, 숨참기 시작 voiceHoldStart.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후

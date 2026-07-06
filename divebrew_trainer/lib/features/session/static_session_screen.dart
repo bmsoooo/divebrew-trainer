@@ -18,8 +18,11 @@ class StaticSessionScreen extends StatefulWidget {
   final VoiceGuide? voiceGuide;
   final SessionWakeLock? wakeLock;
 
-  /// 시작 전 카운트다운 초. 0이면 즉시 숨참기 시작 (테스트 결정성용).
+  /// 시작 전 카운트다운 초. 0이면 카운트다운 없이 준비 호흡부터.
   final int countdownSeconds;
+
+  /// 준비 호흡 시간(초). 0이면 준비 호흡 없이 바로 숨참기 (테스트 결정성용).
+  final int prepSeconds;
 
   const StaticSessionScreen({
     super.key,
@@ -27,24 +30,28 @@ class StaticSessionScreen extends StatefulWidget {
     this.voiceGuide,
     this.wakeLock,
     this.countdownSeconds = 3,
+    this.prepSeconds = 60,
   });
 
   @override
   State<StaticSessionScreen> createState() => _StaticSessionScreenState();
 }
 
+enum _StaticPhase { countdown, preparing, holding, done }
+
 class _StaticSessionScreenState extends State<StaticSessionScreen> {
   late final VoiceGuide _voice = widget.voiceGuide ?? createVoiceGuide();
   late final SessionWakeLock _wakeLock = widget.wakeLock ?? createWakeLock();
 
-  int? _countdown;
+  late _StaticPhase _phase;
+  int _countdown = 0;
+  int _prepRemaining = 0;
   Timer? _timer;
   DateTime? _startedAt;
   int _elapsed = 0;
   int _contractions = 0;
   final List<int> _contractionAtMs = [];
 
-  bool _done = false;
   int? _resultSec;
   bool _isNewPb = false;
   int? _prevPbSec;
@@ -52,9 +59,17 @@ class _StaticSessionScreenState extends State<StaticSessionScreen> {
   @override
   void initState() {
     super.initState();
-    _countdown = widget.countdownSeconds > 0 ? widget.countdownSeconds : null;
-    if (_countdown == null) _startedAt = DateTime.now();
     _wakeLock.acquire();
+    if (widget.countdownSeconds > 0) {
+      _phase = _StaticPhase.countdown;
+      _countdown = widget.countdownSeconds;
+    } else if (widget.prepSeconds > 0) {
+      _phase = _StaticPhase.preparing;
+      _prepRemaining = widget.prepSeconds;
+    } else {
+      _phase = _StaticPhase.holding;
+      _startedAt = DateTime.now();
+    }
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _tick());
   }
 
@@ -63,21 +78,40 @@ class _StaticSessionScreenState extends State<StaticSessionScreen> {
 
   void _tick() {
     setState(() {
-      if (_countdown != null) {
-        final next = _countdown! - 1;
-        if (next <= 0) {
-          _countdown = null;
-          _startedAt = DateTime.now();
-          _voice.speak(AppLocalizations.of(context)!.voiceHoldStart,
-              lang: _voiceLang);
-        } else {
-          _countdown = next;
-        }
-        return;
+      switch (_phase) {
+        case _StaticPhase.countdown:
+          _countdown--;
+          if (_countdown <= 0) _enterPrep();
+        case _StaticPhase.preparing:
+          _prepRemaining--;
+          if (_prepRemaining <= 0) _enterHold();
+        case _StaticPhase.holding:
+          _elapsed++;
+        case _StaticPhase.done:
+          break;
       }
-      _elapsed++;
     });
   }
+
+  void _enterPrep() {
+    if (widget.prepSeconds <= 0) {
+      _enterHold();
+      return;
+    }
+    _phase = _StaticPhase.preparing;
+    _prepRemaining = widget.prepSeconds;
+    _voice.speak(AppLocalizations.of(context)!.voiceBreathe, lang: _voiceLang);
+  }
+
+  void _enterHold() {
+    _phase = _StaticPhase.holding;
+    _startedAt = DateTime.now();
+    _voice.speak(AppLocalizations.of(context)!.voiceHoldStart,
+        lang: _voiceLang);
+  }
+
+  /// 준비 호흡 중 바로 숨참기 시작 (남은 준비 시간 건너뜀).
+  void _skipPrep() => setState(_enterHold);
 
   void _tapContraction() {
     setState(() {
@@ -87,7 +121,7 @@ class _StaticSessionScreenState extends State<StaticSessionScreen> {
   }
 
   Future<void> _finish() async {
-    if (_done) return;
+    if (_phase == _StaticPhase.done) return;
     _timer?.cancel();
     _voice.stop();
     _wakeLock.release();
@@ -117,7 +151,7 @@ class _StaticSessionScreenState extends State<StaticSessionScreen> {
 
     if (!mounted) return;
     setState(() {
-      _done = true;
+      _phase = _StaticPhase.done;
       _resultSec = elapsed;
       _prevPbSec = prev?.valueSec;
       _isNewPb = elapsed > 0 && (prev == null || elapsed > prev.valueSec);
@@ -142,17 +176,19 @@ class _StaticSessionScreenState extends State<StaticSessionScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    if (_countdown != null) {
-      return CountdownView(value: _countdown!);
+    if (_phase == _StaticPhase.countdown) {
+      return CountdownView(value: _countdown);
     }
 
-    if (_done) {
+    if (_phase == _StaticPhase.done) {
       return _StaticResultView(
         resultSec: _resultSec ?? 0,
         isNewPb: _isNewPb,
         prevPbSec: _prevPbSec,
       );
     }
+
+    final isPreparing = _phase == _StaticPhase.preparing;
 
     return Scaffold(
       backgroundColor: abyss,
@@ -168,62 +204,80 @@ class _StaticSessionScreenState extends State<StaticSessionScreen> {
                   Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: snorkelYellow),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isPreparing ? mist : snorkelYellow),
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    l10n.sessionPhaseHolding,
+                    isPreparing ? l10n.staticPrepLabel : l10n.sessionPhaseHolding,
                     key: const ValueKey('static-phase'),
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
-                        color: snorkelYellow),
+                        color: isPreparing ? mist : snorkelYellow),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
-              // 열린 숨참기 — 시간이 위로 올라감.
+              // 준비: 남은 시간 카운트다운 / 숨참기: 경과 시간 카운트업.
               Text(
-                _formatSec(_elapsed),
+                _formatSec(isPreparing ? _prepRemaining : _elapsed),
                 key: const ValueKey('static-timer'),
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(height: 28),
-              OutlinedButton(
-                key: const ValueKey('static-contraction'),
-                onPressed: _tapContraction,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(l10n.sessionContractionCount),
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 1),
-                      decoration: BoxDecoration(
-                        color: midWater,
-                        borderRadius: BorderRadius.circular(999),
+              if (isPreparing)
+                FilledButton(
+                  key: const ValueKey('static-skip-prep'),
+                  onPressed: _skipPrep,
+                  child: Text(l10n.staticStartHoldNow),
+                )
+              else
+                OutlinedButton(
+                  key: const ValueKey('static-contraction'),
+                  onPressed: _tapContraction,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(l10n.sessionContractionCount),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 1),
+                        decoration: BoxDecoration(
+                          color: midWater,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text('$_contractions',
+                            style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: foam)),
                       ),
-                      child: Text('$_contractions',
-                          style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: foam)),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
               const Spacer(),
-              // 안전: 1탭 종료 — 완료를 누르면 즉시 기록.
+              // 안전: 1탭 종료. 준비 중엔 중단(복귀), 숨참기 중엔 완료(기록).
               SizedBox(
                 width: double.infinity,
-                child: FilledButton(
-                  key: const ValueKey('static-done'),
-                  onPressed: _finish,
-                  child: Text(l10n.staticDone),
-                ),
+                child: isPreparing
+                    ? OutlinedButton(
+                        key: const ValueKey('static-stop'),
+                        onPressed: () => context.pop(),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor:
+                              Theme.of(context).colorScheme.error,
+                        ),
+                        child: Text(l10n.sessionStop),
+                      )
+                    : FilledButton(
+                        key: const ValueKey('static-done'),
+                        onPressed: _finish,
+                        child: Text(l10n.staticDone),
+                      ),
               ),
               const SizedBox(height: 14),
               Text(

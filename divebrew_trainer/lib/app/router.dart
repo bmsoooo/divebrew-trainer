@@ -9,6 +9,7 @@ import '../features/home/home_screen.dart';
 import '../features/license/license_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/session/session_screen.dart';
+import '../features/session/static_detail_screen.dart';
 import '../features/session/static_session_screen.dart';
 import '../features/settings/legal_page.dart';
 import '../features/settings/settings_screen.dart';
@@ -119,6 +120,11 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
         ),
         GoRoute(
           path: '/static',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => const StaticDetailScreen(),
+        ),
+        GoRoute(
+          path: '/static/run',
           parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) => StaticSessionScreen(db: db),
         ),

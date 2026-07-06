@@ -571,4 +571,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get licenseDeleted => 'Certification photo deleted';
+
+  @override
+  String get staticDetailBody =>
+      'A single static is one open-ended breath-hold — no rounds — to challenge your personal best.\n\nAfter a 3·2·1 countdown you get one minute of relaxed prep breathing, then the hold begins. Tap Start hold whenever you\'re ready.';
+
+  @override
+  String get staticPrepInfo =>
+      'The hold starts after 1 minute of prep breathing';
+
+  @override
+  String get staticPrepLabel => 'Prep breathing';
+
+  @override
+  String get staticStartHoldNow => 'Start hold now';
 }

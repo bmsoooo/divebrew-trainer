@@ -320,5 +320,9 @@
   "licenseDelete": "Delete",
   "licenseDeleteConfirm": "Delete the saved certification photo?",
   "licenseSaved": "Certification photo saved",
-  "licenseDeleted": "Certification photo deleted"
+  "licenseDeleted": "Certification photo deleted",
+  "staticDetailBody": "A single static is one open-ended breath-hold — no rounds — to challenge your personal best.\n\nAfter a 3·2·1 countdown you get one minute of relaxed prep breathing, then the hold begins. Tap Start hold whenever you're ready.",
+  "staticPrepInfo": "The hold starts after 1 minute of prep breathing",
+  "staticPrepLabel": "Prep breathing",
+  "staticStartHoldNow": "Start hold now"
 }

@@ -561,4 +561,17 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get licenseDeleted => '자격증 사진을 삭제했어요';
+
+  @override
+  String get staticDetailBody =>
+      '단발 스테틱은 라운드 없이 한 번의 숨참기로 내 최고 기록에 도전하는 훈련이에요.\n\n시작하면 3·2·1 카운트다운 뒤 1분 동안 편안하게 준비 호흡을 하고, 그다음 숨참기가 시작돼요. 준비가 되면 바로 참기 시작을 눌러도 돼요.';
+
+  @override
+  String get staticPrepInfo => '준비 호흡 1분 뒤 숨참기가 시작돼요';
+
+  @override
+  String get staticPrepLabel => '준비 호흡';
+
+  @override
+  String get staticStartHoldNow => '지금 참기 시작';
 }
