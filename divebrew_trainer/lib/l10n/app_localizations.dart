@@ -727,6 +727,174 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'PB 추이'**
   String get historyPbTrend;
+
+  /// No description provided for @tabSettings.
+  ///
+  /// In ko, this message translates to:
+  /// **'설정'**
+  String get tabSettings;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'설정'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsInstagram.
+  ///
+  /// In ko, this message translates to:
+  /// **'인스타그램'**
+  String get settingsInstagram;
+
+  /// No description provided for @settingsInstagramHandle.
+  ///
+  /// In ko, this message translates to:
+  /// **'@divebrew.soo'**
+  String get settingsInstagramHandle;
+
+  /// No description provided for @settingsDataSection.
+  ///
+  /// In ko, this message translates to:
+  /// **'데이터 관리'**
+  String get settingsDataSection;
+
+  /// No description provided for @settingsICloud.
+  ///
+  /// In ko, this message translates to:
+  /// **'iCloud 동기화'**
+  String get settingsICloud;
+
+  /// No description provided for @settingsICloudStatus.
+  ///
+  /// In ko, this message translates to:
+  /// **'이 기기에만 저장'**
+  String get settingsICloudStatus;
+
+  /// No description provided for @settingsRestoreDefaults.
+  ///
+  /// In ko, this message translates to:
+  /// **'기본 루틴 복원'**
+  String get settingsRestoreDefaults;
+
+  /// No description provided for @settingsRestoreDefaultsConfirm.
+  ///
+  /// In ko, this message translates to:
+  /// **'기본 CO2/O2 루틴을 처음 상태로 되돌릴까요? 직접 만든 커스텀 테이블은 그대로 남아요.'**
+  String get settingsRestoreDefaultsConfirm;
+
+  /// No description provided for @settingsRestoreDefaultsDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'기본 루틴을 복원했어요'**
+  String get settingsRestoreDefaultsDone;
+
+  /// No description provided for @settingsClearHistory.
+  ///
+  /// In ko, this message translates to:
+  /// **'훈련 기록 전체 삭제'**
+  String get settingsClearHistory;
+
+  /// No description provided for @settingsClearHistoryConfirm.
+  ///
+  /// In ko, this message translates to:
+  /// **'지금까지의 훈련 기록과 최고 기록이 모두 지워져요. 테이블은 그대로 남아요. 되돌릴 수 없어요.'**
+  String get settingsClearHistoryConfirm;
+
+  /// No description provided for @settingsClearHistoryDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'훈련 기록을 삭제했어요'**
+  String get settingsClearHistoryDone;
+
+  /// No description provided for @settingsResetAll.
+  ///
+  /// In ko, this message translates to:
+  /// **'루틴 + 기록 초기화'**
+  String get settingsResetAll;
+
+  /// No description provided for @settingsResetAllConfirm.
+  ///
+  /// In ko, this message translates to:
+  /// **'테이블과 훈련 기록을 모두 지우고 기본 상태로 되돌려요. 되돌릴 수 없어요.'**
+  String get settingsResetAllConfirm;
+
+  /// No description provided for @settingsResetAllDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'모두 초기화했어요'**
+  String get settingsResetAllDone;
+
+  /// No description provided for @settingsInfoSection.
+  ///
+  /// In ko, this message translates to:
+  /// **'앱 정보'**
+  String get settingsInfoSection;
+
+  /// No description provided for @settingsVersion.
+  ///
+  /// In ko, this message translates to:
+  /// **'버전'**
+  String get settingsVersion;
+
+  /// No description provided for @settingsContact.
+  ///
+  /// In ko, this message translates to:
+  /// **'문의'**
+  String get settingsContact;
+
+  /// No description provided for @settingsPrivacy.
+  ///
+  /// In ko, this message translates to:
+  /// **'개인정보처리방침'**
+  String get settingsPrivacy;
+
+  /// No description provided for @settingsTerms.
+  ///
+  /// In ko, this message translates to:
+  /// **'이용약관'**
+  String get settingsTerms;
+
+  /// No description provided for @settingsLicenses.
+  ///
+  /// In ko, this message translates to:
+  /// **'오픈소스 라이선스'**
+  String get settingsLicenses;
+
+  /// No description provided for @commonCancel.
+  ///
+  /// In ko, this message translates to:
+  /// **'취소'**
+  String get commonCancel;
+
+  /// No description provided for @commonConfirm.
+  ///
+  /// In ko, this message translates to:
+  /// **'확인'**
+  String get commonConfirm;
+
+  /// No description provided for @commonDelete.
+  ///
+  /// In ko, this message translates to:
+  /// **'삭제'**
+  String get commonDelete;
+
+  /// No description provided for @commonRestore.
+  ///
+  /// In ko, this message translates to:
+  /// **'복원'**
+  String get commonRestore;
+
+  /// No description provided for @privacyBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'다이브로 트레이너는 훈련 기록을 이 기기 안에만 저장해요. 계정도, 서버도 없어요.\n\n심박·수심 같은 건강 데이터는 이 웹 버전에서 수집하지 않아요. 훈련 시간과 컨트랙션 기록은 브라우저 로컬 저장소(IndexedDB)에만 남고, 브라우저 데이터를 지우면 함께 사라져요. 기록을 지키고 싶으면 설정이 아닌 히스토리 화면에서 JSON으로 내보내 두세요.\n\n제3자에게 어떤 데이터도 전송하지 않아요.'**
+  String get privacyBody;
+
+  /// No description provided for @termsBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'다이브로 트레이너는 프리다이빙 스태틱(숨참기)을 물 밖(드라이)에서 연습하기 위한 훈련 보조 도구예요.\n\n이 앱은 의료 기기가 아니고, 안전을 보장하지 않아요. 숨참기 훈련에는 블랙아웃 위험이 있어요. 저도 항상 앉아서, 물 밖에서, 무리하지 않고 해요. 어지럽거나 이상하면 바로 멈춰주세요.\n\n물속·욕조에서는 절대 사용하지 마세요. 이 앱을 사용해 발생한 결과에 대한 책임은 사용자 본인에게 있어요.'**
+  String get termsBody;
 }
 
 class _AppLocalizationsDelegate

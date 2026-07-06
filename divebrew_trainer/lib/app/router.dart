@@ -7,6 +7,8 @@ import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/session/session_screen.dart';
+import '../features/settings/legal_page.dart';
+import '../features/settings/settings_screen.dart';
 import '../features/tables/table_detail_screen.dart';
 import '../features/tables/table_edit_screen.dart';
 import '../features/tables/table_list_screen.dart';
@@ -50,7 +52,31 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
                 builder: (context, state) => HistoryScreen(db: db),
               ),
             ]),
+            StatefulShellBranch(routes: [
+              GoRoute(
+                path: '/settings',
+                builder: (context, state) => SettingsScreen(db: db),
+              ),
+            ]),
           ],
+        ),
+        // 설정 하위 상세 페이지 — 전체화면 push (탭바 없음).
+        GoRoute(
+          path: '/settings/privacy',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) {
+            final l10n = AppLocalizations.of(context)!;
+            return LegalPage(
+                title: l10n.settingsPrivacy, body: l10n.privacyBody);
+          },
+        ),
+        GoRoute(
+          path: '/settings/terms',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) {
+            final l10n = AppLocalizations.of(context)!;
+            return LegalPage(title: l10n.settingsTerms, body: l10n.termsBody);
+          },
         ),
         // 전체화면 push 라우트 — 탭바 없음. 정적 세그먼트가 :id보다 먼저.
         GoRoute(
@@ -118,6 +144,11 @@ class _TabShell extends StatelessWidget {
             icon: const Icon(Icons.schedule_outlined),
             selectedIcon: const Icon(Icons.schedule),
             label: l10n.tabHistory,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            label: l10n.tabSettings,
           ),
         ],
       ),

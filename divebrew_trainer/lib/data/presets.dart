@@ -53,6 +53,54 @@ Future<void> seedPresetsIfEmpty(AppDatabase db) async {
   });
 }
 
+/// 기본 루틴 복원 — 프리셋 라운드를 원래 값으로 되돌리고, 삭제된 프리셋은 다시 추가.
+/// 커스텀 테이블·훈련 기록은 건드리지 않는다 (이름으로 매칭, 참조 무결성 유지).
+Future<void> restoreDefaultTables(AppDatabase db) async {
+  final existing = await (db.select(db.trainingTables)
+        ..where((t) => t.isPreset.equals(true)))
+      .get();
+  final byName = {for (final t in existing) t.name: t};
+
+  await db.transaction(() async {
+    for (final p in presets) {
+      final current = byName[p.name];
+      if (current == null) {
+        await db.into(db.trainingTables).insert(
+              TrainingTablesCompanion.insert(
+                name: p.name,
+                type: p.type,
+                rounds: p.rounds,
+                isPreset: const Value(true),
+              ),
+            );
+      } else {
+        await (db.update(db.trainingTables)
+              ..where((t) => t.id.equals(current.id)))
+            .write(TrainingTablesCompanion(rounds: Value(p.rounds)));
+      }
+    }
+  });
+}
+
+/// 훈련 기록 전체 삭제 — 세션·PB만 제거, 테이블은 유지.
+Future<void> clearHistory(AppDatabase db) async {
+  await db.transaction(() async {
+    await db.delete(db.sessions).go();
+    await db.delete(db.personalBests).go();
+  });
+}
+
+/// 루틴 + 기록 초기화 — 세션·PB·모든 테이블 삭제 후 기본 프리셋 재시드.
+/// 안전 동의(Settings)는 유지한다.
+Future<void> resetAll(AppDatabase db) async {
+  await db.transaction(() async {
+    await db.delete(db.sessions).go();
+    await db.delete(db.personalBests).go();
+    await db.delete(db.trainingTables).go();
+  });
+  await seedPresetsIfEmpty(db);
+}
+
 /// 테이블 총 소요 시간(초).
 int totalDurationSec(List<Round> rounds) =>
     rounds.fold(0, (sum, r) => sum + r.breathSec + r.holdSec);

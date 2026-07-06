@@ -371,4 +371,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get historyPbTrend => 'PB trend';
+
+  @override
+  String get tabSettings => 'Settings';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsInstagram => 'Instagram';
+
+  @override
+  String get settingsInstagramHandle => '@divebrew.soo';
+
+  @override
+  String get settingsDataSection => 'Data management';
+
+  @override
+  String get settingsICloud => 'iCloud sync';
+
+  @override
+  String get settingsICloudStatus => 'Stored on this device only';
+
+  @override
+  String get settingsRestoreDefaults => 'Restore default routines';
+
+  @override
+  String get settingsRestoreDefaultsConfirm =>
+      'Reset the built-in CO2/O2 routines to their original state? Your custom tables stay untouched.';
+
+  @override
+  String get settingsRestoreDefaultsDone => 'Default routines restored';
+
+  @override
+  String get settingsClearHistory => 'Delete all training history';
+
+  @override
+  String get settingsClearHistoryConfirm =>
+      'This erases all your session history and personal bests. Tables stay. This can\'t be undone.';
+
+  @override
+  String get settingsClearHistoryDone => 'Training history deleted';
+
+  @override
+  String get settingsResetAll => 'Reset routines + history';
+
+  @override
+  String get settingsResetAllConfirm =>
+      'This clears all tables and history and returns to the default state. This can\'t be undone.';
+
+  @override
+  String get settingsResetAllDone => 'Everything reset';
+
+  @override
+  String get settingsInfoSection => 'App info';
+
+  @override
+  String get settingsVersion => 'Version';
+
+  @override
+  String get settingsContact => 'Contact';
+
+  @override
+  String get settingsPrivacy => 'Privacy policy';
+
+  @override
+  String get settingsTerms => 'Terms of use';
+
+  @override
+  String get settingsLicenses => 'Open source licenses';
+
+  @override
+  String get commonCancel => 'Cancel';
+
+  @override
+  String get commonConfirm => 'Confirm';
+
+  @override
+  String get commonDelete => 'Delete';
+
+  @override
+  String get commonRestore => 'Restore';
+
+  @override
+  String get privacyBody =>
+      'divebrew trainer stores your training records only on this device. No account, no server.\n\nHealth data like heart rate or depth is not collected in this web version. Training times and contraction logs live only in your browser\'s local storage (IndexedDB) and disappear if you clear browser data. To keep your records, export them as JSON from the History screen.\n\nNo data is ever sent to any third party.';
+
+  @override
+  String get termsBody =>
+      'divebrew trainer is a training aid for practicing freediving static apnea (breath-holding) out of the water (dry).\n\nThis is not a medical device and guarantees no safety. Breath-hold training carries a real risk of blackout. I always do it seated, out of the water, without pushing. Stop immediately if you feel dizzy or unwell.\n\nNever use it in water or a bathtub. You are responsible for any outcome of using this app.';
 }

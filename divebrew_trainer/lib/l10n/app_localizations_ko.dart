@@ -362,4 +362,93 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get historyPbTrend => 'PB 추이';
+
+  @override
+  String get tabSettings => '설정';
+
+  @override
+  String get settingsTitle => '설정';
+
+  @override
+  String get settingsInstagram => '인스타그램';
+
+  @override
+  String get settingsInstagramHandle => '@divebrew.soo';
+
+  @override
+  String get settingsDataSection => '데이터 관리';
+
+  @override
+  String get settingsICloud => 'iCloud 동기화';
+
+  @override
+  String get settingsICloudStatus => '이 기기에만 저장';
+
+  @override
+  String get settingsRestoreDefaults => '기본 루틴 복원';
+
+  @override
+  String get settingsRestoreDefaultsConfirm =>
+      '기본 CO2/O2 루틴을 처음 상태로 되돌릴까요? 직접 만든 커스텀 테이블은 그대로 남아요.';
+
+  @override
+  String get settingsRestoreDefaultsDone => '기본 루틴을 복원했어요';
+
+  @override
+  String get settingsClearHistory => '훈련 기록 전체 삭제';
+
+  @override
+  String get settingsClearHistoryConfirm =>
+      '지금까지의 훈련 기록과 최고 기록이 모두 지워져요. 테이블은 그대로 남아요. 되돌릴 수 없어요.';
+
+  @override
+  String get settingsClearHistoryDone => '훈련 기록을 삭제했어요';
+
+  @override
+  String get settingsResetAll => '루틴 + 기록 초기화';
+
+  @override
+  String get settingsResetAllConfirm =>
+      '테이블과 훈련 기록을 모두 지우고 기본 상태로 되돌려요. 되돌릴 수 없어요.';
+
+  @override
+  String get settingsResetAllDone => '모두 초기화했어요';
+
+  @override
+  String get settingsInfoSection => '앱 정보';
+
+  @override
+  String get settingsVersion => '버전';
+
+  @override
+  String get settingsContact => '문의';
+
+  @override
+  String get settingsPrivacy => '개인정보처리방침';
+
+  @override
+  String get settingsTerms => '이용약관';
+
+  @override
+  String get settingsLicenses => '오픈소스 라이선스';
+
+  @override
+  String get commonCancel => '취소';
+
+  @override
+  String get commonConfirm => '확인';
+
+  @override
+  String get commonDelete => '삭제';
+
+  @override
+  String get commonRestore => '복원';
+
+  @override
+  String get privacyBody =>
+      '다이브로 트레이너는 훈련 기록을 이 기기 안에만 저장해요. 계정도, 서버도 없어요.\n\n심박·수심 같은 건강 데이터는 이 웹 버전에서 수집하지 않아요. 훈련 시간과 컨트랙션 기록은 브라우저 로컬 저장소(IndexedDB)에만 남고, 브라우저 데이터를 지우면 함께 사라져요. 기록을 지키고 싶으면 설정이 아닌 히스토리 화면에서 JSON으로 내보내 두세요.\n\n제3자에게 어떤 데이터도 전송하지 않아요.';
+
+  @override
+  String get termsBody =>
+      '다이브로 트레이너는 프리다이빙 스태틱(숨참기)을 물 밖(드라이)에서 연습하기 위한 훈련 보조 도구예요.\n\n이 앱은 의료 기기가 아니고, 안전을 보장하지 않아요. 숨참기 훈련에는 블랙아웃 위험이 있어요. 저도 항상 앉아서, 물 밖에서, 무리하지 않고 해요. 어지럽거나 이상하면 바로 멈춰주세요.\n\n물속·욕조에서는 절대 사용하지 마세요. 이 앱을 사용해 발생한 결과에 대한 책임은 사용자 본인에게 있어요.';
 }
