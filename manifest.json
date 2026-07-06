@@ -1,0 +1,35 @@
+{
+    "name": "divebrew trainer",
+    "short_name": "divebrew",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0A2342",
+    "theme_color": "#0A2342",
+    "description": "프리다이빙 스태틱(숨참기) 드라이 훈련 앱 — CO2/O2 테이블, 음성 가이드, 기록",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
