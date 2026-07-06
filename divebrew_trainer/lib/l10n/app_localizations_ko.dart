@@ -501,4 +501,64 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get guideSafetyBody =>
       '빠르게 몰아쉬는 과호흡은 절대 하지 마세요. 과호흡은 CO2를 억지로 날려서 충동을 늦출 뿐, 산소를 늘려주지 않아요. 그래서 \'괜찮은 줄 알았는데 갑자기 정신을 잃는\' 블랙아웃 위험이 커져요.\n\n저는 항상 편안한 호흡 몇 번만 하고, 앉아서, 물 밖에서, 어지러우면 바로 멈춰요. 기록보다 안전이 먼저예요.';
+
+  @override
+  String get homeStaticSection => '단발 스테틱';
+
+  @override
+  String get homeStaticTitle => '스테틱 한 번 해볼까요';
+
+  @override
+  String get homeStaticSubtitle => '오늘도 나의 PB를 갱신해보세요';
+
+  @override
+  String get homeBrowseTables => '훈련 테이블 둘러보기';
+
+  @override
+  String get countdownReady => '준비하세요';
+
+  @override
+  String get staticDone => '완료';
+
+  @override
+  String get staticResultLabel => '이번 기록';
+
+  @override
+  String get staticNewPb => '새 최고 기록을 세웠어요';
+
+  @override
+  String staticPrevPb(String time) {
+    return '이전 최고 $time';
+  }
+
+  @override
+  String get licenseTitle => '내 자격증';
+
+  @override
+  String get licenseHomeTooltip => '내 자격증';
+
+  @override
+  String get licenseEmptyTitle => '자격증 사진을 올려두세요';
+
+  @override
+  String get licenseEmptyBody =>
+      '다이빙 센터나 버디에게 자격증을 바로 보여줄 수 있어요. 사진은 이 기기에만 저장돼요.';
+
+  @override
+  String get licenseUpload => '사진 올리기';
+
+  @override
+  String get licenseReplace => '사진 교체';
+
+  @override
+  String get licenseDelete => '삭제';
+
+  @override
+  String get licenseDeleteConfirm => '저장된 자격증 사진을 삭제할까요?';
+
+  @override
+  String get licenseSaved => '자격증 사진을 저장했어요';
+
+  @override
+  String get licenseDeleted => '자격증 사진을 삭제했어요';
 }

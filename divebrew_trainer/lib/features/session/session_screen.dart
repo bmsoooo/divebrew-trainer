@@ -9,6 +9,7 @@ import '../../data/database.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../tables/dive_profile_line.dart';
+import 'countdown_view.dart';
 import 'session_engine.dart';
 import 'voice_guide.dart';
 import 'wake_lock.dart';
@@ -21,12 +22,16 @@ class SessionScreen extends StatefulWidget {
   final VoiceGuide? voiceGuide;
   final SessionWakeLock? wakeLock;
 
+  /// 시작 전 카운트다운 초. 0이면 즉시 시작 (테스트 결정성용).
+  final int countdownSeconds;
+
   const SessionScreen({
     super.key,
     required this.db,
     required this.tableId,
     this.voiceGuide,
     this.wakeLock,
+    this.countdownSeconds = 3,
   });
 
   @override
@@ -45,6 +50,10 @@ class _SessionScreenState extends State<SessionScreen> {
 
   /// 단계 표시 도트 펄스 — 틱마다 목표 투명도를 토글 (연속 애니메이션 없음, 테스트 안정).
   bool _pulseOn = true;
+
+  /// 세션 시작 전 카운트다운 (3→2→1). null이면 카운트다운 종료·세션 진행 중.
+  int? _countdown;
+  Timer? _countdownTimer;
 
   @override
   void initState() {
@@ -68,17 +77,39 @@ class _SessionScreenState extends State<SessionScreen> {
         .then((row) => row.read<int>('c'));
     if (!mounted) return;
 
-    final engine = SessionEngine(rounds: table.rounds);
-    engine.start();
     setState(() {
       _reminderIndex = sessionCount % 4;
-      _engine = engine;
+      _engine = SessionEngine(rounds: table.rounds);
       _tableType = table.type;
       _tableName = table.name;
-      _startedAt = DateTime.now();
+      _countdown =
+          widget.countdownSeconds > 0 ? widget.countdownSeconds : null;
     });
     _wakeLock.acquire();
+    if (_countdown == null) {
+      _beginSession();
+    } else {
+      // 3→2→1 카운트다운 후 세션 시작.
+      _countdownTimer =
+          Timer.periodic(const Duration(seconds: 1), (_) => _tickCountdown());
+    }
+  }
+
+  void _beginSession() {
+    setState(() => _countdown = null);
+    _engine!.start();
+    _startedAt = DateTime.now();
     _startTimer();
+  }
+
+  void _tickCountdown() {
+    final next = (_countdown ?? 1) - 1;
+    if (next <= 0) {
+      _countdownTimer?.cancel();
+      _beginSession();
+    } else {
+      setState(() => _countdown = next);
+    }
   }
 
   void _startTimer() {
@@ -158,6 +189,7 @@ class _SessionScreenState extends State<SessionScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    _countdownTimer?.cancel();
     _voice.stop();
     _wakeLock.release();
     super.dispose();
@@ -179,6 +211,10 @@ class _SessionScreenState extends State<SessionScreen> {
         backgroundColor: abyss,
         body: Center(child: CircularProgressIndicator()),
       );
+    }
+
+    if (_countdown != null) {
+      return CountdownView(value: _countdown!);
     }
 
     if (!engine.isActive) {

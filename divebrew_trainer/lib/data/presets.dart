@@ -33,6 +33,18 @@ final presets = <PresetDef>[
   PresetDef(name: 'O2 상급', type: TableType.o2, rounds: _o2(120, 120, 15, 8)),
 ];
 
+/// 단발 스테틱 세션이 참조할 시드 테이블 — 라운드는 열린 숨참기라 placeholder.
+/// 테이블 목록에는 노출하지 않고(홈 카드에서만 진입), 스테틱 PB의 소속 테이블 역할.
+const staticTableName = '단발 스테틱';
+final staticPreset = PresetDef(
+  name: staticTableName,
+  type: TableType.static_,
+  rounds: const [Round(breathSec: 0, holdSec: 0)],
+);
+
+/// 최초 시드 대상 = CO2/O2 프리셋 6종 + 단발 스테틱 테이블.
+List<PresetDef> get _seedTables => [...presets, staticPreset];
+
 /// 프리셋이 없으면 시드한다 (최초 실행 1회).
 Future<void> seedPresetsIfEmpty(AppDatabase db) async {
   final existing = await (db.select(db.trainingTables)
@@ -42,7 +54,7 @@ Future<void> seedPresetsIfEmpty(AppDatabase db) async {
 
   await db.batch((batch) {
     batch.insertAll(db.trainingTables, [
-      for (final p in presets)
+      for (final p in _seedTables)
         TrainingTablesCompanion.insert(
           name: p.name,
           type: p.type,
@@ -51,6 +63,17 @@ Future<void> seedPresetsIfEmpty(AppDatabase db) async {
         ),
     ]);
   });
+}
+
+/// 단발 스테틱 시드 테이블을 찾는다 (없으면 null).
+Future<TrainingTable?> findStaticTable(AppDatabase db) async {
+  final rows = await (db.select(db.trainingTables)
+        ..where((t) => t.isPreset.equals(true)))
+      .get();
+  for (final r in rows) {
+    if (r.type == TableType.static_) return r;
+  }
+  return null;
 }
 
 /// 기본 루틴 복원 — 프리셋 라운드를 원래 값으로 되돌리고, 삭제된 프리셋은 다시 추가.
@@ -62,7 +85,7 @@ Future<void> restoreDefaultTables(AppDatabase db) async {
   final byName = {for (final t in existing) t.name: t};
 
   await db.transaction(() async {
-    for (final p in presets) {
+    for (final p in _seedTables) {
       final current = byName[p.name];
       if (current == null) {
         await db.into(db.trainingTables).insert(

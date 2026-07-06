@@ -42,6 +42,22 @@ class AppDatabase extends _$AppDatabase {
         ),
       );
 
+  static const _licenseImageKey = 'licenseImageBase64';
+
+  /// 저장된 자격증 사진(base64)을 실시간 구독 — 없으면 null.
+  Stream<String?> watchLicenseImage() =>
+      (select(settings)..where((s) => s.key.equals(_licenseImageKey)))
+          .watchSingleOrNull()
+          .map((row) => row?.value);
+
+  Future<void> setLicenseImage(String base64) =>
+      into(settings).insertOnConflictUpdate(
+        SettingsCompanion.insert(key: _licenseImageKey, value: base64),
+      );
+
+  Future<void> clearLicenseImage() =>
+      (delete(settings)..where((s) => s.key.equals(_licenseImageKey))).go();
+
   /// 세션 저장 + 해당 종류 PB가 갱신되면 함께 upsert.
   Future<int> saveSession({
     required int tableId,

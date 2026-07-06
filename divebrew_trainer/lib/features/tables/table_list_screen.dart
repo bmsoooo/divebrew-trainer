@@ -26,10 +26,9 @@ class TableListScreen extends StatelessWidget {
             final co2 =
                 tables.where((t) => t.type == TableType.co2).toList();
             final o2 = tables.where((t) => t.type == TableType.o2).toList();
-            final custom = tables
-                .where((t) =>
-                    t.type == TableType.custom || t.type == TableType.static_)
-                .toList();
+            // 단발 스테틱 시드 테이블(static_)은 홈 카드에서만 진입 — 목록엔 커스텀만.
+            final custom =
+                tables.where((t) => t.type == TableType.custom).toList();
 
             return ListView(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),

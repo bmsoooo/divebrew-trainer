@@ -6,8 +6,10 @@ import '../data/database.dart';
 import '../features/guide/guide_screen.dart';
 import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/license/license_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/session/session_screen.dart';
+import '../features/session/static_session_screen.dart';
 import '../features/settings/legal_page.dart';
 import '../features/settings/settings_screen.dart';
 import '../features/tables/table_detail_screen.dart';
@@ -114,6 +116,16 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
             db: db,
             tableId: int.parse(state.pathParameters['tableId']!),
           ),
+        ),
+        GoRoute(
+          path: '/static',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => StaticSessionScreen(db: db),
+        ),
+        GoRoute(
+          path: '/license',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => LicenseScreen(db: db),
         ),
       ],
     );

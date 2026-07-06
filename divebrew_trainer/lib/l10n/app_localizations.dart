@@ -985,6 +985,120 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'빠르게 몰아쉬는 과호흡은 절대 하지 마세요. 과호흡은 CO2를 억지로 날려서 충동을 늦출 뿐, 산소를 늘려주지 않아요. 그래서 \'괜찮은 줄 알았는데 갑자기 정신을 잃는\' 블랙아웃 위험이 커져요.\n\n저는 항상 편안한 호흡 몇 번만 하고, 앉아서, 물 밖에서, 어지러우면 바로 멈춰요. 기록보다 안전이 먼저예요.'**
   String get guideSafetyBody;
+
+  /// No description provided for @homeStaticSection.
+  ///
+  /// In ko, this message translates to:
+  /// **'단발 스테틱'**
+  String get homeStaticSection;
+
+  /// No description provided for @homeStaticTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'스테틱 한 번 해볼까요'**
+  String get homeStaticTitle;
+
+  /// No description provided for @homeStaticSubtitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'오늘도 나의 PB를 갱신해보세요'**
+  String get homeStaticSubtitle;
+
+  /// No description provided for @homeBrowseTables.
+  ///
+  /// In ko, this message translates to:
+  /// **'훈련 테이블 둘러보기'**
+  String get homeBrowseTables;
+
+  /// No description provided for @countdownReady.
+  ///
+  /// In ko, this message translates to:
+  /// **'준비하세요'**
+  String get countdownReady;
+
+  /// No description provided for @staticDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'완료'**
+  String get staticDone;
+
+  /// No description provided for @staticResultLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'이번 기록'**
+  String get staticResultLabel;
+
+  /// No description provided for @staticNewPb.
+  ///
+  /// In ko, this message translates to:
+  /// **'새 최고 기록을 세웠어요'**
+  String get staticNewPb;
+
+  /// No description provided for @staticPrevPb.
+  ///
+  /// In ko, this message translates to:
+  /// **'이전 최고 {time}'**
+  String staticPrevPb(String time);
+
+  /// No description provided for @licenseTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'내 자격증'**
+  String get licenseTitle;
+
+  /// No description provided for @licenseHomeTooltip.
+  ///
+  /// In ko, this message translates to:
+  /// **'내 자격증'**
+  String get licenseHomeTooltip;
+
+  /// No description provided for @licenseEmptyTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'자격증 사진을 올려두세요'**
+  String get licenseEmptyTitle;
+
+  /// No description provided for @licenseEmptyBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'다이빙 센터나 버디에게 자격증을 바로 보여줄 수 있어요. 사진은 이 기기에만 저장돼요.'**
+  String get licenseEmptyBody;
+
+  /// No description provided for @licenseUpload.
+  ///
+  /// In ko, this message translates to:
+  /// **'사진 올리기'**
+  String get licenseUpload;
+
+  /// No description provided for @licenseReplace.
+  ///
+  /// In ko, this message translates to:
+  /// **'사진 교체'**
+  String get licenseReplace;
+
+  /// No description provided for @licenseDelete.
+  ///
+  /// In ko, this message translates to:
+  /// **'삭제'**
+  String get licenseDelete;
+
+  /// No description provided for @licenseDeleteConfirm.
+  ///
+  /// In ko, this message translates to:
+  /// **'저장된 자격증 사진을 삭제할까요?'**
+  String get licenseDeleteConfirm;
+
+  /// No description provided for @licenseSaved.
+  ///
+  /// In ko, this message translates to:
+  /// **'자격증 사진을 저장했어요'**
+  String get licenseSaved;
+
+  /// No description provided for @licenseDeleted.
+  ///
+  /// In ko, this message translates to:
+  /// **'자격증 사진을 삭제했어요'**
+  String get licenseDeleted;
 }
 
 class _AppLocalizationsDelegate

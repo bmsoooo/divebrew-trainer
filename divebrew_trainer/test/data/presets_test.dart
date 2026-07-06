@@ -17,16 +17,17 @@ void main() {
     await db.close();
   });
 
-  test('프리셋 6종 시드 — 두 번 호출해도 중복 없음', () async {
+  test('프리셋 시드 — 두 번 호출해도 중복 없음 (CO2 3 + O2 3 + 스테틱 1)', () async {
     await seedPresetsIfEmpty(db);
     await seedPresetsIfEmpty(db);
 
     final all = await db.select(db.trainingTables).get();
 
-    expect(all, hasLength(6));
+    expect(all, hasLength(7));
     expect(all.every((t) => t.isPreset), isTrue);
     expect(all.where((t) => t.type == TableType.co2), hasLength(3));
     expect(all.where((t) => t.type == TableType.o2), hasLength(3));
+    expect(all.where((t) => t.type == TableType.static_), hasLength(1));
   });
 
   test('CO2 프리셋: 숨참기 고정, 준비 호흡 점감', () {

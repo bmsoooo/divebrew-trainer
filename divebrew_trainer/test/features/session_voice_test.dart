@@ -66,6 +66,7 @@ void main() {
             tableId: tableId,
             voiceGuide: voice,
             wakeLock: wakeLock,
+            countdownSeconds: 0,
           ),
         ),
       ],

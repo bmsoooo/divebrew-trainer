@@ -511,4 +511,64 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get guideSafetyBody =>
       'Never hyperventilate with fast, heavy breathing. It only flushes out CO2 to delay the urge — it does not add oxygen. That raises the risk of blackout, where you \'feel fine and then suddenly pass out.\'\n\nI always take just a few relaxed breaths, sit down, stay out of the water, and stop the moment I feel dizzy. Safety before any record.';
+
+  @override
+  String get homeStaticSection => 'Single static';
+
+  @override
+  String get homeStaticTitle => 'Try one static hold';
+
+  @override
+  String get homeStaticSubtitle => 'Beat your personal best today';
+
+  @override
+  String get homeBrowseTables => 'Browse training tables';
+
+  @override
+  String get countdownReady => 'Get ready';
+
+  @override
+  String get staticDone => 'Done';
+
+  @override
+  String get staticResultLabel => 'This hold';
+
+  @override
+  String get staticNewPb => 'New personal best!';
+
+  @override
+  String staticPrevPb(String time) {
+    return 'Previous best $time';
+  }
+
+  @override
+  String get licenseTitle => 'My certification';
+
+  @override
+  String get licenseHomeTooltip => 'My certification';
+
+  @override
+  String get licenseEmptyTitle => 'Save your certification card';
+
+  @override
+  String get licenseEmptyBody =>
+      'Show your certification to a dive center or buddy instantly. The photo is stored on this device only.';
+
+  @override
+  String get licenseUpload => 'Upload photo';
+
+  @override
+  String get licenseReplace => 'Replace photo';
+
+  @override
+  String get licenseDelete => 'Delete';
+
+  @override
+  String get licenseDeleteConfirm => 'Delete the saved certification photo?';
+
+  @override
+  String get licenseSaved => 'Certification photo saved';
+
+  @override
+  String get licenseDeleted => 'Certification photo deleted';
 }

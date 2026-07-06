@@ -37,7 +37,7 @@ void main() {
     await importFromJson(target, json);
 
     final tables = await target.select(target.trainingTables).get();
-    expect(tables, hasLength(7)); // 프리셋 6 + 커스텀 1
+    expect(tables, hasLength(8)); // 프리셋 7(스테틱 포함) + 커스텀 1
 
     final custom = tables.singleWhere((t) => t.name == '내 커스텀');
     expect(custom.id, customId);

@@ -294,5 +294,31 @@
   "guideWhyTitle": "왜 훈련하면 숨참기가 늘어요?",
   "guideWhyBody": "세 가지가 함께 작용해요.\n\n1. CO2 내성 — 숨 쉬고 싶은 충동은 대부분 CO2 때문이에요. 훈련으로 이 충동을 견디는 여유가 생기면, 예전 같으면 포기했을 지점을 지나갈 수 있어요.\n\n2. 이완 — 긴장하면 산소를 더 빨리 써요. 몸에 힘 빼는 법을 익히면 같은 산소로 더 오래 버텨요. '힘을 빼야 뜬다'는 말이 여기에도 통해요.\n\n3. 저산소 적응 — O2 훈련으로 몸이 낮은 산소에 조금씩 익숙해져요.\n\n폐를 크게 만드는 게 아니라, 몸과 마음이 '적응'하는 거예요. 그래서 꾸준함이 재능을 이겨요.",
   "guideSafetyTitle": "딱 하나, 꼭 기억해요",
-  "guideSafetyBody": "빠르게 몰아쉬는 과호흡은 절대 하지 마세요. 과호흡은 CO2를 억지로 날려서 충동을 늦출 뿐, 산소를 늘려주지 않아요. 그래서 '괜찮은 줄 알았는데 갑자기 정신을 잃는' 블랙아웃 위험이 커져요.\n\n저는 항상 편안한 호흡 몇 번만 하고, 앉아서, 물 밖에서, 어지러우면 바로 멈춰요. 기록보다 안전이 먼저예요."
+  "guideSafetyBody": "빠르게 몰아쉬는 과호흡은 절대 하지 마세요. 과호흡은 CO2를 억지로 날려서 충동을 늦출 뿐, 산소를 늘려주지 않아요. 그래서 '괜찮은 줄 알았는데 갑자기 정신을 잃는' 블랙아웃 위험이 커져요.\n\n저는 항상 편안한 호흡 몇 번만 하고, 앉아서, 물 밖에서, 어지러우면 바로 멈춰요. 기록보다 안전이 먼저예요.",
+  "homeStaticSection": "단발 스테틱",
+  "homeStaticTitle": "스테틱 한 번 해볼까요",
+  "homeStaticSubtitle": "오늘도 나의 PB를 갱신해보세요",
+  "homeBrowseTables": "훈련 테이블 둘러보기",
+  "countdownReady": "준비하세요",
+  "staticDone": "완료",
+  "staticResultLabel": "이번 기록",
+  "staticNewPb": "새 최고 기록을 세웠어요",
+  "staticPrevPb": "이전 최고 {time}",
+  "@staticPrevPb": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "licenseTitle": "내 자격증",
+  "licenseHomeTooltip": "내 자격증",
+  "licenseEmptyTitle": "자격증 사진을 올려두세요",
+  "licenseEmptyBody": "다이빙 센터나 버디에게 자격증을 바로 보여줄 수 있어요. 사진은 이 기기에만 저장돼요.",
+  "licenseUpload": "사진 올리기",
+  "licenseReplace": "사진 교체",
+  "licenseDelete": "삭제",
+  "licenseDeleteConfirm": "저장된 자격증 사진을 삭제할까요?",
+  "licenseSaved": "자격증 사진을 저장했어요",
+  "licenseDeleted": "자격증 사진을 삭제했어요"
 }

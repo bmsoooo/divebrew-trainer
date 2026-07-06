@@ -69,7 +69,7 @@ void main() {
       final presetsInDb = await (db.select(db.trainingTables)
             ..where((t) => t.isPreset.equals(true)))
           .get();
-      expect(presetsInDb, hasLength(presets.length));
+      expect(presetsInDb, hasLength(presets.length + 1)); // +스테틱
     });
   });
 
@@ -106,7 +106,7 @@ void main() {
       await resetAll(db);
 
       final tables = await db.select(db.trainingTables).get();
-      expect(tables, hasLength(presets.length));
+      expect(tables, hasLength(presets.length + 1)); // +스테틱
       expect(tables.every((t) => t.isPreset), isTrue);
       expect(await db.select(db.sessions).get(), isEmpty);
       expect(await db.select(db.personalBests).get(), isEmpty);

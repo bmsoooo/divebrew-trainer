@@ -40,6 +40,7 @@ void main() {
           builder: (context, state) => SessionScreen(
             db: db,
             tableId: int.parse(state.pathParameters['tableId']!),
+            countdownSeconds: 0,
           ),
         ),
       ],

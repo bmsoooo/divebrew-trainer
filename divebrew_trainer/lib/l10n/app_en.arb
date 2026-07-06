@@ -294,5 +294,31 @@
   "guideWhyTitle": "Why does training grow your hold?",
   "guideWhyBody": "Three things work together.\n\n1. CO2 tolerance — the urge to breathe is mostly from CO2. When training gives you room to endure it, you can pass the point where you'd have quit before.\n\n2. Relaxation — tension burns oxygen faster. Learning to let go lets you last longer on the same oxygen. 'You only rise once you stop straining' applies here too.\n\n3. Low-oxygen adaptation — O2 training gradually accustoms your body to lower oxygen.\n\nIt's not about bigger lungs — it's your body and mind adapting. That's why consistency beats talent.",
   "guideSafetyTitle": "One thing, always remember",
-  "guideSafetyBody": "Never hyperventilate with fast, heavy breathing. It only flushes out CO2 to delay the urge — it does not add oxygen. That raises the risk of blackout, where you 'feel fine and then suddenly pass out.'\n\nI always take just a few relaxed breaths, sit down, stay out of the water, and stop the moment I feel dizzy. Safety before any record."
+  "guideSafetyBody": "Never hyperventilate with fast, heavy breathing. It only flushes out CO2 to delay the urge — it does not add oxygen. That raises the risk of blackout, where you 'feel fine and then suddenly pass out.'\n\nI always take just a few relaxed breaths, sit down, stay out of the water, and stop the moment I feel dizzy. Safety before any record.",
+  "homeStaticSection": "Single static",
+  "homeStaticTitle": "Try one static hold",
+  "homeStaticSubtitle": "Beat your personal best today",
+  "homeBrowseTables": "Browse training tables",
+  "countdownReady": "Get ready",
+  "staticDone": "Done",
+  "staticResultLabel": "This hold",
+  "staticNewPb": "New personal best!",
+  "staticPrevPb": "Previous best {time}",
+  "@staticPrevPb": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "licenseTitle": "My certification",
+  "licenseHomeTooltip": "My certification",
+  "licenseEmptyTitle": "Save your certification card",
+  "licenseEmptyBody": "Show your certification to a dive center or buddy instantly. The photo is stored on this device only.",
+  "licenseUpload": "Upload photo",
+  "licenseReplace": "Replace photo",
+  "licenseDelete": "Delete",
+  "licenseDeleteConfirm": "Delete the saved certification photo?",
+  "licenseSaved": "Certification photo saved",
+  "licenseDeleted": "Certification photo deleted"
 }

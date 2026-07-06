@@ -158,6 +158,25 @@
 - 해결: `youtube-profile-800x800.png`(원형 소스)를 Deep Ocean(#0A2342) 불투명 정사각형 위에 합성 → 모서리가 네이비로 채워짐. maskable은 사진을 14% 확대해 safe zone까지 채움. 도구는 Node `jimp`(PIL/ImageMagick 부재, npm은 dart hang과 무관). 스크립트: scratchpad/composite.js.
 - 정사각형 풀블리드 원본이 없어 색 채우기로 처리 — 네이티브 앱 아이콘(M3)은 풀블리드 이미지로 재제작 권장.
 
+## 2026-07-06 — 단발 스테틱 + 3→2→1 카운트다운 + 자격증 사진
+
+**D28. 홈 = 단발 스테틱 중심으로 재편, 홈 PB = 스테틱 최고 기록**
+- 요청: CO2/O2 테이블 시작 시 3→2→1 카운트다운, 홈 PB는 테이블이 아닌 단발성 스테틱 기록, 홈에 스테틱 시작 메뉴, 카드 문구는 동기부여형("오늘도 나의 PB를 갱신해보세요").
+- 홈 카드를 "오늘의 훈련 제안"(테이블) → "단발 스테틱" 카드로 교체(→ /static). 홈 PB 카드는 `personalBests` where type=static_만 표시. 하단 CTA는 /tables(테이블 목록)로.
+- 홈이 카드가 늘어 짧은 화면에서 오버플로우 → 콘텐츠를 ListView로 감싸고 CTA만 하단 고정.
+
+**D29. 단발 스테틱 = 열린 숨참기(카운트업), static_ 시드 테이블에 귀속**
+- `presets.dart`에 `staticPreset`(name '단발 스테틱', type static_) 추가 → 시드 대상이 6→7개. 테이블 목록엔 노출 안 함(custom 섹션은 type==custom만). `findStaticTable(db)`로 세션이 참조할 테이블 조회.
+- StaticSessionScreen: 카운트다운 → 카운트업 타이머(열린 숨참기, 무제한) → "완료" 1탭 종료 → static_ PB 갱신 + 결과(새 PB 여부). saveSession(type static_)이 PB upsert.
+- FK 유지 위해 별도 스키마 변경 없이 static_ 시드 테이블 tableId 사용(nullable 마이그레이션 회피).
+
+**D30. 3→2→1 카운트다운 — 세션 시작 전 공용, 주입 가능**
+- SessionScreen·StaticSessionScreen에 `countdownSeconds`(기본 3, 테스트는 0으로 건너뜀) 파라미터. CountdownView 공용 위젯. 시드 테이블 추가·카운트다운 도입으로 기존 테스트 다수 갱신(시드 count 6→7, 세션 테스트에 countdownSeconds:0).
+- 주의: _beginSession에서 초기 preparing 단계는 음성 안내 안 함(기존 동작 유지, 전환 시에만).
+
+**D31. 내 자격증 사진 — 로컬 저장(다이빙 센터 제시용)**
+- 홈 상단 우측 badge 아이콘 → /license. 업로드/보기/교체/삭제. base64로 Settings 테이블(key licenseImageBase64)에 저장, Image.memory로 렌더. 웹 이미지 선택은 `image_picker.dart` 조건부 import(FileReader.readAsArrayBuffer). 비웹 스텁은 M3에서 image_picker로 교체.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후
