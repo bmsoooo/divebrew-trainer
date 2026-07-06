@@ -231,4 +231,135 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sessionPausedLabel => '일시정지됨';
+
+  @override
+  String get homeGreeting => '안녕하세요, 오늘도\n천천히 내려가볼까요';
+
+  @override
+  String get homePbLabel => '최고 기록 · PB';
+
+  @override
+  String homePbDate(String date) {
+    return '$date 기록';
+  }
+
+  @override
+  String get homePbEmpty => '아직 기록이 없어요';
+
+  @override
+  String get homeSuggestionLabel => '오늘의 훈련 제안';
+
+  @override
+  String get homeSuggestionFirst => '처음이시죠? CO2 입문 테이블로 가볍게 시작해볼까요';
+
+  @override
+  String homeSuggestionAlternate(String type, String suggested) {
+    return '지난번엔 $type 테이블이었으니, 이번엔 $suggested 테이블로 균형을 맞춰봐요';
+  }
+
+  @override
+  String get homeSuggestionDetail => '자세히 보기 →';
+
+  @override
+  String get homeCta => '오늘의 훈련 보러가기';
+
+  @override
+  String get tabHome => '홈';
+
+  @override
+  String get tabTables => '테이블';
+
+  @override
+  String get tabHistory => '히스토리';
+
+  @override
+  String get tableListIntro => 'CO2 테이블은 회복호흡을 줄이고, O2 테이블은 숨참기를 늘려요';
+
+  @override
+  String get tableListSectionCo2 => 'CO2 테이블';
+
+  @override
+  String get tableListSectionO2 => 'O2 테이블';
+
+  @override
+  String get tableListSectionCustom => '커스텀';
+
+  @override
+  String get tableListCreateCustom => '+ 나만의 테이블 만들기';
+
+  @override
+  String tableListMinutes(int min) {
+    return '$min분';
+  }
+
+  @override
+  String get detailBack => '← 테이블';
+
+  @override
+  String get detailProfileLabel => '다이브 프로파일';
+
+  @override
+  String get detailStatTotal => '총 훈련 시간';
+
+  @override
+  String get detailStatRounds => '라운드';
+
+  @override
+  String detailStatRoundsValue(int count) {
+    return '$count개';
+  }
+
+  @override
+  String detailColRound(int n) {
+    return '라운드 $n';
+  }
+
+  @override
+  String detailColHold(String time) {
+    return '숨참기 $time';
+  }
+
+  @override
+  String detailColBreath(String time) {
+    return '호흡 $time';
+  }
+
+  @override
+  String get sessionExit => '✕ 중단';
+
+  @override
+  String sessionHeader(String table, int n, int total) {
+    return '$table · 라운드 $n/$total';
+  }
+
+  @override
+  String get sessionPhaseRecovery => '회복호흡';
+
+  @override
+  String get sessionContractionCount => '컨트랙션 탭';
+
+  @override
+  String get sessionStartRecovery => '회복호흡 시작';
+
+  @override
+  String get historyStatSessions => '총 세션';
+
+  @override
+  String historyStatSessionsValue(int count) {
+    return '$count회';
+  }
+
+  @override
+  String get historyStatPb => '최고 기록';
+
+  @override
+  String get historyStatWeek => '이번주';
+
+  @override
+  String historyStatWeekValue(int days) {
+    return '$days일';
+  }
+
+  @override
+  String get historyPbTrend => 'PB 추이';
 }

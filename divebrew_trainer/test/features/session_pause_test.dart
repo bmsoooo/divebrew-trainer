@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:divebrew_trainer/data/database.dart';
 import 'package:divebrew_trainer/data/models.dart';
 import 'package:divebrew_trainer/features/session/session_screen.dart';
+import 'package:divebrew_trainer/features/tables/dive_profile_line.dart';
 import 'package:divebrew_trainer/l10n/app_localizations.dart';
 
 void main() {
@@ -61,7 +62,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const ValueKey('resume-session')), findsOneWidget);
-    expect(find.byKey(const ValueKey('paused-label')), findsOneWidget);
+    expect(find.text('일시정지됨'), findsOneWidget);
     expect(find.text('0:10'), findsOneWidget);
 
     // 일시정지 중에는 시간이 흐르지 않아야 한다.
@@ -120,7 +121,7 @@ void main() {
     expect(sessions.single.results.single.actualHoldSec, 2);
   });
 
-  testWidgets('라운드 타임라인이 표시되고 완료된 라운드에 실제 홀드 시간이 반영된다', (tester) async {
+  testWidgets('세션 화면에 다이브 프로파일 라인이 표시된다', (tester) async {
     final tableId = await insertTable(const [
       Round(breathSec: 1, holdSec: 2),
       Round(breathSec: 1, holdSec: 5),
@@ -128,10 +129,9 @@ void main() {
     await tester.pumpWidget(buildApp(tableId));
     await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey('timeline-round-0')), findsOneWidget);
-    expect(find.byKey(const ValueKey('timeline-round-1')), findsOneWidget);
+    expect(find.byType(DiveProfileLine), findsOneWidget);
 
     await tester.pump(const Duration(seconds: 3)); // 1라운드 완주 (준비1+홀드2)
-    expect(find.text('2s'), findsOneWidget); // 완료된 1라운드 실제 홀드
+    expect(find.byType(DiveProfileLine), findsOneWidget);
   });
 }

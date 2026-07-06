@@ -67,11 +67,11 @@ void main() {
     await tester.pumpWidget(buildApp(tableId));
     await tester.pumpAndSettle();
 
-    expect(find.text('내 커스텀'), findsOneWidget);
+    expect(find.textContaining('내 커스텀'), findsOneWidget);
     expect(find.byKey(const ValueKey('timeline-round-0')), findsOneWidget);
     expect(find.byKey(const ValueKey('timeline-round-1')), findsOneWidget);
-    expect(find.text('30s'), findsOneWidget);
-    expect(find.text('45s'), findsOneWidget);
+    expect(find.text('숨참기 0:30'), findsOneWidget);
+    expect(find.text('숨참기 0:45'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
     await tester.pump(const Duration(seconds: 1));

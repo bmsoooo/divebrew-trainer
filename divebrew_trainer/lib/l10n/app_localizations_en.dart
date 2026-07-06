@@ -238,4 +238,137 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sessionPausedLabel => 'Paused';
+
+  @override
+  String get homeGreeting => 'Hello — shall we\ndescend slowly today?';
+
+  @override
+  String get homePbLabel => 'Personal best · PB';
+
+  @override
+  String homePbDate(String date) {
+    return 'Set on $date';
+  }
+
+  @override
+  String get homePbEmpty => 'No record yet';
+
+  @override
+  String get homeSuggestionLabel => 'Today\'s training';
+
+  @override
+  String get homeSuggestionFirst =>
+      'First time? Let\'s ease in with the CO2 beginner table';
+
+  @override
+  String homeSuggestionAlternate(String type, String suggested) {
+    return 'Last time was a $type table — let\'s balance it with $suggested today';
+  }
+
+  @override
+  String get homeSuggestionDetail => 'View details →';
+
+  @override
+  String get homeCta => 'See today\'s training';
+
+  @override
+  String get tabHome => 'Home';
+
+  @override
+  String get tabTables => 'Tables';
+
+  @override
+  String get tabHistory => 'History';
+
+  @override
+  String get tableListIntro =>
+      'CO2 tables shrink recovery breathing; O2 tables extend the hold';
+
+  @override
+  String get tableListSectionCo2 => 'CO2 tables';
+
+  @override
+  String get tableListSectionO2 => 'O2 tables';
+
+  @override
+  String get tableListSectionCustom => 'Custom';
+
+  @override
+  String get tableListCreateCustom => '+ Create your own table';
+
+  @override
+  String tableListMinutes(int min) {
+    return '$min min';
+  }
+
+  @override
+  String get detailBack => '← Tables';
+
+  @override
+  String get detailProfileLabel => 'Dive profile';
+
+  @override
+  String get detailStatTotal => 'Total duration';
+
+  @override
+  String get detailStatRounds => 'Rounds';
+
+  @override
+  String detailStatRoundsValue(int count) {
+    return '$count';
+  }
+
+  @override
+  String detailColRound(int n) {
+    return 'Round $n';
+  }
+
+  @override
+  String detailColHold(String time) {
+    return 'Hold $time';
+  }
+
+  @override
+  String detailColBreath(String time) {
+    return 'Breathe $time';
+  }
+
+  @override
+  String get sessionExit => '✕ Stop';
+
+  @override
+  String sessionHeader(String table, int n, int total) {
+    return '$table · Round $n/$total';
+  }
+
+  @override
+  String get sessionPhaseRecovery => 'Recovery breathing';
+
+  @override
+  String get sessionContractionCount => 'Contraction tap';
+
+  @override
+  String get sessionStartRecovery => 'Start recovery';
+
+  @override
+  String get historyStatSessions => 'Sessions';
+
+  @override
+  String historyStatSessionsValue(int count) {
+    return '$count';
+  }
+
+  @override
+  String get historyStatPb => 'Personal best';
+
+  @override
+  String get historyStatWeek => 'This week';
+
+  @override
+  String historyStatWeekValue(int days) {
+    return '${days}d';
+  }
+
+  @override
+  String get historyPbTrend => 'PB trend';
 }

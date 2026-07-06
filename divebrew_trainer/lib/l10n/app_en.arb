@@ -135,5 +135,121 @@
   "tableDetailStart": "Start",
   "sessionPause": "Pause",
   "sessionResume": "Resume",
-  "sessionPausedLabel": "Paused"
+  "sessionPausedLabel": "Paused",
+  "homeGreeting": "Hello — shall we\ndescend slowly today?",
+  "homePbLabel": "Personal best · PB",
+  "homePbDate": "Set on {date}",
+  "@homePbDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homePbEmpty": "No record yet",
+  "homeSuggestionLabel": "Today's training",
+  "homeSuggestionFirst": "First time? Let's ease in with the CO2 beginner table",
+  "homeSuggestionAlternate": "Last time was a {type} table — let's balance it with {suggested} today",
+  "@homeSuggestionAlternate": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "suggested": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSuggestionDetail": "View details →",
+  "homeCta": "See today's training",
+  "tabHome": "Home",
+  "tabTables": "Tables",
+  "tabHistory": "History",
+  "tableListIntro": "CO2 tables shrink recovery breathing; O2 tables extend the hold",
+  "tableListSectionCo2": "CO2 tables",
+  "tableListSectionO2": "O2 tables",
+  "tableListSectionCustom": "Custom",
+  "tableListCreateCustom": "+ Create your own table",
+  "tableListMinutes": "{min} min",
+  "@tableListMinutes": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "detailBack": "← Tables",
+  "detailProfileLabel": "Dive profile",
+  "detailStatTotal": "Total duration",
+  "detailStatRounds": "Rounds",
+  "detailStatRoundsValue": "{count}",
+  "@detailStatRoundsValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "detailColRound": "Round {n}",
+  "@detailColRound": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "detailColHold": "Hold {time}",
+  "@detailColHold": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "detailColBreath": "Breathe {time}",
+  "@detailColBreath": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sessionExit": "✕ Stop",
+  "sessionHeader": "{table} · Round {n}/{total}",
+  "@sessionHeader": {
+    "placeholders": {
+      "table": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionPhaseRecovery": "Recovery breathing",
+  "sessionContractionCount": "Contraction tap",
+  "sessionStartRecovery": "Start recovery",
+  "historyStatSessions": "Sessions",
+  "historyStatSessionsValue": "{count}",
+  "@historyStatSessionsValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyStatPb": "Personal best",
+  "historyStatWeek": "This week",
+  "historyStatWeekValue": "{days}d",
+  "@historyStatWeekValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "historyPbTrend": "PB trend"
 }

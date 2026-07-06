@@ -1,5 +1,6 @@
 // 앱 루트 스모크 테스트 — 동의 여부에 따른 첫 화면 분기
 import 'package:drift/native.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:divebrew_trainer/app/consent_state.dart';
@@ -17,6 +18,10 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    expect(find.text('divebrew trainer'), findsOneWidget);
+    expect(find.text('DIVEBREW TRAINER'), findsOneWidget);
+
+    // drift watch() keep-alive 타이머 소진.
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 1));
   });
 }

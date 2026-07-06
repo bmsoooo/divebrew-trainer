@@ -117,6 +117,20 @@
 - `RoundTimeline` 공용 위젯 신설(`lib/features/tables/round_timeline.dart`) — 완료(✓ 실제시간)/진행중(▶ 강조)/예정(○ 흐림) 3상태를 아이콘+텍스트로. 텍스트 라벨 없이 아이콘 위주 설계(안전 카피 원칙과 별개로 단순함 우선). 테이블 상세(전부 예정)와 세션 실행 화면(실시간 상태) 양쪽에서 재사용.
 - 일시정지 시 타이머는 `cancel()`, 재개 시 새 `Timer.periodic` 시작(틱 스킵 방식 대신) — WakeLock은 일시정지 중에도 유지(화면은 계속 보고 있으므로), 음성은 `stop()`으로 끊음.
 
+## 2026-07-06 — Claude Design 핸드오프 UI/UX 전면 적용
+
+**D24. 디자인 핸드오프(`Dive breath training app.zip`)를 5개 화면에 반영**
+- 출처: 운영자가 Claude Design에서 생성한 고정밀 핸드오프(HTML 프로토타입 + 토큰 + 스크린샷 5장 + README 스펙). `design-system/`은 브랜드 3색을 앱용으로 확장한 값.
+- 수심 팔레트 확정(theme.dart): Abyss #061527 / Deep Ocean #0A2342 / Mid-water #12325C / Mist #B8C7D9 / Foam #F2F6FA + Snorkel Yellow 악센트. Espresso는 UI에서 제외(브루잉 콘텐츠 전용).
+- "깊이 스테이징": 홈/테이블/히스토리=Deep Ocean, 상세=Mid-water, 세션=Abyss. 화면이 깊어질수록 배경이 어두워짐.
+- 타이포 3역할: Display(타이머·PB, ExtraBold 800 + tabular figures), Body, Utility(칩·라벨 SemiBold+자간). Pretendard-ExtraBold.otf(weight 800) 추가.
+- 시그니처 `DiveProfileLine`(CustomPaint): 라운드를 다이브컴퓨터 수심 그래프로. 홀드=하강(최대 홀드 대비 비율), 호흡=수면 복귀. 상세=풀 프로파일(옐로+트로프 도트), 세션=미니(Mist 40% + 옐로 플레이헤드, engine.progress 기반). 기존 RoundTimeline은 이걸로 대체·삭제.
+- 라우터: `StatefulShellRoute.indexedStack`로 하단 탭(홈/테이블/히스토리) 셸 도입. 상세·세션·편집은 rootNavigator로 전체화면 push(탭바 없음). 세션 화면은 탭바 없이 몰입.
+- 홈: 인사말+PB카드(옐로 세로바 악센트)+오늘의 훈련 제안(지난 세션과 다른 타입 추천). 세션 카운트/최근 타입으로 제안 로직.
+- 세션: 88px 타이머, 펄스 도트(연속 애니메이션은 pumpAndSettle과 충돌 → 틱 토글 Opacity로 구현), 컨트랙션 카운터 뱃지, 하단 안전 리마인더 상시 1줄.
+- 주의: drift `watch()`를 쓰는 위젯 테스트는 종료 전 `pumpWidget(SizedBox())+pump(1s)`로 keep-alive 타이머 소진 필수(기존 D22와 동일).
+- 테스트 69건 유지·통과. 문구는 핸드오프 카피(1인칭 해요체) 채택.
+
 ## 미해결 (착수 비차단)
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후

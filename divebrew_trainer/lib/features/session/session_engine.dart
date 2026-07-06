@@ -33,6 +33,24 @@ class SessionEngine {
   /// 지금까지 확정된 라운드 결과.
   List<RoundResult> get results => List.unmodifiable(_results);
 
+  /// 현재 홀드에서 기록된 컨트랙션 수 (UI 카운터 뱃지용).
+  int get currentContractionCount => _contractionAtMs.length;
+
+  /// 세션 전체 진행률 0.0~1.0 — 프로파일 플레이헤드용.
+  double get progress {
+    if (_phase == SessionPhase.finished) return 1.0;
+    final round = rounds[_roundIndex];
+    final total = round.breathSec + round.holdSec;
+    final activePhase =
+        _phase == SessionPhase.paused ? _phaseBeforePause : _phase;
+    final elapsed = switch (activePhase) {
+      SessionPhase.preparing => round.breathSec - _remainingSec,
+      SessionPhase.holding => round.breathSec + (round.holdSec - _remainingSec),
+      _ => 0,
+    };
+    return (_roundIndex + elapsed / total) / rounds.length;
+  }
+
   /// 타이머가 실제로 흐르고 있는 상태(준비/홀드). 일시정지는 포함하지 않는다.
   bool get isRunning =>
       _phase == SessionPhase.preparing || _phase == SessionPhase.holding;

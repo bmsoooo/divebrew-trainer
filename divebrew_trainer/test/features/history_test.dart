@@ -124,12 +124,19 @@ void main() {
           RoundResult(round: 2, actualHoldSec: 62),
         ],
       );
+      await db.saveSession(
+        tableId: tableId,
+        type: TableType.co2,
+        startedAt: DateTime(2026, 7, 3, 9),
+        completedAt: DateTime(2026, 7, 3, 9, 20),
+        results: const [RoundResult(round: 1, actualHoldSec: 71)],
+      );
 
       await tester.pumpWidget(buildApp());
       await tester.pumpAndSettle();
 
-      expect(find.text('CO2 테이블'), findsOneWidget);
-      expect(find.text('최고 62초'), findsOneWidget);
+      expect(find.text('CO2 테이블'), findsNWidgets(2));
+      expect(find.text('1:02'), findsOneWidget); // 첫 세션 최고 홀드 62초
       expect(find.byType(LineChart), findsOneWidget);
 
       // drift watch() 스트림의 keep-alive 타이머를 소진시켜 타이머 누수 방지.
@@ -141,7 +148,7 @@ void main() {
       await tester.pumpWidget(buildApp());
       await tester.pumpAndSettle();
 
-      expect(find.textContaining('아직 기록이 없어요'), findsOneWidget);
+      expect(find.textContaining('아직 기록이 없어요'), findsWidgets);
       expect(find.byType(LineChart), findsNothing);
 
       await tester.pumpWidget(const SizedBox());

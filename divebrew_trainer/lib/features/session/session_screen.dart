@@ -1,13 +1,14 @@
-// 세션 실행 화면 — 대형 타이머, 라운드 타임라인, 일시정지/재개, 컨트랙션 탭, 1탭 중단 (A4: 중단 버튼 상시 노출·확인 팝업 없음)
+// 세션 실행 — Abyss 몰입 배경, 88px 타이머, 컨트랙션 카운터, 미니 프로파일 플레이헤드, 1탭 중단 (디자인 04-session, A4)
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../../l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/theme.dart';
 import '../../data/database.dart';
 import '../../data/models.dart';
-import '../tables/round_timeline.dart';
+import '../../l10n/app_localizations.dart';
+import '../tables/dive_profile_line.dart';
 import 'session_engine.dart';
 import 'voice_guide.dart';
 import 'wake_lock.dart';
@@ -37,9 +38,13 @@ class _SessionScreenState extends State<SessionScreen> {
   Timer? _timer;
   DateTime? _startedAt;
   TableType? _tableType;
+  String _tableName = '';
   bool _saved = false;
   late final VoiceGuide _voice = widget.voiceGuide ?? createVoiceGuide();
   late final SessionWakeLock _wakeLock = widget.wakeLock ?? createWakeLock();
+
+  /// 단계 표시 도트 펄스 — 틱마다 목표 투명도를 토글 (연속 애니메이션 없음, 테스트 안정).
+  bool _pulseOn = true;
 
   @override
   void initState() {
@@ -69,6 +74,7 @@ class _SessionScreenState extends State<SessionScreen> {
       _reminderIndex = sessionCount % 4;
       _engine = engine;
       _tableType = table.type;
+      _tableName = table.name;
       _startedAt = DateTime.now();
     });
     _wakeLock.acquire();
@@ -79,7 +85,10 @@ class _SessionScreenState extends State<SessionScreen> {
     _timer = Timer.periodic(const Duration(seconds: 1), (_) => _onTick());
   }
 
-  void _onTick() => _runEngineEvent(_engine!.tick);
+  void _onTick() {
+    _pulseOn = !_pulseOn;
+    _runEngineEvent(_engine!.tick);
+  }
 
   void _endHoldEarly() => _runEngineEvent(_engine!.endHoldEarly);
 
@@ -166,7 +175,10 @@ class _SessionScreenState extends State<SessionScreen> {
     final engine = _engine;
 
     if (engine == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(
+        backgroundColor: abyss,
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
 
     if (!engine.isActive) {
@@ -178,117 +190,174 @@ class _SessionScreenState extends State<SessionScreen> {
 
     final isHolding = engine.phase == SessionPhase.holding;
     final isPaused = engine.phase == SessionPhase.paused;
+    final phaseLabel = isHolding
+        ? l10n.sessionPhaseHolding
+        : engine.currentRound == 1
+            ? l10n.sessionPhasePreparing
+            : l10n.sessionPhaseRecovery;
 
+    // 깊이 스테이징 3단계 — 세션은 가장 깊은 Abyss.
     return Scaffold(
+      backgroundColor: abyss,
       body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            Text(
-              l10n.sessionRoundProgress(engine.currentRound, engine.totalRounds),
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            // 세션 시작 리마인더 — 첫 라운드 준비 호흡 동안 1줄 로테이션 (A4).
-            if (engine.currentRound == 1 && !isHolding && !isPaused)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
-                child: Text(
-                  '⚠️ ${switch (_reminderIndex) {
-                    0 => l10n.safetyReminder1,
-                    1 => l10n.safetyReminder2,
-                    2 => l10n.safetyReminder3,
-                    _ => l10n.safetyReminder4,
-                  }}',
-                  key: const ValueKey('safety-reminder'),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  RoundTimeline(
-                    rounds: engine.rounds,
-                    results: engine.results,
-                    currentRoundIndex: engine.currentRound - 1,
+                  InkWell(
+                    key: const ValueKey('stop-session'),
+                    onTap: _stop,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        l10n.sessionExit,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: mist,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      l10n.sessionHeader(
+                          _tableName, engine.currentRound, engine.totalRounds),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: mist,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 56),
+                ],
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Opacity(
+                    opacity: isPaused || _pulseOn ? 1.0 : 0.4,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isHolding ? snorkelYellow : mist,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    isPaused ? l10n.sessionPausedLabel : phaseLabel,
+                    key: const ValueKey('phase-label'),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
+                      color: isHolding ? snorkelYellow : mist,
+                    ),
                   ),
                 ],
               ),
-            ),
-            if (isPaused)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  l10n.sessionPausedLabel,
-                  key: const ValueKey('paused-label'),
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-            Text(
-              isHolding ? l10n.sessionPhaseHolding : l10n.sessionPhasePreparing,
-              key: const ValueKey('phase-label'),
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              _formatSec(engine.remainingSec),
-              key: const ValueKey('timer'),
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-            const SizedBox(height: 24),
-            if (isHolding) ...[
-              FilledButton.tonal(
-                key: const ValueKey('contraction-tap'),
-                onPressed: engine.tapContraction,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Text(l10n.sessionContractionTap),
-                ),
-              ),
               const SizedBox(height: 12),
-              TextButton(
-                key: const ValueKey('end-hold-early'),
-                onPressed: _endHoldEarly,
-                child: Text(l10n.sessionEndHoldEarly),
+              Text(
+                _formatSec(engine.remainingSec),
+                key: const ValueKey('timer'),
+                style: Theme.of(context).textTheme.displayLarge,
               ),
-              const SizedBox(height: 12),
-            ],
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
+              const SizedBox(height: 28),
+              if (isHolding) ...[
+                OutlinedButton(
+                  key: const ValueKey('contraction-tap'),
+                  onPressed: () =>
+                      setState(engine.tapContraction),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(l10n.sessionContractionCount),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 1),
+                        decoration: BoxDecoration(
+                          color: midWater,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text(
+                          '${engine.currentContractionCount}',
+                          key: const ValueKey('contraction-count'),
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: foam,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                FilledButton(
+                  key: const ValueKey('end-hold-early'),
+                  onPressed: _endHoldEarly,
+                  child: Text(l10n.sessionStartRecovery),
+                ),
+              ],
+              const Spacer(),
+              DiveProfileLine(
+                rounds: engine.rounds,
+                progress: engine.progress,
+                height: 60,
+              ),
+              const SizedBox(height: 16),
+              Row(
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      key: ValueKey(isPaused ? 'resume-session' : 'pause-session'),
+                      key: ValueKey(
+                          isPaused ? 'resume-session' : 'pause-session'),
                       onPressed: isPaused ? _resume : _pause,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child:
-                            Text(isPaused ? l10n.sessionResume : l10n.sessionPause),
-                      ),
+                      child: Text(
+                          isPaused ? l10n.sessionResume : l10n.sessionPause),
                     ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    // 안전 요구사항: 중단 버튼 상시 노출, 확인 팝업 없이 1탭 종료.
                     child: OutlinedButton(
-                      key: const ValueKey('stop-session'),
+                      key: const ValueKey('stop-session-pill'),
                       onPressed: _stop,
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Theme.of(context).colorScheme.error,
+                        backgroundColor: oceanRaised,
+                        side: BorderSide.none,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.error,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Text(l10n.sessionStop),
-                      ),
+                      child: Text(l10n.sessionStop),
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 24),
-          ],
+              const SizedBox(height: 14),
+              // 안전 리마인더 — 하단 상시 노출 1줄 로테이션 (A4).
+              Text(
+                switch (_reminderIndex) {
+                  0 => l10n.safetyReminder1,
+                  1 => l10n.safetyReminder2,
+                  2 => l10n.safetyReminder3,
+                  _ => l10n.safetyReminder4,
+                },
+                key: const ValueKey('safety-reminder'),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 12.5, color: mist, height: 1.4),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -307,6 +376,7 @@ class _ResultView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
+      backgroundColor: abyss,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -317,7 +387,8 @@ class _ResultView extends StatelessWidget {
               Text(
                 finished ? l10n.sessionFinished : l10n.sessionStopped,
                 key: const ValueKey('session-end-title'),
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: foam, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
@@ -326,8 +397,8 @@ class _ResultView extends StatelessWidget {
                   children: [
                     for (final r in engine.results)
                       ListTile(
-                        title:
-                            Text(l10n.sessionResultRound(r.round, r.actualHoldSec)),
+                        title: Text(
+                            l10n.sessionResultRound(r.round, r.actualHoldSec)),
                         subtitle: r.contractionAtMs.isEmpty
                             ? null
                             : Text(l10n.sessionResultContractions(

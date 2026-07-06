@@ -35,7 +35,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const ValueKey('agree-button')), findsOneWidget);
-    expect(find.text('divebrew trainer'), findsNothing);
+    expect(find.text('DIVEBREW TRAINER'), findsNothing);
   });
 
   testWidgets('4항목 전체 체크 전에는 동의 버튼이 비활성', (tester) async {
@@ -75,15 +75,21 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('agree-button')));
     await tester.pumpAndSettle();
 
-    expect(find.text('divebrew trainer'), findsOneWidget);
+    expect(find.text('DIVEBREW TRAINER'), findsOneWidget);
     expect(await db.safetyConsented, isTrue);
+
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 1));
   });
 
   testWidgets('이미 동의한 사용자는 온보딩을 건너뛴다', (tester) async {
     await tester.pumpWidget(app(consented: true));
     await tester.pumpAndSettle();
 
-    expect(find.text('divebrew trainer'), findsOneWidget);
+    expect(find.text('DIVEBREW TRAINER'), findsOneWidget);
     expect(find.byKey(const ValueKey('agree-button')), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 1));
   });
 }

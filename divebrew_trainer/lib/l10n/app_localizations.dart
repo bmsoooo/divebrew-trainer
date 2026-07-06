@@ -505,6 +505,228 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'일시정지됨'**
   String get sessionPausedLabel;
+
+  /// No description provided for @homeGreeting.
+  ///
+  /// In ko, this message translates to:
+  /// **'안녕하세요, 오늘도\n천천히 내려가볼까요'**
+  String get homeGreeting;
+
+  /// No description provided for @homePbLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'최고 기록 · PB'**
+  String get homePbLabel;
+
+  /// No description provided for @homePbDate.
+  ///
+  /// In ko, this message translates to:
+  /// **'{date} 기록'**
+  String homePbDate(String date);
+
+  /// No description provided for @homePbEmpty.
+  ///
+  /// In ko, this message translates to:
+  /// **'아직 기록이 없어요'**
+  String get homePbEmpty;
+
+  /// No description provided for @homeSuggestionLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'오늘의 훈련 제안'**
+  String get homeSuggestionLabel;
+
+  /// No description provided for @homeSuggestionFirst.
+  ///
+  /// In ko, this message translates to:
+  /// **'처음이시죠? CO2 입문 테이블로 가볍게 시작해볼까요'**
+  String get homeSuggestionFirst;
+
+  /// No description provided for @homeSuggestionAlternate.
+  ///
+  /// In ko, this message translates to:
+  /// **'지난번엔 {type} 테이블이었으니, 이번엔 {suggested} 테이블로 균형을 맞춰봐요'**
+  String homeSuggestionAlternate(String type, String suggested);
+
+  /// No description provided for @homeSuggestionDetail.
+  ///
+  /// In ko, this message translates to:
+  /// **'자세히 보기 →'**
+  String get homeSuggestionDetail;
+
+  /// No description provided for @homeCta.
+  ///
+  /// In ko, this message translates to:
+  /// **'오늘의 훈련 보러가기'**
+  String get homeCta;
+
+  /// No description provided for @tabHome.
+  ///
+  /// In ko, this message translates to:
+  /// **'홈'**
+  String get tabHome;
+
+  /// No description provided for @tabTables.
+  ///
+  /// In ko, this message translates to:
+  /// **'테이블'**
+  String get tabTables;
+
+  /// No description provided for @tabHistory.
+  ///
+  /// In ko, this message translates to:
+  /// **'히스토리'**
+  String get tabHistory;
+
+  /// No description provided for @tableListIntro.
+  ///
+  /// In ko, this message translates to:
+  /// **'CO2 테이블은 회복호흡을 줄이고, O2 테이블은 숨참기를 늘려요'**
+  String get tableListIntro;
+
+  /// No description provided for @tableListSectionCo2.
+  ///
+  /// In ko, this message translates to:
+  /// **'CO2 테이블'**
+  String get tableListSectionCo2;
+
+  /// No description provided for @tableListSectionO2.
+  ///
+  /// In ko, this message translates to:
+  /// **'O2 테이블'**
+  String get tableListSectionO2;
+
+  /// No description provided for @tableListSectionCustom.
+  ///
+  /// In ko, this message translates to:
+  /// **'커스텀'**
+  String get tableListSectionCustom;
+
+  /// No description provided for @tableListCreateCustom.
+  ///
+  /// In ko, this message translates to:
+  /// **'+ 나만의 테이블 만들기'**
+  String get tableListCreateCustom;
+
+  /// No description provided for @tableListMinutes.
+  ///
+  /// In ko, this message translates to:
+  /// **'{min}분'**
+  String tableListMinutes(int min);
+
+  /// No description provided for @detailBack.
+  ///
+  /// In ko, this message translates to:
+  /// **'← 테이블'**
+  String get detailBack;
+
+  /// No description provided for @detailProfileLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'다이브 프로파일'**
+  String get detailProfileLabel;
+
+  /// No description provided for @detailStatTotal.
+  ///
+  /// In ko, this message translates to:
+  /// **'총 훈련 시간'**
+  String get detailStatTotal;
+
+  /// No description provided for @detailStatRounds.
+  ///
+  /// In ko, this message translates to:
+  /// **'라운드'**
+  String get detailStatRounds;
+
+  /// No description provided for @detailStatRoundsValue.
+  ///
+  /// In ko, this message translates to:
+  /// **'{count}개'**
+  String detailStatRoundsValue(int count);
+
+  /// No description provided for @detailColRound.
+  ///
+  /// In ko, this message translates to:
+  /// **'라운드 {n}'**
+  String detailColRound(int n);
+
+  /// No description provided for @detailColHold.
+  ///
+  /// In ko, this message translates to:
+  /// **'숨참기 {time}'**
+  String detailColHold(String time);
+
+  /// No description provided for @detailColBreath.
+  ///
+  /// In ko, this message translates to:
+  /// **'호흡 {time}'**
+  String detailColBreath(String time);
+
+  /// No description provided for @sessionExit.
+  ///
+  /// In ko, this message translates to:
+  /// **'✕ 중단'**
+  String get sessionExit;
+
+  /// No description provided for @sessionHeader.
+  ///
+  /// In ko, this message translates to:
+  /// **'{table} · 라운드 {n}/{total}'**
+  String sessionHeader(String table, int n, int total);
+
+  /// No description provided for @sessionPhaseRecovery.
+  ///
+  /// In ko, this message translates to:
+  /// **'회복호흡'**
+  String get sessionPhaseRecovery;
+
+  /// No description provided for @sessionContractionCount.
+  ///
+  /// In ko, this message translates to:
+  /// **'컨트랙션 탭'**
+  String get sessionContractionCount;
+
+  /// No description provided for @sessionStartRecovery.
+  ///
+  /// In ko, this message translates to:
+  /// **'회복호흡 시작'**
+  String get sessionStartRecovery;
+
+  /// No description provided for @historyStatSessions.
+  ///
+  /// In ko, this message translates to:
+  /// **'총 세션'**
+  String get historyStatSessions;
+
+  /// No description provided for @historyStatSessionsValue.
+  ///
+  /// In ko, this message translates to:
+  /// **'{count}회'**
+  String historyStatSessionsValue(int count);
+
+  /// No description provided for @historyStatPb.
+  ///
+  /// In ko, this message translates to:
+  /// **'최고 기록'**
+  String get historyStatPb;
+
+  /// No description provided for @historyStatWeek.
+  ///
+  /// In ko, this message translates to:
+  /// **'이번주'**
+  String get historyStatWeek;
+
+  /// No description provided for @historyStatWeekValue.
+  ///
+  /// In ko, this message translates to:
+  /// **'{days}일'**
+  String historyStatWeekValue(int days);
+
+  /// No description provided for @historyPbTrend.
+  ///
+  /// In ko, this message translates to:
+  /// **'PB 추이'**
+  String get historyPbTrend;
 }
 
 class _AppLocalizationsDelegate

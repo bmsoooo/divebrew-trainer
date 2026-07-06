@@ -135,5 +135,121 @@
   "tableDetailStart": "시작하기",
   "sessionPause": "일시정지",
   "sessionResume": "재개",
-  "sessionPausedLabel": "일시정지됨"
+  "sessionPausedLabel": "일시정지됨",
+  "homeGreeting": "안녕하세요, 오늘도\n천천히 내려가볼까요",
+  "homePbLabel": "최고 기록 · PB",
+  "homePbDate": "{date} 기록",
+  "@homePbDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homePbEmpty": "아직 기록이 없어요",
+  "homeSuggestionLabel": "오늘의 훈련 제안",
+  "homeSuggestionFirst": "처음이시죠? CO2 입문 테이블로 가볍게 시작해볼까요",
+  "homeSuggestionAlternate": "지난번엔 {type} 테이블이었으니, 이번엔 {suggested} 테이블로 균형을 맞춰봐요",
+  "@homeSuggestionAlternate": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "suggested": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSuggestionDetail": "자세히 보기 →",
+  "homeCta": "오늘의 훈련 보러가기",
+  "tabHome": "홈",
+  "tabTables": "테이블",
+  "tabHistory": "히스토리",
+  "tableListIntro": "CO2 테이블은 회복호흡을 줄이고, O2 테이블은 숨참기를 늘려요",
+  "tableListSectionCo2": "CO2 테이블",
+  "tableListSectionO2": "O2 테이블",
+  "tableListSectionCustom": "커스텀",
+  "tableListCreateCustom": "+ 나만의 테이블 만들기",
+  "tableListMinutes": "{min}분",
+  "@tableListMinutes": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "detailBack": "← 테이블",
+  "detailProfileLabel": "다이브 프로파일",
+  "detailStatTotal": "총 훈련 시간",
+  "detailStatRounds": "라운드",
+  "detailStatRoundsValue": "{count}개",
+  "@detailStatRoundsValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "detailColRound": "라운드 {n}",
+  "@detailColRound": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "detailColHold": "숨참기 {time}",
+  "@detailColHold": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "detailColBreath": "호흡 {time}",
+  "@detailColBreath": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sessionExit": "✕ 중단",
+  "sessionHeader": "{table} · 라운드 {n}/{total}",
+  "@sessionHeader": {
+    "placeholders": {
+      "table": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionPhaseRecovery": "회복호흡",
+  "sessionContractionCount": "컨트랙션 탭",
+  "sessionStartRecovery": "회복호흡 시작",
+  "historyStatSessions": "총 세션",
+  "historyStatSessionsValue": "{count}회",
+  "@historyStatSessionsValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyStatPb": "최고 기록",
+  "historyStatWeek": "이번주",
+  "historyStatWeekValue": "{days}일",
+  "@historyStatWeekValue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "historyPbTrend": "PB 추이"
 }

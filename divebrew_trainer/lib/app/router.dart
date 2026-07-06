@@ -1,4 +1,5 @@
-// go_router 기반 앱 라우팅 정의 — 안전 미동의 시 온보딩으로 강제 리다이렉트 (A4)
+// go_router 라우팅 — 하단 탭 셸(홈/테이블/히스토리) + 상세·세션은 전체화면 push, 미동의 시 온보딩 강제 (A4)
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../data/database.dart';
@@ -9,9 +10,13 @@ import '../features/session/session_screen.dart';
 import '../features/tables/table_detail_screen.dart';
 import '../features/tables/table_edit_screen.dart';
 import '../features/tables/table_list_screen.dart';
+import '../l10n/app_localizations.dart';
 import 'consent_state.dart';
 
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
 GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
+      navigatorKey: _rootNavigatorKey,
       redirect: (context, state) {
         final atOnboarding = state.matchedLocation == '/onboarding';
         if (!consent.consented && !atOnboarding) return '/onboarding';
@@ -24,25 +29,38 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
           builder: (context, state) =>
               OnboardingScreen(db: db, consent: consent),
         ),
-        GoRoute(
-          path: '/',
-          builder: (context, state) => const HomeScreen(),
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, shell) => _TabShell(shell: shell),
+          branches: [
+            StatefulShellBranch(routes: [
+              GoRoute(
+                path: '/',
+                builder: (context, state) => HomeScreen(db: db),
+              ),
+            ]),
+            StatefulShellBranch(routes: [
+              GoRoute(
+                path: '/tables',
+                builder: (context, state) => TableListScreen(db: db),
+              ),
+            ]),
+            StatefulShellBranch(routes: [
+              GoRoute(
+                path: '/history',
+                builder: (context, state) => HistoryScreen(db: db),
+              ),
+            ]),
+          ],
         ),
-        GoRoute(
-          path: '/history',
-          builder: (context, state) => HistoryScreen(db: db),
-        ),
-        GoRoute(
-          path: '/tables',
-          builder: (context, state) => TableListScreen(db: db),
-        ),
-        // 정적 세그먼트(new, edit/:id)는 동적 :id 라우트보다 먼저 선언해 우선 매칭한다.
+        // 전체화면 push 라우트 — 탭바 없음. 정적 세그먼트가 :id보다 먼저.
         GoRoute(
           path: '/tables/new',
+          parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) => TableEditScreen(db: db),
         ),
         GoRoute(
           path: '/tables/edit/:id',
+          parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) => TableEditScreen(
             db: db,
             tableId: int.parse(state.pathParameters['id']!),
@@ -50,6 +68,7 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
         ),
         GoRoute(
           path: '/tables/:id',
+          parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) => TableDetailScreen(
             db: db,
             tableId: int.parse(state.pathParameters['id']!),
@@ -57,6 +76,7 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
         ),
         GoRoute(
           path: '/session/:tableId',
+          parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) => SessionScreen(
             db: db,
             tableId: int.parse(state.pathParameters['tableId']!),
@@ -64,3 +84,43 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
         ),
       ],
     );
+
+/// 하단 탭 셸 — 홈/테이블/히스토리.
+class _TabShell extends StatelessWidget {
+  final StatefulNavigationShell shell;
+
+  const _TabShell({required this.shell});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Scaffold(
+      body: shell,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: shell.currentIndex,
+        onDestinationSelected: (i) => shell.goBranch(
+          i,
+          initialLocation: i == shell.currentIndex,
+        ),
+        destinations: [
+          NavigationDestination(
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: l10n.tabHome,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.list_alt_outlined),
+            selectedIcon: const Icon(Icons.list_alt),
+            label: l10n.tabTables,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.schedule_outlined),
+            selectedIcon: const Icon(Icons.schedule),
+            label: l10n.tabHistory,
+          ),
+        ],
+      ),
+    );
+  }
+}
