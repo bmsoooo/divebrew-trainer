@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'l10n/app_localizations.dart';
 
 import 'app/consent_state.dart';
+import 'app/licenses.dart';
 import 'app/router.dart';
 import 'app/theme.dart';
 import 'data/database.dart';
@@ -10,6 +11,7 @@ import 'data/presets.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  registerBundledLicenses();
   final db = AppDatabase();
   await seedPresetsIfEmpty(db);
   final consent = ConsentState(consented: await db.safetyConsented);

@@ -11,6 +11,9 @@ import '../../l10n/app_localizations.dart';
 /// pubspec version 1.0.0+1 과 일치 — 릴리스 시 함께 갱신.
 const _appVersion = '1.0.0 (1)';
 const _instagramUrl = 'https://instagram.com/divebrew.soo';
+const _contactEmail = 'divebrew@gmail.com';
+const _contactMailto =
+    'mailto:$_contactEmail?subject=divebrew%20trainer%20%EB%AC%B8%EC%9D%98';
 
 class SettingsScreen extends StatelessWidget {
   final AppDatabase db;
@@ -168,9 +171,14 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ),
                 _SettingRow(
+                  key: const ValueKey('settings-contact'),
                   label: l10n.settingsContact,
+                  trailing: Text(
+                    _contactEmail,
+                    style: const TextStyle(fontSize: 13, color: mist),
+                  ),
                   showChevron: true,
-                  onTap: () => openExternalLink(_instagramUrl),
+                  onTap: () => openExternalLink(_contactMailto),
                 ),
                 _SettingRow(
                   label: l10n.settingsPrivacy,
