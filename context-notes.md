@@ -202,5 +202,6 @@
 - showLicensePage(LicenseRegistry) 방식은 실제 업계 표준이라 유지. 누락돼 있던 수동 번들 자산 2건을 main에서 LicenseRegistry.addLicense로 등록: Pretendard(SIL OFL 1.1 전문), sqlite3.wasm(SQLite public domain 고지). drift_worker.js 등 패키지 유래 자산은 패키지 라이선스로 자동 커버.
 
 ## 미해결 (착수 비차단)
+- 다이빙 컨디션 위젯의 기본 포인트는 서귀포이며, 포항·부산으로 전환 가능하게 구현 중 (2026-07-10). 실제 입수 포인트와 모델 격자가 다를 수 있으므로 예보는 참고용이며 현장·버디 확인을 대체하지 않는다는 고지를 유지한다.
 - 앱 이름 최종 확정(가칭 유지 중) — M3 스토어 등록 전까지
 - 음성 가이드 본인 녹음 교체 여부 — M2 테스터 피드백 후

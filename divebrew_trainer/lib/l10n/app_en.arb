@@ -284,6 +284,59 @@
   "guideTitle": "Training guide",
   "homeGuideCard": "New to freediving static?",
   "homeGuideCardSub": "What CO2/O2 tables are, and why your breath-hold grows — in 3 minutes",
+  "homeMarineLabel": "IF YOU'RE HEADING TO THE SEA",
+  "marineTitle": "DIVE CONDITIONS",
+  "marineSelectSite": "Choose a site",
+  "marineSiteCurrentLocation": "Current Location",
+  "marineSiteGoseong": "Goseong",
+  "marineSiteSokcho": "Sokcho",
+  "marineSiteYangyang": "Yangyang",
+  "marineSiteGangneung": "Gangneung",
+  "marineSiteDonghae": "Donghae",
+  "marineSiteUljin": "Uljin",
+  "marineSiteYeongdeok": "Yeongdeok",
+  "marineSitePohang": "Pohang",
+  "marineSiteUlleungdo": "Ulleungdo",
+  "marineSiteBusan": "Busan",
+  "marineSiteGeoje": "Geoje",
+  "marineSiteTongyeong": "Tongyeong",
+  "marineSiteNamhae": "Namhae",
+  "marineSiteYeosu": "Yeosu",
+  "marineSiteJeju": "Jeju City",
+  "marineSiteSeogwipo": "Seogwipo",
+  "marineFavorable": "Check the site before entering",
+  "marineCaution": "Extra care needed",
+  "marineAvoid": "Take today off",
+  "marineWave": "WAVE",
+  "marineWaterTemp": "WATER",
+  "marineWaveDirection": "DIRECTION",
+  "marineFrom": "from {direction}",
+  "@marineFrom": {
+    "placeholders": {
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "marineUpdatedAt": "as of {time}",
+  "@marineUpdatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "marineLoadError": "Unable to load the marine forecast",
+  "marineRetry": "Retry",
+  "marineDisclaimer": "Forecasts are reference only. Check conditions on site and with your buddy before entering.",
+  "marineDirectionNorth": "north",
+  "marineDirectionNorthEast": "northeast",
+  "marineDirectionEast": "east",
+  "marineDirectionSouthEast": "southeast",
+  "marineDirectionSouth": "south",
+  "marineDirectionSouthWest": "southwest",
+  "marineDirectionWest": "west",
+  "marineDirectionNorthWest": "northwest",
   "settingsGuide": "Training guide",
   "guideIntroTitle": "What is static training?",
   "guideIntroBody": "Static (STA) is the freediving discipline of holding your breath without moving. This app is a tool for practicing that out of the water (dry), sitting comfortably.\n\nAs you hold, you feel discomfort and your belly twitches with diaphragm contractions. That's not your oxygen running out — it's carbon dioxide (CO2) building up and signaling 'breathe!'. Training is practice at tolerating that signal and relaxing your body.\n\nI could barely last a minute as a total beginner. Build it up a little each day, without pushing, and it grows.",

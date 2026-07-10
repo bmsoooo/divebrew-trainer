@@ -475,6 +475,128 @@ class AppLocalizationsEn extends AppLocalizations {
       'What CO2/O2 tables are, and why your breath-hold grows — in 3 minutes';
 
   @override
+  String get homeMarineLabel => 'IF YOU\'RE HEADING TO THE SEA';
+
+  @override
+  String get marineTitle => 'DIVE CONDITIONS';
+
+  @override
+  String get marineSelectSite => 'Choose a site';
+
+  @override
+  String get marineSiteCurrentLocation => 'Current Location';
+
+  @override
+  String get marineSiteGoseong => 'Goseong';
+
+  @override
+  String get marineSiteSokcho => 'Sokcho';
+
+  @override
+  String get marineSiteYangyang => 'Yangyang';
+
+  @override
+  String get marineSiteGangneung => 'Gangneung';
+
+  @override
+  String get marineSiteDonghae => 'Donghae';
+
+  @override
+  String get marineSiteUljin => 'Uljin';
+
+  @override
+  String get marineSiteYeongdeok => 'Yeongdeok';
+
+  @override
+  String get marineSitePohang => 'Pohang';
+
+  @override
+  String get marineSiteUlleungdo => 'Ulleungdo';
+
+  @override
+  String get marineSiteBusan => 'Busan';
+
+  @override
+  String get marineSiteGeoje => 'Geoje';
+
+  @override
+  String get marineSiteTongyeong => 'Tongyeong';
+
+  @override
+  String get marineSiteNamhae => 'Namhae';
+
+  @override
+  String get marineSiteYeosu => 'Yeosu';
+
+  @override
+  String get marineSiteJeju => 'Jeju City';
+
+  @override
+  String get marineSiteSeogwipo => 'Seogwipo';
+
+  @override
+  String get marineFavorable => 'Check the site before entering';
+
+  @override
+  String get marineCaution => 'Extra care needed';
+
+  @override
+  String get marineAvoid => 'Take today off';
+
+  @override
+  String get marineWave => 'WAVE';
+
+  @override
+  String get marineWaterTemp => 'WATER';
+
+  @override
+  String get marineWaveDirection => 'DIRECTION';
+
+  @override
+  String marineFrom(String direction) {
+    return 'from $direction';
+  }
+
+  @override
+  String marineUpdatedAt(String time) {
+    return 'as of $time';
+  }
+
+  @override
+  String get marineLoadError => 'Unable to load the marine forecast';
+
+  @override
+  String get marineRetry => 'Retry';
+
+  @override
+  String get marineDisclaimer =>
+      'Forecasts are reference only. Check conditions on site and with your buddy before entering.';
+
+  @override
+  String get marineDirectionNorth => 'north';
+
+  @override
+  String get marineDirectionNorthEast => 'northeast';
+
+  @override
+  String get marineDirectionEast => 'east';
+
+  @override
+  String get marineDirectionSouthEast => 'southeast';
+
+  @override
+  String get marineDirectionSouth => 'south';
+
+  @override
+  String get marineDirectionSouthWest => 'southwest';
+
+  @override
+  String get marineDirectionWest => 'west';
+
+  @override
+  String get marineDirectionNorthWest => 'northwest';
+
+  @override
   String get settingsGuide => 'Training guide';
 
   @override

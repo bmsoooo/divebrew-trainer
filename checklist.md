@@ -28,6 +28,7 @@
 - [x] 다국어 (ko/en) — 전 화면 l10n 구조 (M1부터 적용, 하드코딩 없음) (2026-07-05)
 - [x] 정적 호스팅 배포 (URL 공유 가능 상태) — https://bmsoooo.github.io/divebrew-trainer/ (GitHub Pages, gh-pages 브랜치) (2026-07-05)
 - [ ] 테스터 5인 1주 사용 → 피드백 반영 (변경은 한 번에 변수 1개 원칙)
+- [ ] 다이빙 컨디션 위젯 (Open-Meteo Marine) → verify: 파고·수온·파향 표시, 적합도 판정 단위 테스트, API 실패 상태 확인 (착수 2026-07-10)
 
 ## M3. iOS 앱 출시
 - [ ] iOS 타깃 활성화 + 플랫폼 분기 (TTS→flutter_tts, DB→SQLite)
