@@ -920,6 +920,240 @@ abstract class AppLocalizations {
   /// **'CO2·O2 테이블이 뭔지, 왜 숨참기가 느는지 3분이면 이해돼요'**
   String get homeGuideCardSub;
 
+  /// No description provided for @homeMarineLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'바다에 갈 예정이라면'**
+  String get homeMarineLabel;
+
+  /// No description provided for @marineTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'다이빙 컨디션'**
+  String get marineTitle;
+
+  /// No description provided for @marineSelectSite.
+  ///
+  /// In ko, this message translates to:
+  /// **'포인트 선택'**
+  String get marineSelectSite;
+
+  /// No description provided for @marineSiteCurrentLocation.
+  ///
+  /// In ko, this message translates to:
+  /// **'현재 위치'**
+  String get marineSiteCurrentLocation;
+
+  /// No description provided for @marineSiteGoseong.
+  ///
+  /// In ko, this message translates to:
+  /// **'고성'**
+  String get marineSiteGoseong;
+
+  /// No description provided for @marineSiteSokcho.
+  ///
+  /// In ko, this message translates to:
+  /// **'속초'**
+  String get marineSiteSokcho;
+
+  /// No description provided for @marineSiteYangyang.
+  ///
+  /// In ko, this message translates to:
+  /// **'양양'**
+  String get marineSiteYangyang;
+
+  /// No description provided for @marineSiteGangneung.
+  ///
+  /// In ko, this message translates to:
+  /// **'강릉'**
+  String get marineSiteGangneung;
+
+  /// No description provided for @marineSiteDonghae.
+  ///
+  /// In ko, this message translates to:
+  /// **'동해'**
+  String get marineSiteDonghae;
+
+  /// No description provided for @marineSiteUljin.
+  ///
+  /// In ko, this message translates to:
+  /// **'울진'**
+  String get marineSiteUljin;
+
+  /// No description provided for @marineSiteYeongdeok.
+  ///
+  /// In ko, this message translates to:
+  /// **'영덕'**
+  String get marineSiteYeongdeok;
+
+  /// No description provided for @marineSitePohang.
+  ///
+  /// In ko, this message translates to:
+  /// **'포항'**
+  String get marineSitePohang;
+
+  /// No description provided for @marineSiteUlleungdo.
+  ///
+  /// In ko, this message translates to:
+  /// **'울릉도'**
+  String get marineSiteUlleungdo;
+
+  /// No description provided for @marineSiteBusan.
+  ///
+  /// In ko, this message translates to:
+  /// **'부산'**
+  String get marineSiteBusan;
+
+  /// No description provided for @marineSiteGeoje.
+  ///
+  /// In ko, this message translates to:
+  /// **'거제'**
+  String get marineSiteGeoje;
+
+  /// No description provided for @marineSiteTongyeong.
+  ///
+  /// In ko, this message translates to:
+  /// **'통영'**
+  String get marineSiteTongyeong;
+
+  /// No description provided for @marineSiteNamhae.
+  ///
+  /// In ko, this message translates to:
+  /// **'남해'**
+  String get marineSiteNamhae;
+
+  /// No description provided for @marineSiteYeosu.
+  ///
+  /// In ko, this message translates to:
+  /// **'여수'**
+  String get marineSiteYeosu;
+
+  /// No description provided for @marineSiteJeju.
+  ///
+  /// In ko, this message translates to:
+  /// **'제주시'**
+  String get marineSiteJeju;
+
+  /// No description provided for @marineSiteSeogwipo.
+  ///
+  /// In ko, this message translates to:
+  /// **'서귀포'**
+  String get marineSiteSeogwipo;
+
+  /// No description provided for @marineFavorable.
+  ///
+  /// In ko, this message translates to:
+  /// **'입수 전 현장 확인'**
+  String get marineFavorable;
+
+  /// No description provided for @marineCaution.
+  ///
+  /// In ko, this message translates to:
+  /// **'주의가 필요해요'**
+  String get marineCaution;
+
+  /// No description provided for @marineAvoid.
+  ///
+  /// In ko, this message translates to:
+  /// **'오늘은 쉬어가요'**
+  String get marineAvoid;
+
+  /// No description provided for @marineWave.
+  ///
+  /// In ko, this message translates to:
+  /// **'파고'**
+  String get marineWave;
+
+  /// No description provided for @marineWaterTemp.
+  ///
+  /// In ko, this message translates to:
+  /// **'수온'**
+  String get marineWaterTemp;
+
+  /// No description provided for @marineWaveDirection.
+  ///
+  /// In ko, this message translates to:
+  /// **'파향'**
+  String get marineWaveDirection;
+
+  /// No description provided for @marineFrom.
+  ///
+  /// In ko, this message translates to:
+  /// **'{direction}에서'**
+  String marineFrom(String direction);
+
+  /// No description provided for @marineUpdatedAt.
+  ///
+  /// In ko, this message translates to:
+  /// **'{time} 기준'**
+  String marineUpdatedAt(String time);
+
+  /// No description provided for @marineLoadError.
+  ///
+  /// In ko, this message translates to:
+  /// **'바다 예보를 불러오지 못했어요'**
+  String get marineLoadError;
+
+  /// No description provided for @marineRetry.
+  ///
+  /// In ko, this message translates to:
+  /// **'다시 시도'**
+  String get marineRetry;
+
+  /// No description provided for @marineDisclaimer.
+  ///
+  /// In ko, this message translates to:
+  /// **'예보는 참고용이에요. 입수 전 현장과 버디 컨디션을 꼭 확인해요.'**
+  String get marineDisclaimer;
+
+  /// No description provided for @marineDirectionNorth.
+  ///
+  /// In ko, this message translates to:
+  /// **'북쪽'**
+  String get marineDirectionNorth;
+
+  /// No description provided for @marineDirectionNorthEast.
+  ///
+  /// In ko, this message translates to:
+  /// **'북동쪽'**
+  String get marineDirectionNorthEast;
+
+  /// No description provided for @marineDirectionEast.
+  ///
+  /// In ko, this message translates to:
+  /// **'동쪽'**
+  String get marineDirectionEast;
+
+  /// No description provided for @marineDirectionSouthEast.
+  ///
+  /// In ko, this message translates to:
+  /// **'남동쪽'**
+  String get marineDirectionSouthEast;
+
+  /// No description provided for @marineDirectionSouth.
+  ///
+  /// In ko, this message translates to:
+  /// **'남쪽'**
+  String get marineDirectionSouth;
+
+  /// No description provided for @marineDirectionSouthWest.
+  ///
+  /// In ko, this message translates to:
+  /// **'남서쪽'**
+  String get marineDirectionSouthWest;
+
+  /// No description provided for @marineDirectionWest.
+  ///
+  /// In ko, this message translates to:
+  /// **'서쪽'**
+  String get marineDirectionWest;
+
+  /// No description provided for @marineDirectionNorthWest.
+  ///
+  /// In ko, this message translates to:
+  /// **'북서쪽'**
+  String get marineDirectionNorthWest;
+
   /// No description provided for @settingsGuide.
   ///
   /// In ko, this message translates to:

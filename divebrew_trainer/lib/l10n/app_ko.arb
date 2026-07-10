@@ -284,6 +284,59 @@
   "guideTitle": "훈련 가이드",
   "homeGuideCard": "프리다이빙 스태틱이 처음이라면",
   "homeGuideCardSub": "CO2·O2 테이블이 뭔지, 왜 숨참기가 느는지 3분이면 이해돼요",
+  "homeMarineLabel": "바다에 갈 예정이라면",
+  "marineTitle": "다이빙 컨디션",
+  "marineSelectSite": "포인트 선택",
+  "marineSiteCurrentLocation": "현재 위치",
+  "marineSiteGoseong": "고성",
+  "marineSiteSokcho": "속초",
+  "marineSiteYangyang": "양양",
+  "marineSiteGangneung": "강릉",
+  "marineSiteDonghae": "동해",
+  "marineSiteUljin": "울진",
+  "marineSiteYeongdeok": "영덕",
+  "marineSitePohang": "포항",
+  "marineSiteUlleungdo": "울릉도",
+  "marineSiteBusan": "부산",
+  "marineSiteGeoje": "거제",
+  "marineSiteTongyeong": "통영",
+  "marineSiteNamhae": "남해",
+  "marineSiteYeosu": "여수",
+  "marineSiteJeju": "제주시",
+  "marineSiteSeogwipo": "서귀포",
+  "marineFavorable": "입수 전 현장 확인",
+  "marineCaution": "주의가 필요해요",
+  "marineAvoid": "오늘은 쉬어가요",
+  "marineWave": "파고",
+  "marineWaterTemp": "수온",
+  "marineWaveDirection": "파향",
+  "marineFrom": "{direction}에서",
+  "@marineFrom": {
+    "placeholders": {
+      "direction": {
+        "type": "String"
+      }
+    }
+  },
+  "marineUpdatedAt": "{time} 기준",
+  "@marineUpdatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "marineLoadError": "바다 예보를 불러오지 못했어요",
+  "marineRetry": "다시 시도",
+  "marineDisclaimer": "예보는 참고용이에요. 입수 전 현장과 버디 컨디션을 꼭 확인해요.",
+  "marineDirectionNorth": "북쪽",
+  "marineDirectionNorthEast": "북동쪽",
+  "marineDirectionEast": "동쪽",
+  "marineDirectionSouthEast": "남동쪽",
+  "marineDirectionSouth": "남쪽",
+  "marineDirectionSouthWest": "남서쪽",
+  "marineDirectionWest": "서쪽",
+  "marineDirectionNorthWest": "북서쪽",
   "settingsGuide": "훈련 가이드",
   "guideIntroTitle": "스태틱 훈련이 뭐예요?",
   "guideIntroBody": "스태틱(STA)은 움직이지 않고 숨을 참는 프리다이빙 종목이에요. 이 앱은 물 밖에서(드라이) 편하게 앉아 숨참기를 연습하는 훈련 도구예요.\n\n숨을 참다 보면 답답한 느낌과 함께 배가 꿀렁이는 횡격막 수축이 와요. 이건 산소가 바닥나서가 아니라, 몸에 이산화탄소(CO2)가 쌓이면서 '숨 쉬어!' 하고 보내는 신호예요. 훈련은 이 신호를 견디고 몸을 이완하는 연습이에요.\n\n저도 왕초보 때는 1분도 버거웠어요. 매일 조금씩, 무리하지 않고 쌓으면 늘어요.",

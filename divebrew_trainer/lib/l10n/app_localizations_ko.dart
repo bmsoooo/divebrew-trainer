@@ -465,6 +465,127 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeGuideCardSub => 'CO2·O2 테이블이 뭔지, 왜 숨참기가 느는지 3분이면 이해돼요';
 
   @override
+  String get homeMarineLabel => '바다에 갈 예정이라면';
+
+  @override
+  String get marineTitle => '다이빙 컨디션';
+
+  @override
+  String get marineSelectSite => '포인트 선택';
+
+  @override
+  String get marineSiteCurrentLocation => '현재 위치';
+
+  @override
+  String get marineSiteGoseong => '고성';
+
+  @override
+  String get marineSiteSokcho => '속초';
+
+  @override
+  String get marineSiteYangyang => '양양';
+
+  @override
+  String get marineSiteGangneung => '강릉';
+
+  @override
+  String get marineSiteDonghae => '동해';
+
+  @override
+  String get marineSiteUljin => '울진';
+
+  @override
+  String get marineSiteYeongdeok => '영덕';
+
+  @override
+  String get marineSitePohang => '포항';
+
+  @override
+  String get marineSiteUlleungdo => '울릉도';
+
+  @override
+  String get marineSiteBusan => '부산';
+
+  @override
+  String get marineSiteGeoje => '거제';
+
+  @override
+  String get marineSiteTongyeong => '통영';
+
+  @override
+  String get marineSiteNamhae => '남해';
+
+  @override
+  String get marineSiteYeosu => '여수';
+
+  @override
+  String get marineSiteJeju => '제주시';
+
+  @override
+  String get marineSiteSeogwipo => '서귀포';
+
+  @override
+  String get marineFavorable => '입수 전 현장 확인';
+
+  @override
+  String get marineCaution => '주의가 필요해요';
+
+  @override
+  String get marineAvoid => '오늘은 쉬어가요';
+
+  @override
+  String get marineWave => '파고';
+
+  @override
+  String get marineWaterTemp => '수온';
+
+  @override
+  String get marineWaveDirection => '파향';
+
+  @override
+  String marineFrom(String direction) {
+    return '$direction에서';
+  }
+
+  @override
+  String marineUpdatedAt(String time) {
+    return '$time 기준';
+  }
+
+  @override
+  String get marineLoadError => '바다 예보를 불러오지 못했어요';
+
+  @override
+  String get marineRetry => '다시 시도';
+
+  @override
+  String get marineDisclaimer => '예보는 참고용이에요. 입수 전 현장과 버디 컨디션을 꼭 확인해요.';
+
+  @override
+  String get marineDirectionNorth => '북쪽';
+
+  @override
+  String get marineDirectionNorthEast => '북동쪽';
+
+  @override
+  String get marineDirectionEast => '동쪽';
+
+  @override
+  String get marineDirectionSouthEast => '남동쪽';
+
+  @override
+  String get marineDirectionSouth => '남쪽';
+
+  @override
+  String get marineDirectionSouthWest => '남서쪽';
+
+  @override
+  String get marineDirectionWest => '서쪽';
+
+  @override
+  String get marineDirectionNorthWest => '북서쪽';
+
+  @override
   String get settingsGuide => '훈련 가이드';
 
   @override
