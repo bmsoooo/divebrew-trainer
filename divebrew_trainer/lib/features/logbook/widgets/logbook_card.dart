@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../data/database.dart';
 import '../../../data/models.dart';
+import 'logbook_image.dart';
 
 class LogbookCard extends StatelessWidget {
   final DiveSession session;
@@ -43,10 +44,9 @@ class LogbookCard extends StatelessWidget {
                 child: session.photoPaths.isNotEmpty
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          session.photoPaths.first,
+                        child: LogbookImage(
+                          path: session.photoPaths.first,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => _buildPlaceholderIcon(theme),
                         ),
                       )
                     : _buildPlaceholderIcon(theme),

@@ -1,12 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:path_provider/path_provider.dart';
 
 
 import '../../data/database.dart';
@@ -14,6 +16,7 @@ import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import 'logbook_repository.dart';
 import 'services/location_weather_service.dart';
+import 'widgets/logbook_image.dart';
 
 class _RepFormData {
   Discipline discipline = Discipline.cwt;
@@ -520,10 +523,30 @@ class _LogbookEditScreenState extends State<LogbookEditScreen> {
                   _buildSectionTitle(theme, '사진 추가'),
                   TextButton.icon(
                     onPressed: () async {
-                      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                      final XFile? image = await _picker.pickImage(
+                        source: ImageSource.gallery,
+                        maxWidth: 1080,
+                        maxHeight: 1080,
+                        imageQuality: 85,
+                      );
                       if (image != null) {
+                        String finalPath = image.path;
+                        if (kIsWeb) {
+                          final bytes = await image.readAsBytes();
+                          final base64Str = base64Encode(bytes);
+                          finalPath = 'base64:$base64Str';
+                        } else {
+                          final appDir = await getApplicationDocumentsDirectory();
+                          final photosDir = Directory('${appDir.path}/divebrew_photos');
+                          if (!await photosDir.exists()) {
+                            await photosDir.create(recursive: true);
+                          }
+                          final fileName = '${DateTime.now().millisecondsSinceEpoch}_${image.name}';
+                          final savedImage = await File(image.path).copy('${photosDir.path}/$fileName');
+                          finalPath = savedImage.path;
+                        }
                         setState(() {
-                          _photoPaths.add(image.path);
+                          _photoPaths.add(finalPath);
                         });
                       }
                     },
@@ -550,9 +573,7 @@ class _LogbookEditScreenState extends State<LogbookEditScreen> {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: kIsWeb
-                              ? Image.network(path, fit: BoxFit.cover)
-                              : Image.file(File(path), fit: BoxFit.cover),
+                          child: LogbookImage(path: path),
                         ),
                       );
                     },

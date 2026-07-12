@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:screenshot/screenshot.dart';
@@ -10,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/database.dart';
 import '../../data/models.dart';
 import 'logbook_repository.dart';
+import 'widgets/logbook_image.dart';
 
 enum ShareField { record, date, site, condition, rating, purpose }
 
@@ -20,6 +18,8 @@ class ShareCardPreference {
   bool isTextWhite;
   Map<ShareField, Offset> customPositions;
   Map<ShareField, double> customScales;
+  Map<ShareField, bool> customBolds;
+  Map<ShareField, bool> customItalics;
 
   ShareCardPreference({
     this.selectedFields = const {
@@ -33,6 +33,8 @@ class ShareCardPreference {
     this.isTextWhite = true,
     this.customPositions = const {},
     this.customScales = const {},
+    this.customBolds = const {},
+    this.customItalics = const {},
   });
 
   static Future<ShareCardPreference> load() async {
@@ -55,6 +57,8 @@ class ShareCardPreference {
 
     final positionsMap = <ShareField, Offset>{};
     final scalesMap = <ShareField, double>{};
+    final boldsMap = <ShareField, bool>{};
+    final italicsMap = <ShareField, bool>{};
     for (final field in ShareField.values) {
       final x = prefs.getDouble('share_pos_${field.name}_x');
       final y = prefs.getDouble('share_pos_${field.name}_y');
@@ -65,6 +69,14 @@ class ShareCardPreference {
       if (s != null) {
         scalesMap[field] = s;
       }
+      final b = prefs.getBool('share_bold_${field.name}');
+      if (b != null) {
+        boldsMap[field] = b;
+      }
+      final i = prefs.getBool('share_italic_${field.name}');
+      if (i != null) {
+        italicsMap[field] = i;
+      }
     }
 
     return ShareCardPreference(
@@ -74,6 +86,8 @@ class ShareCardPreference {
       isTextWhite: isTextWhite,
       customPositions: positionsMap,
       customScales: scalesMap,
+      customBolds: boldsMap,
+      customItalics: italicsMap,
     );
   }
 
@@ -90,6 +104,12 @@ class ShareCardPreference {
     }
     for (final entry in customScales.entries) {
       await prefs.setDouble('share_scale_${entry.key.name}', entry.value);
+    }
+    for (final entry in customBolds.entries) {
+      await prefs.setBool('share_bold_${entry.key.name}', entry.value);
+    }
+    for (final entry in customItalics.entries) {
+      await prefs.setBool('share_italic_${entry.key.name}', entry.value);
     }
   }
 }
@@ -229,9 +249,7 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
             fit: StackFit.expand,
             children: [
               // Background Image
-              kIsWeb
-                  ? Image.network(photoPath, fit: BoxFit.cover)
-                  : Image.file(File(photoPath), fit: BoxFit.cover),
+              LogbookImage(path: photoPath, fit: BoxFit.cover),
                   
               // Overlay
               if (_prefs.overlayGradient)
@@ -351,9 +369,20 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
 
   Widget? _buildFieldWidget(ShareField field) {
     final scale = _prefs.customScales[field] ?? 1.0;
+    final isBold = _prefs.customBolds[field] ?? false;
+    final isItalic = _prefs.customItalics[field] ?? false;
     final primaryColor = _prefs.isTextWhite ? Colors.white : Colors.black;
     final secondaryColor = _prefs.isTextWhite ? Colors.white70 : Colors.black87;
     final bgColor = _prefs.isTextWhite ? Colors.white24 : Colors.black12;
+
+    TextStyle getStyle(Color color, double size, {bool defaultBold = false}) {
+      return TextStyle(
+        color: color,
+        fontSize: size * scale,
+        fontWeight: (isBold || defaultBold) ? FontWeight.bold : FontWeight.normal,
+        fontStyle: isItalic ? FontStyle.italic : FontStyle.normal,
+      );
+    }
     
     switch (field) {
       case ShareField.record:
@@ -369,19 +398,19 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
           }
           return Text(
             recordText,
-            style: TextStyle(color: primaryColor, fontSize: 36 * scale, fontWeight: FontWeight.bold),
+            style: getStyle(primaryColor, 36, defaultBold: true),
           );
         } else {
           return Text(
             widget.session.siteName,
-            style: TextStyle(color: primaryColor, fontSize: 32 * scale, fontWeight: FontWeight.bold),
+            style: getStyle(primaryColor, 32, defaultBold: true),
           );
         }
         
       case ShareField.date:
         return Text(
           DateFormat('yyyy.MM.dd').format(widget.session.date),
-          style: TextStyle(color: secondaryColor, fontSize: 16 * scale),
+          style: getStyle(secondaryColor, 16),
         );
         
       case ShareField.site:
@@ -392,7 +421,7 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
             SizedBox(width: 4 * scale),
             Text(
               widget.session.siteName,
-              style: TextStyle(color: primaryColor, fontSize: 20 * scale, fontWeight: FontWeight.bold),
+              style: getStyle(primaryColor, 20, defaultBold: true),
             ),
           ],
         );
@@ -403,11 +432,11 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.session.condition.waterTempC != null)
-                Text('수온 ${widget.session.condition.waterTempC}°C', style: TextStyle(color: secondaryColor, fontSize: 14 * scale)),
+                Text('수온 ${widget.session.condition.waterTempC}°C', style: getStyle(secondaryColor, 14)),
               if (widget.session.condition.waterTempC != null && widget.session.condition.waveHeightM != null)
-                Text(' · ', style: TextStyle(color: secondaryColor, fontSize: 14 * scale)),
+                Text(' · ', style: getStyle(secondaryColor, 14)),
               if (widget.session.condition.waveHeightM != null)
-                Text('파고 ${widget.session.condition.waveHeightM}m', style: TextStyle(color: secondaryColor, fontSize: 14 * scale)),
+                Text('파고 ${widget.session.condition.waveHeightM}m', style: getStyle(secondaryColor, 14)),
             ],
           );
         }
@@ -417,7 +446,7 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 8 * scale, vertical: 4 * scale),
           decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(4 * scale)),
-          child: Text(_getPurposeText(widget.session.purposeTag), style: TextStyle(color: primaryColor, fontSize: 12 * scale)),
+          child: Text(_getPurposeText(widget.session.purposeTag), style: getStyle(primaryColor, 12)),
         );
         
       case ShareField.rating:
@@ -444,16 +473,43 @@ class _LogbookShareScreenState extends State<LogbookShareScreen> {
       children: [
         if (_selectedField != null) ...[
           Text('${_getFieldName(_selectedField!)} 글자 크기 조절', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-          Slider(
-            value: _prefs.customScales[_selectedField!] ?? 1.0,
-            min: 0.5,
-            max: 3.0,
-            divisions: 25,
-            label: '${((_prefs.customScales[_selectedField!] ?? 1.0) * 100).toInt()}%',
-            onChanged: (val) {
-              setState(() => _prefs.customScales[_selectedField!] = val);
-            },
-            onChangeEnd: (_) => _savePrefs(),
+          Row(
+            children: [
+              Expanded(
+                child: Slider(
+                  value: _prefs.customScales[_selectedField!] ?? 1.0,
+                  min: 0.5,
+                  max: 3.0,
+                  divisions: 25,
+                  label: '${((_prefs.customScales[_selectedField!] ?? 1.0) * 100).toInt()}%',
+                  onChanged: (val) {
+                    setState(() => _prefs.customScales[_selectedField!] = val);
+                  },
+                  onChangeEnd: (_) => _savePrefs(),
+                ),
+              ),
+              ToggleButtons(
+                isSelected: [
+                  _prefs.customBolds[_selectedField!] ?? false,
+                  _prefs.customItalics[_selectedField!] ?? false,
+                ],
+                onPressed: (index) {
+                  setState(() {
+                    if (index == 0) {
+                      _prefs.customBolds[_selectedField!] = !(_prefs.customBolds[_selectedField!] ?? false);
+                    } else {
+                      _prefs.customItalics[_selectedField!] = !(_prefs.customItalics[_selectedField!] ?? false);
+                    }
+                  });
+                  _savePrefs();
+                },
+                borderRadius: BorderRadius.circular(8),
+                children: const [
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: Text('B', style: TextStyle(fontWeight: FontWeight.bold))),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: Text('I', style: TextStyle(fontStyle: FontStyle.italic))),
+                ],
+              ),
+            ],
           ),
         ] else ...[
           const Text('크기를 조절할 항목을 위 사진에서 터치하세요.', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
