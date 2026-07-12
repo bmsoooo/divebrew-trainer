@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +8,7 @@ import '../../l10n/app_localizations.dart';
 import 'logbook_map_view.dart';
 import 'logbook_repository.dart';
 import 'widgets/logbook_card.dart';
+import 'widgets/logbook_image.dart';
 import 'widgets/logbook_stats_card.dart';
 
 enum ViewMode { list, gallery, map }
@@ -274,9 +273,7 @@ class _LogbookScreenState extends State<LogbookScreen> {
               final path = s.photoPaths.first;
               return GestureDetector(
                 onTap: () => context.push('/logbook/edit/${s.id}'),
-                child: kIsWeb
-                    ? Image.network(path, fit: BoxFit.cover)
-                    : Image.file(File(path), fit: BoxFit.cover),
+                child: LogbookImage(path: path, fit: BoxFit.cover),
               );
             },
           );
