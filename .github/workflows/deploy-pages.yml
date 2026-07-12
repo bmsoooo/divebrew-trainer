@@ -25,6 +25,8 @@ jobs:
         working-directory: divebrew_trainer
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: subosito/flutter-action@v2
         with:
@@ -32,11 +34,21 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Build old version (v1.0.1)
+        run: |
+          git checkout 8a2bc20
+          flutter pub get
+          flutter build web --release --base-href "/divebrew-trainer/v1/"
+          mkdir -p ../old_build_v1
+          cp -R build/web/* ../old_build_v1/
 
-      - name: Build web
-        run: flutter build web --release --base-href "/divebrew-trainer/"
+      - name: Build new version (v1.1.0)
+        run: |
+          git checkout ${{ github.sha }}
+          flutter pub get
+          flutter build web --release --base-href "/divebrew-trainer/"
+          mkdir -p build/web/v1
+          cp -R ../old_build_v1/* build/web/v1/
 
       - uses: actions/configure-pages@v5
 

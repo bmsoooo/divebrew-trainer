@@ -1,0 +1,425 @@
+diff --git a/divebrew_trainer/lib/app/router.dart b/divebrew_trainer/lib/app/router.dart
+index 197ac6d..3e6b791 100644
+--- a/divebrew_trainer/lib/app/router.dart
++++ b/divebrew_trainer/lib/app/router.dart
+@@ -6,6 +6,7 @@ import '../data/database.dart';
+ import '../features/guide/guide_screen.dart';
+ import '../features/history/history_screen.dart';
+ import '../features/home/home_screen.dart';
++import '../features/logbook/logbook_screen.dart';
+ import '../features/license/license_screen.dart';
+ import '../features/onboarding/onboarding_screen.dart';
+ import '../features/session/session_screen.dart';
+@@ -56,6 +57,12 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
+                 builder: (context, state) => HistoryScreen(db: db),
+               ),
+             ]),
++            StatefulShellBranch(routes: [
++              GoRoute(
++                path: '/logbook',
++                builder: (context, state) => LogbookScreen(db: db),
++              ),
++            ]),
+             StatefulShellBranch(routes: [
+               GoRoute(
+                 path: '/settings',
+@@ -170,6 +177,11 @@ class _TabShell extends StatelessWidget {
+             selectedIcon: const Icon(Icons.schedule),
+             label: l10n.tabHistory,
+           ),
++          NavigationDestination(
++            icon: const Icon(Icons.menu_book_outlined),
++            selectedIcon: const Icon(Icons.menu_book),
++            label: l10n.tabLogbook,
++          ),
+           NavigationDestination(
+             icon: const Icon(Icons.settings_outlined),
+             selectedIcon: const Icon(Icons.settings),
+diff --git a/divebrew_trainer/lib/data/database.dart b/divebrew_trainer/lib/data/database.dart
+index d749db0..4645d02 100644
+--- a/divebrew_trainer/lib/data/database.dart
++++ b/divebrew_trainer/lib/data/database.dart
+@@ -7,14 +7,25 @@ import 'tables.dart';
+ 
+ part 'database.g.dart';
+ 
+-@DriftDatabase(tables: [TrainingTables, Sessions, PersonalBests, Settings])
++@DriftDatabase(tables: [
++  TrainingTables,
++  Sessions,
++  PersonalBests,
++  Settings,
++  DiveSessions,
++  DiveReps,
++  DiveSites,
++  DiveBuddies,
++  GearPresets,
++  MedicalDocs,
++])
+ class AppDatabase extends _$AppDatabase {
+   AppDatabase() : super(_openConnection());
+ 
+   AppDatabase.forTesting(super.connection);
+ 
+   @override
+-  int get schemaVersion => 2;
++  int get schemaVersion => 3;
+ 
+   @override
+   MigrationStrategy get migration => MigrationStrategy(
+@@ -22,6 +33,14 @@ class AppDatabase extends _$AppDatabase {
+           if (from < 2) {
+             await m.createTable(settings);
+           }
++          if (from < 3) {
++            // await m.createTable(diveSessions);
++            // await m.createTable(diveReps);
++            // await m.createTable(diveSites);
++            // await m.createTable(diveBuddies);
++            // await m.createTable(gearPresets);
++            // await m.createTable(medicalDocs);
++          }
+         },
+       );
+ 
+diff --git a/divebrew_trainer/lib/data/models.dart b/divebrew_trainer/lib/data/models.dart
+index 64b7f49..84b4f97 100644
+--- a/divebrew_trainer/lib/data/models.dart
++++ b/divebrew_trainer/lib/data/models.dart
+@@ -82,3 +82,70 @@ String encodeRoundResults(List<RoundResult> results) =>
+ List<RoundResult> decodeRoundResults(String json) => (jsonDecode(json) as List)
+     .map((e) => RoundResult.fromJson(e as Map<String, dynamic>))
+     .toList();
++
++// Logbook Enums
++enum SiteType { pool, sea, lake }
++enum PurposeTag { training, leisure, spearfishing, photo, competitionPractice, other }
++enum ConditionSource { auto, manual }
++enum FinType { monofin, bifin, barefoot }
++enum IncidentType { none, samba, blackout }
++enum RecoveryType { normal, delayed, assisted }
++enum Discipline { sta, dyn, dnf, cwt, cwtb, cnf, fim, custom }
++enum PerformanceUnit { sec, m }
++
++class DiveCondition {
++  final double? waveHeightM;
++  final double? waterTempC;
++  final double? waveDirectionDeg;
++  final double? visibilityM;
++  final ConditionSource source;
++
++  const DiveCondition({
++    this.waveHeightM,
++    this.waterTempC,
++    this.waveDirectionDeg,
++    this.visibilityM,
++    this.source = ConditionSource.manual,
++  });
++
++  Map<String, dynamic> toJson() => {
++        'waveHeightM': waveHeightM,
++        'waterTempC': waterTempC,
++        'waveDirectionDeg': waveDirectionDeg,
++        'visibilityM': visibilityM,
++        'source': source.name,
++      };
++
++  factory DiveCondition.fromJson(Map<String, dynamic> json) => DiveCondition(
++        waveHeightM: (json['waveHeightM'] as num?)?.toDouble(),
++        waterTempC: (json['waterTempC'] as num?)?.toDouble(),
++        waveDirectionDeg: (json['waveDirectionDeg'] as num?)?.toDouble(),
++        visibilityM: (json['visibilityM'] as num?)?.toDouble(),
++        source: ConditionSource.values.firstWhere(
++          (e) => e.name == json['source'],
++          orElse: () => ConditionSource.manual,
++        ),
++      );
++}
++
++class DiveGear {
++  final double? weightKg;
++  final double? suitThicknessMm;
++  final FinType? finType;
++
++  const DiveGear({this.weightKg, this.suitThicknessMm, this.finType});
++
++  Map<String, dynamic> toJson() => {
++        'weightKg': weightKg,
++        'suitThicknessMm': suitThicknessMm,
++        'finType': finType?.name,
++      };
++
++  factory DiveGear.fromJson(Map<String, dynamic> json) => DiveGear(
++        weightKg: (json['weightKg'] as num?)?.toDouble(),
++        suitThicknessMm: (json['suitThicknessMm'] as num?)?.toDouble(),
++        finType: json['finType'] != null
++            ? FinType.values.firstWhere((e) => e.name == json['finType'])
++            : null,
++      );
++}
+diff --git a/divebrew_trainer/lib/data/tables.dart b/divebrew_trainer/lib/data/tables.dart
+index 1881cd9..2014d19 100644
+--- a/divebrew_trainer/lib/data/tables.dart
++++ b/divebrew_trainer/lib/data/tables.dart
+@@ -1,4 +1,5 @@
+ // drift 테이블 정의 — 훈련 테이블, 세션, 개인 최고 기록 (M1 웹 범위)
++import 'dart:convert';
+ import 'package:drift/drift.dart';
+ 
+ import 'models.dart';
+@@ -63,3 +64,103 @@ class PersonalBests extends Table {
+   @override
+   Set<Column> get primaryKey => {type};
+ }
++
++// Logbook Type Converters
++class ConditionConverter extends TypeConverter<DiveCondition, String> {
++  const ConditionConverter();
++  @override
++  DiveCondition fromSql(String fromDb) => DiveCondition.fromJson(jsonDecode(fromDb));
++  @override
++  String toSql(DiveCondition value) => jsonEncode(value.toJson());
++}
++
++class GearConverter extends TypeConverter<DiveGear, String> {
++  const GearConverter();
++  @override
++  DiveGear fromSql(String fromDb) => DiveGear.fromJson(jsonDecode(fromDb));
++  @override
++  String toSql(DiveGear value) => jsonEncode(value.toJson());
++}
++
++class StringListConverter extends TypeConverter<List<String>, String> {
++  const StringListConverter();
++  @override
++  List<String> fromSql(String fromDb) => (jsonDecode(fromDb) as List).cast<String>();
++  @override
++  String toSql(List<String> value) => jsonEncode(value);
++}
++
++class IntListConverter extends TypeConverter<List<int>, String> {
++  const IntListConverter();
++  @override
++  List<int> fromSql(String fromDb) => (jsonDecode(fromDb) as List).cast<int>();
++  @override
++  String toSql(List<int> value) => jsonEncode(value);
++}
++
++// Logbook Tables
++class DiveSessions extends Table {
++  IntColumn get id => integer().autoIncrement()();
++  DateTimeColumn get date => dateTime()();
++  TextColumn get siteType => textEnum<SiteType>()();
++  IntColumn get siteId => integer().nullable()();
++  TextColumn get siteName => text()();
++  RealColumn get lat => real().nullable()();
++  RealColumn get lon => real().nullable()();
++  TextColumn get purposeTag => textEnum<PurposeTag>()();
++  TextColumn get condition => text().map(const ConditionConverter())();
++  IntColumn get gearPresetId => integer().nullable()();
++  TextColumn get gear => text().map(const GearConverter())();
++  TextColumn get buddyIds => text().map(const IntListConverter())();
++  TextColumn get leaderName => text().nullable()();
++  IntColumn get overallRating => integer().nullable()();
++  TextColumn get photoPaths => text().map(const StringListConverter())();
++  TextColumn get note => text().nullable()();
++  IntColumn get linkedTrainingSessionId => integer().nullable()();
++}
++
++class DiveReps extends Table {
++  IntColumn get id => integer().autoIncrement()();
++  IntColumn get sessionId => integer().references(DiveSessions, #id)();
++  IntColumn get sequence => integer()();
++  TextColumn get discipline => textEnum<Discipline>()();
++  RealColumn get performanceValue => real()();
++  TextColumn get performanceUnit => textEnum<PerformanceUnit>()();
++  RealColumn get targetValue => real().nullable()();
++  IntColumn get surfaceRestBeforeSec => integer().nullable()();
++  IntColumn get msstRecommendedSec => integer().nullable()();
++  TextColumn get incident => textEnum<IncidentType>()();
++  TextColumn get recoveryNote => text().nullable()();
++  BoolColumn get isMergedFromAutoSplit => boolean().withDefault(const Constant(false))();
++}
++
++class DiveSites extends Table {
++  IntColumn get id => integer().autoIncrement()();
++  TextColumn get name => text()();
++  RealColumn get lat => real()();
++  RealColumn get lon => real()();
++  IntColumn get visitCount => integer().withDefault(const Constant(0))();
++  DateTimeColumn get lastVisitedAt => dateTime().nullable()();
++}
++
++class DiveBuddies extends Table {
++  IntColumn get id => integer().autoIncrement()();
++  TextColumn get name => text()();
++  TextColumn get note => text().nullable()();
++}
++
++class GearPresets extends Table {
++  IntColumn get id => integer().autoIncrement()();
++  TextColumn get name => text()();
++  RealColumn get weightKg => real().nullable()();
++  RealColumn get suitThicknessMm => real().nullable()();
++  TextColumn get finType => textEnum<FinType>().nullable()();
++}
++
++class MedicalDocs extends Table {
++  IntColumn get id => integer().autoIncrement()();
++  DateTimeColumn get issuedAt => dateTime()();
++  DateTimeColumn get expiresAt => dateTime().nullable()();
++  TextColumn get filePath => text()();
++  TextColumn get note => text().nullable()();
++}
+diff --git a/divebrew_trainer/lib/l10n/app_en.arb b/divebrew_trainer/lib/l10n/app_en.arb
+index 8283c44..3f263d4 100644
+--- a/divebrew_trainer/lib/l10n/app_en.arb
++++ b/divebrew_trainer/lib/l10n/app_en.arb
+@@ -165,6 +165,7 @@
+   "tabHome": "Home",
+   "tabTables": "Tables",
+   "tabHistory": "History",
++  "tabLogbook": "Logbook",
+   "tableListIntro": "CO2 tables shrink recovery breathing; O2 tables extend the hold",
+   "tableListSectionCo2": "CO2 tables",
+   "tableListSectionO2": "O2 tables",
+diff --git a/divebrew_trainer/lib/l10n/app_ko.arb b/divebrew_trainer/lib/l10n/app_ko.arb
+index 0692388..ff84b78 100644
+--- a/divebrew_trainer/lib/l10n/app_ko.arb
++++ b/divebrew_trainer/lib/l10n/app_ko.arb
+@@ -165,6 +165,7 @@
+   "tabHome": "홈",
+   "tabTables": "테이블",
+   "tabHistory": "히스토리",
++  "tabLogbook": "로그북",
+   "tableListIntro": "CO2 테이블은 회복호흡을 줄이고, O2 테이블은 숨참기를 늘려요",
+   "tableListSectionCo2": "CO2 테이블",
+   "tableListSectionO2": "O2 테이블",
+diff --git a/divebrew_trainer/lib/l10n/app_localizations.dart b/divebrew_trainer/lib/l10n/app_localizations.dart
+index 7450bb8..321d931 100644
+--- a/divebrew_trainer/lib/l10n/app_localizations.dart
++++ b/divebrew_trainer/lib/l10n/app_localizations.dart
+@@ -578,6 +578,12 @@ abstract class AppLocalizations {
+   /// **'히스토리'**
+   String get tabHistory;
+ 
++  /// No description provided for @tabLogbook.
++  ///
++  /// In ko, this message translates to:
++  /// **'로그북'**
++  String get tabLogbook;
++
+   /// No description provided for @tableListIntro.
+   ///
+   /// In ko, this message translates to:
+diff --git a/divebrew_trainer/lib/l10n/app_localizations_en.dart b/divebrew_trainer/lib/l10n/app_localizations_en.dart
+index 24e8b1c..4ff808e 100644
+--- a/divebrew_trainer/lib/l10n/app_localizations_en.dart
++++ b/divebrew_trainer/lib/l10n/app_localizations_en.dart
+@@ -280,6 +280,9 @@ class AppLocalizationsEn extends AppLocalizations {
+   @override
+   String get tabHistory => 'History';
+ 
++  @override
++  String get tabLogbook => 'Logbook';
++
+   @override
+   String get tableListIntro =>
+       'CO2 tables shrink recovery breathing; O2 tables extend the hold';
+diff --git a/divebrew_trainer/lib/l10n/app_localizations_ko.dart b/divebrew_trainer/lib/l10n/app_localizations_ko.dart
+index 725ab33..5e62f50 100644
+--- a/divebrew_trainer/lib/l10n/app_localizations_ko.dart
++++ b/divebrew_trainer/lib/l10n/app_localizations_ko.dart
+@@ -272,6 +272,9 @@ class AppLocalizationsKo extends AppLocalizations {
+   @override
+   String get tabHistory => '히스토리';
+ 
++  @override
++  String get tabLogbook => '로그북';
++
+   @override
+   String get tableListIntro => 'CO2 테이블은 회복호흡을 줄이고, O2 테이블은 숨참기를 늘려요';
+ 
+diff --git a/divebrew_trainer/pubspec.lock b/divebrew_trainer/pubspec.lock
+index a03981d..953daf5 100644
+--- a/divebrew_trainer/pubspec.lock
++++ b/divebrew_trainer/pubspec.lock
+@@ -45,34 +45,34 @@ packages:
+     dependency: transitive
+     description:
+       name: build
+-      sha256: a156715e7cd728130c592f30552575908aae5b100005fbc1f0fb16b3c03a3d10
++      sha256: "45d14a0fb23e018d8287c32fc98d726ce466b231928ed9b9200f29bd3ccd39ae"
+       url: "https://pub.dev"
+     source: hosted
+-    version: "4.0.6"
++    version: "4.0.7"
+   build_config:
+     dependency: transitive
+     description:
+       name: build_config
+-      sha256: "4070d2a59f8eec34c97c86ceb44403834899075f66e8a9d59706f8e7834f6f71"
++      sha256: f2c223156a26eea323e6244b85141d76413a80aeee9fe0b380773789fabaf8ae
+       url: "https://pub.dev"
+     source: hosted
+-    version: "1.3.0"
++    version: "1.3.1"
+   build_daemon:
+     dependency: transitive
+     description:
+       name: build_daemon
+-      sha256: bf05f6e12cfea92d3c09308d7bcdab1906cd8a179b023269eed00c071004b957
++      sha256: fd754058c342243718d5171a95f352cfc9fcf0cba8cfa26df67cb13a5836db78
+       url: "https://pub.dev"
+     source: hosted
+-    version: "4.1.1"
++    version: "4.1.2"
+   build_runner:
+     dependency: "direct dev"
+     description:
+       name: build_runner
+-      sha256: "1523ce62448ebac2c15a8ba5fbad8acac169788658a7dd2a1c2d9c2a9318b9a6"
++      sha256: "5367e521935b102bdf1e735d2aab461e36b2edca6517662d088dd04cc39f8d16"
+       url: "https://pub.dev"
+     source: hosted
+-    version: "2.15.0"
++    version: "2.15.1"
+   built_collection:
+     dependency: transitive
+     description:
+@@ -189,10 +189,10 @@ packages:
+     dependency: "direct main"
+     description:
+       name: drift
+-      sha256: "6cc0b623c0e83f7080524d8396e9301b1d78b9c66a4fdceeb0f798211303254c"
++      sha256: c21b9af62e78f86837638dda6c33506bd9444ca8a32cad2b99c07369cf9e2462
+       url: "https://pub.dev"
+     source: hosted
+-    version: "2.34.0"
++    version: "2.34.1"
+   drift_dev:
+     dependency: "direct dev"
+     description:
+@@ -205,18 +205,18 @@ packages:
+     dependency: "direct main"
+     description:
+       name: drift_flutter
+-      sha256: "887fdec622174dc7eaefd0048403e34ee07cc18626ac8a7544cc3b8a4a172166"
++      sha256: "91acf4bee7c3c84467cba46455aa70e5292a3b889f4582645d74f2e5a8c106f2"
+       url: "https://pub.dev"
+     source: hosted
+-    version: "0.3.0"
++    version: "0.3.1"
+   equatable:
+     dependency: transitive
+     description:
+       name: equatable
+-      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
++      sha256: "3bce007a596ff8b3119c45d68aaef631272537c03d30e5d4534dd24bf4c5eaa2"
+       url: "https://pub.dev"
+     source: hosted
+-    version: "2.0.7"
++    version: "2.1.0"
+   fake_async:
+     dependency: transitive
+     description:

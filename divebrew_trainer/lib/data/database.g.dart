@@ -1242,6 +1242,3104 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
   }
 }
 
+class $DiveSessionsTable extends DiveSessions
+    with TableInfo<$DiveSessionsTable, DiveSession> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DiveSessionsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<SiteType, String> siteType =
+      GeneratedColumn<String>(
+        'site_type',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<SiteType>($DiveSessionsTable.$convertersiteType);
+  static const VerificationMeta _siteIdMeta = const VerificationMeta('siteId');
+  @override
+  late final GeneratedColumn<int> siteId = GeneratedColumn<int>(
+    'site_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _siteNameMeta = const VerificationMeta(
+    'siteName',
+  );
+  @override
+  late final GeneratedColumn<String> siteName = GeneratedColumn<String>(
+    'site_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _latMeta = const VerificationMeta('lat');
+  @override
+  late final GeneratedColumn<double> lat = GeneratedColumn<double>(
+    'lat',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lonMeta = const VerificationMeta('lon');
+  @override
+  late final GeneratedColumn<double> lon = GeneratedColumn<double>(
+    'lon',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<PurposeTag, String> purposeTag =
+      GeneratedColumn<String>(
+        'purpose_tag',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<PurposeTag>($DiveSessionsTable.$converterpurposeTag);
+  @override
+  late final GeneratedColumnWithTypeConverter<DiveCondition, String> condition =
+      GeneratedColumn<String>(
+        'condition',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<DiveCondition>($DiveSessionsTable.$convertercondition);
+  static const VerificationMeta _gearPresetIdMeta = const VerificationMeta(
+    'gearPresetId',
+  );
+  @override
+  late final GeneratedColumn<int> gearPresetId = GeneratedColumn<int>(
+    'gear_preset_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<DiveGear, String> gear =
+      GeneratedColumn<String>(
+        'gear',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<DiveGear>($DiveSessionsTable.$convertergear);
+  @override
+  late final GeneratedColumnWithTypeConverter<List<int>, String> buddyIds =
+      GeneratedColumn<String>(
+        'buddy_ids',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<List<int>>($DiveSessionsTable.$converterbuddyIds);
+  static const VerificationMeta _leaderNameMeta = const VerificationMeta(
+    'leaderName',
+  );
+  @override
+  late final GeneratedColumn<String> leaderName = GeneratedColumn<String>(
+    'leader_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _overallRatingMeta = const VerificationMeta(
+    'overallRating',
+  );
+  @override
+  late final GeneratedColumn<int> overallRating = GeneratedColumn<int>(
+    'overall_rating',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> photoPaths =
+      GeneratedColumn<String>(
+        'photo_paths',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<List<String>>($DiveSessionsTable.$converterphotoPaths);
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _linkedTrainingSessionIdMeta =
+      const VerificationMeta('linkedTrainingSessionId');
+  @override
+  late final GeneratedColumn<int> linkedTrainingSessionId =
+      GeneratedColumn<int>(
+        'linked_training_session_id',
+        aliasedName,
+        true,
+        type: DriftSqlType.int,
+        requiredDuringInsert: false,
+      );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    date,
+    siteType,
+    siteId,
+    siteName,
+    lat,
+    lon,
+    purposeTag,
+    condition,
+    gearPresetId,
+    gear,
+    buddyIds,
+    leaderName,
+    overallRating,
+    photoPaths,
+    note,
+    linkedTrainingSessionId,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'dive_sessions';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DiveSession> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('site_id')) {
+      context.handle(
+        _siteIdMeta,
+        siteId.isAcceptableOrUnknown(data['site_id']!, _siteIdMeta),
+      );
+    }
+    if (data.containsKey('site_name')) {
+      context.handle(
+        _siteNameMeta,
+        siteName.isAcceptableOrUnknown(data['site_name']!, _siteNameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_siteNameMeta);
+    }
+    if (data.containsKey('lat')) {
+      context.handle(
+        _latMeta,
+        lat.isAcceptableOrUnknown(data['lat']!, _latMeta),
+      );
+    }
+    if (data.containsKey('lon')) {
+      context.handle(
+        _lonMeta,
+        lon.isAcceptableOrUnknown(data['lon']!, _lonMeta),
+      );
+    }
+    if (data.containsKey('gear_preset_id')) {
+      context.handle(
+        _gearPresetIdMeta,
+        gearPresetId.isAcceptableOrUnknown(
+          data['gear_preset_id']!,
+          _gearPresetIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('leader_name')) {
+      context.handle(
+        _leaderNameMeta,
+        leaderName.isAcceptableOrUnknown(data['leader_name']!, _leaderNameMeta),
+      );
+    }
+    if (data.containsKey('overall_rating')) {
+      context.handle(
+        _overallRatingMeta,
+        overallRating.isAcceptableOrUnknown(
+          data['overall_rating']!,
+          _overallRatingMeta,
+        ),
+      );
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('linked_training_session_id')) {
+      context.handle(
+        _linkedTrainingSessionIdMeta,
+        linkedTrainingSessionId.isAcceptableOrUnknown(
+          data['linked_training_session_id']!,
+          _linkedTrainingSessionIdMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DiveSession map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DiveSession(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date'],
+      )!,
+      siteType: $DiveSessionsTable.$convertersiteType.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}site_type'],
+        )!,
+      ),
+      siteId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}site_id'],
+      ),
+      siteName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}site_name'],
+      )!,
+      lat: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lat'],
+      ),
+      lon: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lon'],
+      ),
+      purposeTag: $DiveSessionsTable.$converterpurposeTag.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}purpose_tag'],
+        )!,
+      ),
+      condition: $DiveSessionsTable.$convertercondition.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}condition'],
+        )!,
+      ),
+      gearPresetId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}gear_preset_id'],
+      ),
+      gear: $DiveSessionsTable.$convertergear.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}gear'],
+        )!,
+      ),
+      buddyIds: $DiveSessionsTable.$converterbuddyIds.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}buddy_ids'],
+        )!,
+      ),
+      leaderName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}leader_name'],
+      ),
+      overallRating: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}overall_rating'],
+      ),
+      photoPaths: $DiveSessionsTable.$converterphotoPaths.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}photo_paths'],
+        )!,
+      ),
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+      linkedTrainingSessionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}linked_training_session_id'],
+      ),
+    );
+  }
+
+  @override
+  $DiveSessionsTable createAlias(String alias) {
+    return $DiveSessionsTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<SiteType, String, String> $convertersiteType =
+      const EnumNameConverter<SiteType>(SiteType.values);
+  static JsonTypeConverter2<PurposeTag, String, String> $converterpurposeTag =
+      const EnumNameConverter<PurposeTag>(PurposeTag.values);
+  static TypeConverter<DiveCondition, String> $convertercondition =
+      const ConditionConverter();
+  static TypeConverter<DiveGear, String> $convertergear = const GearConverter();
+  static TypeConverter<List<int>, String> $converterbuddyIds =
+      const IntListConverter();
+  static TypeConverter<List<String>, String> $converterphotoPaths =
+      const StringListConverter();
+}
+
+class DiveSession extends DataClass implements Insertable<DiveSession> {
+  final int id;
+  final DateTime date;
+  final SiteType siteType;
+  final int? siteId;
+  final String siteName;
+  final double? lat;
+  final double? lon;
+  final PurposeTag purposeTag;
+  final DiveCondition condition;
+  final int? gearPresetId;
+  final DiveGear gear;
+  final List<int> buddyIds;
+  final String? leaderName;
+  final int? overallRating;
+  final List<String> photoPaths;
+  final String? note;
+  final int? linkedTrainingSessionId;
+  const DiveSession({
+    required this.id,
+    required this.date,
+    required this.siteType,
+    this.siteId,
+    required this.siteName,
+    this.lat,
+    this.lon,
+    required this.purposeTag,
+    required this.condition,
+    this.gearPresetId,
+    required this.gear,
+    required this.buddyIds,
+    this.leaderName,
+    this.overallRating,
+    required this.photoPaths,
+    this.note,
+    this.linkedTrainingSessionId,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['date'] = Variable<DateTime>(date);
+    {
+      map['site_type'] = Variable<String>(
+        $DiveSessionsTable.$convertersiteType.toSql(siteType),
+      );
+    }
+    if (!nullToAbsent || siteId != null) {
+      map['site_id'] = Variable<int>(siteId);
+    }
+    map['site_name'] = Variable<String>(siteName);
+    if (!nullToAbsent || lat != null) {
+      map['lat'] = Variable<double>(lat);
+    }
+    if (!nullToAbsent || lon != null) {
+      map['lon'] = Variable<double>(lon);
+    }
+    {
+      map['purpose_tag'] = Variable<String>(
+        $DiveSessionsTable.$converterpurposeTag.toSql(purposeTag),
+      );
+    }
+    {
+      map['condition'] = Variable<String>(
+        $DiveSessionsTable.$convertercondition.toSql(condition),
+      );
+    }
+    if (!nullToAbsent || gearPresetId != null) {
+      map['gear_preset_id'] = Variable<int>(gearPresetId);
+    }
+    {
+      map['gear'] = Variable<String>(
+        $DiveSessionsTable.$convertergear.toSql(gear),
+      );
+    }
+    {
+      map['buddy_ids'] = Variable<String>(
+        $DiveSessionsTable.$converterbuddyIds.toSql(buddyIds),
+      );
+    }
+    if (!nullToAbsent || leaderName != null) {
+      map['leader_name'] = Variable<String>(leaderName);
+    }
+    if (!nullToAbsent || overallRating != null) {
+      map['overall_rating'] = Variable<int>(overallRating);
+    }
+    {
+      map['photo_paths'] = Variable<String>(
+        $DiveSessionsTable.$converterphotoPaths.toSql(photoPaths),
+      );
+    }
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    if (!nullToAbsent || linkedTrainingSessionId != null) {
+      map['linked_training_session_id'] = Variable<int>(
+        linkedTrainingSessionId,
+      );
+    }
+    return map;
+  }
+
+  DiveSessionsCompanion toCompanion(bool nullToAbsent) {
+    return DiveSessionsCompanion(
+      id: Value(id),
+      date: Value(date),
+      siteType: Value(siteType),
+      siteId: siteId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(siteId),
+      siteName: Value(siteName),
+      lat: lat == null && nullToAbsent ? const Value.absent() : Value(lat),
+      lon: lon == null && nullToAbsent ? const Value.absent() : Value(lon),
+      purposeTag: Value(purposeTag),
+      condition: Value(condition),
+      gearPresetId: gearPresetId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(gearPresetId),
+      gear: Value(gear),
+      buddyIds: Value(buddyIds),
+      leaderName: leaderName == null && nullToAbsent
+          ? const Value.absent()
+          : Value(leaderName),
+      overallRating: overallRating == null && nullToAbsent
+          ? const Value.absent()
+          : Value(overallRating),
+      photoPaths: Value(photoPaths),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      linkedTrainingSessionId: linkedTrainingSessionId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(linkedTrainingSessionId),
+    );
+  }
+
+  factory DiveSession.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DiveSession(
+      id: serializer.fromJson<int>(json['id']),
+      date: serializer.fromJson<DateTime>(json['date']),
+      siteType: $DiveSessionsTable.$convertersiteType.fromJson(
+        serializer.fromJson<String>(json['siteType']),
+      ),
+      siteId: serializer.fromJson<int?>(json['siteId']),
+      siteName: serializer.fromJson<String>(json['siteName']),
+      lat: serializer.fromJson<double?>(json['lat']),
+      lon: serializer.fromJson<double?>(json['lon']),
+      purposeTag: $DiveSessionsTable.$converterpurposeTag.fromJson(
+        serializer.fromJson<String>(json['purposeTag']),
+      ),
+      condition: serializer.fromJson<DiveCondition>(json['condition']),
+      gearPresetId: serializer.fromJson<int?>(json['gearPresetId']),
+      gear: serializer.fromJson<DiveGear>(json['gear']),
+      buddyIds: serializer.fromJson<List<int>>(json['buddyIds']),
+      leaderName: serializer.fromJson<String?>(json['leaderName']),
+      overallRating: serializer.fromJson<int?>(json['overallRating']),
+      photoPaths: serializer.fromJson<List<String>>(json['photoPaths']),
+      note: serializer.fromJson<String?>(json['note']),
+      linkedTrainingSessionId: serializer.fromJson<int?>(
+        json['linkedTrainingSessionId'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'date': serializer.toJson<DateTime>(date),
+      'siteType': serializer.toJson<String>(
+        $DiveSessionsTable.$convertersiteType.toJson(siteType),
+      ),
+      'siteId': serializer.toJson<int?>(siteId),
+      'siteName': serializer.toJson<String>(siteName),
+      'lat': serializer.toJson<double?>(lat),
+      'lon': serializer.toJson<double?>(lon),
+      'purposeTag': serializer.toJson<String>(
+        $DiveSessionsTable.$converterpurposeTag.toJson(purposeTag),
+      ),
+      'condition': serializer.toJson<DiveCondition>(condition),
+      'gearPresetId': serializer.toJson<int?>(gearPresetId),
+      'gear': serializer.toJson<DiveGear>(gear),
+      'buddyIds': serializer.toJson<List<int>>(buddyIds),
+      'leaderName': serializer.toJson<String?>(leaderName),
+      'overallRating': serializer.toJson<int?>(overallRating),
+      'photoPaths': serializer.toJson<List<String>>(photoPaths),
+      'note': serializer.toJson<String?>(note),
+      'linkedTrainingSessionId': serializer.toJson<int?>(
+        linkedTrainingSessionId,
+      ),
+    };
+  }
+
+  DiveSession copyWith({
+    int? id,
+    DateTime? date,
+    SiteType? siteType,
+    Value<int?> siteId = const Value.absent(),
+    String? siteName,
+    Value<double?> lat = const Value.absent(),
+    Value<double?> lon = const Value.absent(),
+    PurposeTag? purposeTag,
+    DiveCondition? condition,
+    Value<int?> gearPresetId = const Value.absent(),
+    DiveGear? gear,
+    List<int>? buddyIds,
+    Value<String?> leaderName = const Value.absent(),
+    Value<int?> overallRating = const Value.absent(),
+    List<String>? photoPaths,
+    Value<String?> note = const Value.absent(),
+    Value<int?> linkedTrainingSessionId = const Value.absent(),
+  }) => DiveSession(
+    id: id ?? this.id,
+    date: date ?? this.date,
+    siteType: siteType ?? this.siteType,
+    siteId: siteId.present ? siteId.value : this.siteId,
+    siteName: siteName ?? this.siteName,
+    lat: lat.present ? lat.value : this.lat,
+    lon: lon.present ? lon.value : this.lon,
+    purposeTag: purposeTag ?? this.purposeTag,
+    condition: condition ?? this.condition,
+    gearPresetId: gearPresetId.present ? gearPresetId.value : this.gearPresetId,
+    gear: gear ?? this.gear,
+    buddyIds: buddyIds ?? this.buddyIds,
+    leaderName: leaderName.present ? leaderName.value : this.leaderName,
+    overallRating: overallRating.present
+        ? overallRating.value
+        : this.overallRating,
+    photoPaths: photoPaths ?? this.photoPaths,
+    note: note.present ? note.value : this.note,
+    linkedTrainingSessionId: linkedTrainingSessionId.present
+        ? linkedTrainingSessionId.value
+        : this.linkedTrainingSessionId,
+  );
+  DiveSession copyWithCompanion(DiveSessionsCompanion data) {
+    return DiveSession(
+      id: data.id.present ? data.id.value : this.id,
+      date: data.date.present ? data.date.value : this.date,
+      siteType: data.siteType.present ? data.siteType.value : this.siteType,
+      siteId: data.siteId.present ? data.siteId.value : this.siteId,
+      siteName: data.siteName.present ? data.siteName.value : this.siteName,
+      lat: data.lat.present ? data.lat.value : this.lat,
+      lon: data.lon.present ? data.lon.value : this.lon,
+      purposeTag: data.purposeTag.present
+          ? data.purposeTag.value
+          : this.purposeTag,
+      condition: data.condition.present ? data.condition.value : this.condition,
+      gearPresetId: data.gearPresetId.present
+          ? data.gearPresetId.value
+          : this.gearPresetId,
+      gear: data.gear.present ? data.gear.value : this.gear,
+      buddyIds: data.buddyIds.present ? data.buddyIds.value : this.buddyIds,
+      leaderName: data.leaderName.present
+          ? data.leaderName.value
+          : this.leaderName,
+      overallRating: data.overallRating.present
+          ? data.overallRating.value
+          : this.overallRating,
+      photoPaths: data.photoPaths.present
+          ? data.photoPaths.value
+          : this.photoPaths,
+      note: data.note.present ? data.note.value : this.note,
+      linkedTrainingSessionId: data.linkedTrainingSessionId.present
+          ? data.linkedTrainingSessionId.value
+          : this.linkedTrainingSessionId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveSession(')
+          ..write('id: $id, ')
+          ..write('date: $date, ')
+          ..write('siteType: $siteType, ')
+          ..write('siteId: $siteId, ')
+          ..write('siteName: $siteName, ')
+          ..write('lat: $lat, ')
+          ..write('lon: $lon, ')
+          ..write('purposeTag: $purposeTag, ')
+          ..write('condition: $condition, ')
+          ..write('gearPresetId: $gearPresetId, ')
+          ..write('gear: $gear, ')
+          ..write('buddyIds: $buddyIds, ')
+          ..write('leaderName: $leaderName, ')
+          ..write('overallRating: $overallRating, ')
+          ..write('photoPaths: $photoPaths, ')
+          ..write('note: $note, ')
+          ..write('linkedTrainingSessionId: $linkedTrainingSessionId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    date,
+    siteType,
+    siteId,
+    siteName,
+    lat,
+    lon,
+    purposeTag,
+    condition,
+    gearPresetId,
+    gear,
+    buddyIds,
+    leaderName,
+    overallRating,
+    photoPaths,
+    note,
+    linkedTrainingSessionId,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DiveSession &&
+          other.id == this.id &&
+          other.date == this.date &&
+          other.siteType == this.siteType &&
+          other.siteId == this.siteId &&
+          other.siteName == this.siteName &&
+          other.lat == this.lat &&
+          other.lon == this.lon &&
+          other.purposeTag == this.purposeTag &&
+          other.condition == this.condition &&
+          other.gearPresetId == this.gearPresetId &&
+          other.gear == this.gear &&
+          other.buddyIds == this.buddyIds &&
+          other.leaderName == this.leaderName &&
+          other.overallRating == this.overallRating &&
+          other.photoPaths == this.photoPaths &&
+          other.note == this.note &&
+          other.linkedTrainingSessionId == this.linkedTrainingSessionId);
+}
+
+class DiveSessionsCompanion extends UpdateCompanion<DiveSession> {
+  final Value<int> id;
+  final Value<DateTime> date;
+  final Value<SiteType> siteType;
+  final Value<int?> siteId;
+  final Value<String> siteName;
+  final Value<double?> lat;
+  final Value<double?> lon;
+  final Value<PurposeTag> purposeTag;
+  final Value<DiveCondition> condition;
+  final Value<int?> gearPresetId;
+  final Value<DiveGear> gear;
+  final Value<List<int>> buddyIds;
+  final Value<String?> leaderName;
+  final Value<int?> overallRating;
+  final Value<List<String>> photoPaths;
+  final Value<String?> note;
+  final Value<int?> linkedTrainingSessionId;
+  const DiveSessionsCompanion({
+    this.id = const Value.absent(),
+    this.date = const Value.absent(),
+    this.siteType = const Value.absent(),
+    this.siteId = const Value.absent(),
+    this.siteName = const Value.absent(),
+    this.lat = const Value.absent(),
+    this.lon = const Value.absent(),
+    this.purposeTag = const Value.absent(),
+    this.condition = const Value.absent(),
+    this.gearPresetId = const Value.absent(),
+    this.gear = const Value.absent(),
+    this.buddyIds = const Value.absent(),
+    this.leaderName = const Value.absent(),
+    this.overallRating = const Value.absent(),
+    this.photoPaths = const Value.absent(),
+    this.note = const Value.absent(),
+    this.linkedTrainingSessionId = const Value.absent(),
+  });
+  DiveSessionsCompanion.insert({
+    this.id = const Value.absent(),
+    required DateTime date,
+    required SiteType siteType,
+    this.siteId = const Value.absent(),
+    required String siteName,
+    this.lat = const Value.absent(),
+    this.lon = const Value.absent(),
+    required PurposeTag purposeTag,
+    required DiveCondition condition,
+    this.gearPresetId = const Value.absent(),
+    required DiveGear gear,
+    required List<int> buddyIds,
+    this.leaderName = const Value.absent(),
+    this.overallRating = const Value.absent(),
+    required List<String> photoPaths,
+    this.note = const Value.absent(),
+    this.linkedTrainingSessionId = const Value.absent(),
+  }) : date = Value(date),
+       siteType = Value(siteType),
+       siteName = Value(siteName),
+       purposeTag = Value(purposeTag),
+       condition = Value(condition),
+       gear = Value(gear),
+       buddyIds = Value(buddyIds),
+       photoPaths = Value(photoPaths);
+  static Insertable<DiveSession> custom({
+    Expression<int>? id,
+    Expression<DateTime>? date,
+    Expression<String>? siteType,
+    Expression<int>? siteId,
+    Expression<String>? siteName,
+    Expression<double>? lat,
+    Expression<double>? lon,
+    Expression<String>? purposeTag,
+    Expression<String>? condition,
+    Expression<int>? gearPresetId,
+    Expression<String>? gear,
+    Expression<String>? buddyIds,
+    Expression<String>? leaderName,
+    Expression<int>? overallRating,
+    Expression<String>? photoPaths,
+    Expression<String>? note,
+    Expression<int>? linkedTrainingSessionId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (date != null) 'date': date,
+      if (siteType != null) 'site_type': siteType,
+      if (siteId != null) 'site_id': siteId,
+      if (siteName != null) 'site_name': siteName,
+      if (lat != null) 'lat': lat,
+      if (lon != null) 'lon': lon,
+      if (purposeTag != null) 'purpose_tag': purposeTag,
+      if (condition != null) 'condition': condition,
+      if (gearPresetId != null) 'gear_preset_id': gearPresetId,
+      if (gear != null) 'gear': gear,
+      if (buddyIds != null) 'buddy_ids': buddyIds,
+      if (leaderName != null) 'leader_name': leaderName,
+      if (overallRating != null) 'overall_rating': overallRating,
+      if (photoPaths != null) 'photo_paths': photoPaths,
+      if (note != null) 'note': note,
+      if (linkedTrainingSessionId != null)
+        'linked_training_session_id': linkedTrainingSessionId,
+    });
+  }
+
+  DiveSessionsCompanion copyWith({
+    Value<int>? id,
+    Value<DateTime>? date,
+    Value<SiteType>? siteType,
+    Value<int?>? siteId,
+    Value<String>? siteName,
+    Value<double?>? lat,
+    Value<double?>? lon,
+    Value<PurposeTag>? purposeTag,
+    Value<DiveCondition>? condition,
+    Value<int?>? gearPresetId,
+    Value<DiveGear>? gear,
+    Value<List<int>>? buddyIds,
+    Value<String?>? leaderName,
+    Value<int?>? overallRating,
+    Value<List<String>>? photoPaths,
+    Value<String?>? note,
+    Value<int?>? linkedTrainingSessionId,
+  }) {
+    return DiveSessionsCompanion(
+      id: id ?? this.id,
+      date: date ?? this.date,
+      siteType: siteType ?? this.siteType,
+      siteId: siteId ?? this.siteId,
+      siteName: siteName ?? this.siteName,
+      lat: lat ?? this.lat,
+      lon: lon ?? this.lon,
+      purposeTag: purposeTag ?? this.purposeTag,
+      condition: condition ?? this.condition,
+      gearPresetId: gearPresetId ?? this.gearPresetId,
+      gear: gear ?? this.gear,
+      buddyIds: buddyIds ?? this.buddyIds,
+      leaderName: leaderName ?? this.leaderName,
+      overallRating: overallRating ?? this.overallRating,
+      photoPaths: photoPaths ?? this.photoPaths,
+      note: note ?? this.note,
+      linkedTrainingSessionId:
+          linkedTrainingSessionId ?? this.linkedTrainingSessionId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<DateTime>(date.value);
+    }
+    if (siteType.present) {
+      map['site_type'] = Variable<String>(
+        $DiveSessionsTable.$convertersiteType.toSql(siteType.value),
+      );
+    }
+    if (siteId.present) {
+      map['site_id'] = Variable<int>(siteId.value);
+    }
+    if (siteName.present) {
+      map['site_name'] = Variable<String>(siteName.value);
+    }
+    if (lat.present) {
+      map['lat'] = Variable<double>(lat.value);
+    }
+    if (lon.present) {
+      map['lon'] = Variable<double>(lon.value);
+    }
+    if (purposeTag.present) {
+      map['purpose_tag'] = Variable<String>(
+        $DiveSessionsTable.$converterpurposeTag.toSql(purposeTag.value),
+      );
+    }
+    if (condition.present) {
+      map['condition'] = Variable<String>(
+        $DiveSessionsTable.$convertercondition.toSql(condition.value),
+      );
+    }
+    if (gearPresetId.present) {
+      map['gear_preset_id'] = Variable<int>(gearPresetId.value);
+    }
+    if (gear.present) {
+      map['gear'] = Variable<String>(
+        $DiveSessionsTable.$convertergear.toSql(gear.value),
+      );
+    }
+    if (buddyIds.present) {
+      map['buddy_ids'] = Variable<String>(
+        $DiveSessionsTable.$converterbuddyIds.toSql(buddyIds.value),
+      );
+    }
+    if (leaderName.present) {
+      map['leader_name'] = Variable<String>(leaderName.value);
+    }
+    if (overallRating.present) {
+      map['overall_rating'] = Variable<int>(overallRating.value);
+    }
+    if (photoPaths.present) {
+      map['photo_paths'] = Variable<String>(
+        $DiveSessionsTable.$converterphotoPaths.toSql(photoPaths.value),
+      );
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (linkedTrainingSessionId.present) {
+      map['linked_training_session_id'] = Variable<int>(
+        linkedTrainingSessionId.value,
+      );
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveSessionsCompanion(')
+          ..write('id: $id, ')
+          ..write('date: $date, ')
+          ..write('siteType: $siteType, ')
+          ..write('siteId: $siteId, ')
+          ..write('siteName: $siteName, ')
+          ..write('lat: $lat, ')
+          ..write('lon: $lon, ')
+          ..write('purposeTag: $purposeTag, ')
+          ..write('condition: $condition, ')
+          ..write('gearPresetId: $gearPresetId, ')
+          ..write('gear: $gear, ')
+          ..write('buddyIds: $buddyIds, ')
+          ..write('leaderName: $leaderName, ')
+          ..write('overallRating: $overallRating, ')
+          ..write('photoPaths: $photoPaths, ')
+          ..write('note: $note, ')
+          ..write('linkedTrainingSessionId: $linkedTrainingSessionId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DiveRepsTable extends DiveReps with TableInfo<$DiveRepsTable, DiveRep> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DiveRepsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _sessionIdMeta = const VerificationMeta(
+    'sessionId',
+  );
+  @override
+  late final GeneratedColumn<int> sessionId = GeneratedColumn<int>(
+    'session_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES dive_sessions (id)',
+    ),
+  );
+  static const VerificationMeta _sequenceMeta = const VerificationMeta(
+    'sequence',
+  );
+  @override
+  late final GeneratedColumn<int> sequence = GeneratedColumn<int>(
+    'sequence',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<Discipline, String> discipline =
+      GeneratedColumn<String>(
+        'discipline',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<Discipline>($DiveRepsTable.$converterdiscipline);
+  static const VerificationMeta _performanceValueMeta = const VerificationMeta(
+    'performanceValue',
+  );
+  @override
+  late final GeneratedColumn<double> performanceValue = GeneratedColumn<double>(
+    'performance_value',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<PerformanceUnit, String>
+  performanceUnit = GeneratedColumn<String>(
+    'performance_unit',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<PerformanceUnit>($DiveRepsTable.$converterperformanceUnit);
+  static const VerificationMeta _targetValueMeta = const VerificationMeta(
+    'targetValue',
+  );
+  @override
+  late final GeneratedColumn<double> targetValue = GeneratedColumn<double>(
+    'target_value',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _surfaceRestBeforeSecMeta =
+      const VerificationMeta('surfaceRestBeforeSec');
+  @override
+  late final GeneratedColumn<int> surfaceRestBeforeSec = GeneratedColumn<int>(
+    'surface_rest_before_sec',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _msstRecommendedSecMeta =
+      const VerificationMeta('msstRecommendedSec');
+  @override
+  late final GeneratedColumn<int> msstRecommendedSec = GeneratedColumn<int>(
+    'msst_recommended_sec',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<IncidentType, String> incident =
+      GeneratedColumn<String>(
+        'incident',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<IncidentType>($DiveRepsTable.$converterincident);
+  static const VerificationMeta _recoveryNoteMeta = const VerificationMeta(
+    'recoveryNote',
+  );
+  @override
+  late final GeneratedColumn<String> recoveryNote = GeneratedColumn<String>(
+    'recovery_note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _isMergedFromAutoSplitMeta =
+      const VerificationMeta('isMergedFromAutoSplit');
+  @override
+  late final GeneratedColumn<bool> isMergedFromAutoSplit =
+      GeneratedColumn<bool>(
+        'is_merged_from_auto_split',
+        aliasedName,
+        false,
+        type: DriftSqlType.bool,
+        requiredDuringInsert: false,
+        defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_merged_from_auto_split" IN (0, 1))',
+        ),
+        defaultValue: const Constant(false),
+      );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    sessionId,
+    sequence,
+    discipline,
+    performanceValue,
+    performanceUnit,
+    targetValue,
+    surfaceRestBeforeSec,
+    msstRecommendedSec,
+    incident,
+    recoveryNote,
+    isMergedFromAutoSplit,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'dive_reps';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DiveRep> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('session_id')) {
+      context.handle(
+        _sessionIdMeta,
+        sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sessionIdMeta);
+    }
+    if (data.containsKey('sequence')) {
+      context.handle(
+        _sequenceMeta,
+        sequence.isAcceptableOrUnknown(data['sequence']!, _sequenceMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sequenceMeta);
+    }
+    if (data.containsKey('performance_value')) {
+      context.handle(
+        _performanceValueMeta,
+        performanceValue.isAcceptableOrUnknown(
+          data['performance_value']!,
+          _performanceValueMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_performanceValueMeta);
+    }
+    if (data.containsKey('target_value')) {
+      context.handle(
+        _targetValueMeta,
+        targetValue.isAcceptableOrUnknown(
+          data['target_value']!,
+          _targetValueMeta,
+        ),
+      );
+    }
+    if (data.containsKey('surface_rest_before_sec')) {
+      context.handle(
+        _surfaceRestBeforeSecMeta,
+        surfaceRestBeforeSec.isAcceptableOrUnknown(
+          data['surface_rest_before_sec']!,
+          _surfaceRestBeforeSecMeta,
+        ),
+      );
+    }
+    if (data.containsKey('msst_recommended_sec')) {
+      context.handle(
+        _msstRecommendedSecMeta,
+        msstRecommendedSec.isAcceptableOrUnknown(
+          data['msst_recommended_sec']!,
+          _msstRecommendedSecMeta,
+        ),
+      );
+    }
+    if (data.containsKey('recovery_note')) {
+      context.handle(
+        _recoveryNoteMeta,
+        recoveryNote.isAcceptableOrUnknown(
+          data['recovery_note']!,
+          _recoveryNoteMeta,
+        ),
+      );
+    }
+    if (data.containsKey('is_merged_from_auto_split')) {
+      context.handle(
+        _isMergedFromAutoSplitMeta,
+        isMergedFromAutoSplit.isAcceptableOrUnknown(
+          data['is_merged_from_auto_split']!,
+          _isMergedFromAutoSplitMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DiveRep map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DiveRep(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      sessionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}session_id'],
+      )!,
+      sequence: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}sequence'],
+      )!,
+      discipline: $DiveRepsTable.$converterdiscipline.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}discipline'],
+        )!,
+      ),
+      performanceValue: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}performance_value'],
+      )!,
+      performanceUnit: $DiveRepsTable.$converterperformanceUnit.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}performance_unit'],
+        )!,
+      ),
+      targetValue: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}target_value'],
+      ),
+      surfaceRestBeforeSec: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}surface_rest_before_sec'],
+      ),
+      msstRecommendedSec: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}msst_recommended_sec'],
+      ),
+      incident: $DiveRepsTable.$converterincident.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}incident'],
+        )!,
+      ),
+      recoveryNote: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}recovery_note'],
+      ),
+      isMergedFromAutoSplit: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_merged_from_auto_split'],
+      )!,
+    );
+  }
+
+  @override
+  $DiveRepsTable createAlias(String alias) {
+    return $DiveRepsTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<Discipline, String, String> $converterdiscipline =
+      const EnumNameConverter<Discipline>(Discipline.values);
+  static JsonTypeConverter2<PerformanceUnit, String, String>
+  $converterperformanceUnit = const EnumNameConverter<PerformanceUnit>(
+    PerformanceUnit.values,
+  );
+  static JsonTypeConverter2<IncidentType, String, String> $converterincident =
+      const EnumNameConverter<IncidentType>(IncidentType.values);
+}
+
+class DiveRep extends DataClass implements Insertable<DiveRep> {
+  final int id;
+  final int sessionId;
+  final int sequence;
+  final Discipline discipline;
+  final double performanceValue;
+  final PerformanceUnit performanceUnit;
+  final double? targetValue;
+  final int? surfaceRestBeforeSec;
+  final int? msstRecommendedSec;
+  final IncidentType incident;
+  final String? recoveryNote;
+  final bool isMergedFromAutoSplit;
+  const DiveRep({
+    required this.id,
+    required this.sessionId,
+    required this.sequence,
+    required this.discipline,
+    required this.performanceValue,
+    required this.performanceUnit,
+    this.targetValue,
+    this.surfaceRestBeforeSec,
+    this.msstRecommendedSec,
+    required this.incident,
+    this.recoveryNote,
+    required this.isMergedFromAutoSplit,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['session_id'] = Variable<int>(sessionId);
+    map['sequence'] = Variable<int>(sequence);
+    {
+      map['discipline'] = Variable<String>(
+        $DiveRepsTable.$converterdiscipline.toSql(discipline),
+      );
+    }
+    map['performance_value'] = Variable<double>(performanceValue);
+    {
+      map['performance_unit'] = Variable<String>(
+        $DiveRepsTable.$converterperformanceUnit.toSql(performanceUnit),
+      );
+    }
+    if (!nullToAbsent || targetValue != null) {
+      map['target_value'] = Variable<double>(targetValue);
+    }
+    if (!nullToAbsent || surfaceRestBeforeSec != null) {
+      map['surface_rest_before_sec'] = Variable<int>(surfaceRestBeforeSec);
+    }
+    if (!nullToAbsent || msstRecommendedSec != null) {
+      map['msst_recommended_sec'] = Variable<int>(msstRecommendedSec);
+    }
+    {
+      map['incident'] = Variable<String>(
+        $DiveRepsTable.$converterincident.toSql(incident),
+      );
+    }
+    if (!nullToAbsent || recoveryNote != null) {
+      map['recovery_note'] = Variable<String>(recoveryNote);
+    }
+    map['is_merged_from_auto_split'] = Variable<bool>(isMergedFromAutoSplit);
+    return map;
+  }
+
+  DiveRepsCompanion toCompanion(bool nullToAbsent) {
+    return DiveRepsCompanion(
+      id: Value(id),
+      sessionId: Value(sessionId),
+      sequence: Value(sequence),
+      discipline: Value(discipline),
+      performanceValue: Value(performanceValue),
+      performanceUnit: Value(performanceUnit),
+      targetValue: targetValue == null && nullToAbsent
+          ? const Value.absent()
+          : Value(targetValue),
+      surfaceRestBeforeSec: surfaceRestBeforeSec == null && nullToAbsent
+          ? const Value.absent()
+          : Value(surfaceRestBeforeSec),
+      msstRecommendedSec: msstRecommendedSec == null && nullToAbsent
+          ? const Value.absent()
+          : Value(msstRecommendedSec),
+      incident: Value(incident),
+      recoveryNote: recoveryNote == null && nullToAbsent
+          ? const Value.absent()
+          : Value(recoveryNote),
+      isMergedFromAutoSplit: Value(isMergedFromAutoSplit),
+    );
+  }
+
+  factory DiveRep.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DiveRep(
+      id: serializer.fromJson<int>(json['id']),
+      sessionId: serializer.fromJson<int>(json['sessionId']),
+      sequence: serializer.fromJson<int>(json['sequence']),
+      discipline: $DiveRepsTable.$converterdiscipline.fromJson(
+        serializer.fromJson<String>(json['discipline']),
+      ),
+      performanceValue: serializer.fromJson<double>(json['performanceValue']),
+      performanceUnit: $DiveRepsTable.$converterperformanceUnit.fromJson(
+        serializer.fromJson<String>(json['performanceUnit']),
+      ),
+      targetValue: serializer.fromJson<double?>(json['targetValue']),
+      surfaceRestBeforeSec: serializer.fromJson<int?>(
+        json['surfaceRestBeforeSec'],
+      ),
+      msstRecommendedSec: serializer.fromJson<int?>(json['msstRecommendedSec']),
+      incident: $DiveRepsTable.$converterincident.fromJson(
+        serializer.fromJson<String>(json['incident']),
+      ),
+      recoveryNote: serializer.fromJson<String?>(json['recoveryNote']),
+      isMergedFromAutoSplit: serializer.fromJson<bool>(
+        json['isMergedFromAutoSplit'],
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'sessionId': serializer.toJson<int>(sessionId),
+      'sequence': serializer.toJson<int>(sequence),
+      'discipline': serializer.toJson<String>(
+        $DiveRepsTable.$converterdiscipline.toJson(discipline),
+      ),
+      'performanceValue': serializer.toJson<double>(performanceValue),
+      'performanceUnit': serializer.toJson<String>(
+        $DiveRepsTable.$converterperformanceUnit.toJson(performanceUnit),
+      ),
+      'targetValue': serializer.toJson<double?>(targetValue),
+      'surfaceRestBeforeSec': serializer.toJson<int?>(surfaceRestBeforeSec),
+      'msstRecommendedSec': serializer.toJson<int?>(msstRecommendedSec),
+      'incident': serializer.toJson<String>(
+        $DiveRepsTable.$converterincident.toJson(incident),
+      ),
+      'recoveryNote': serializer.toJson<String?>(recoveryNote),
+      'isMergedFromAutoSplit': serializer.toJson<bool>(isMergedFromAutoSplit),
+    };
+  }
+
+  DiveRep copyWith({
+    int? id,
+    int? sessionId,
+    int? sequence,
+    Discipline? discipline,
+    double? performanceValue,
+    PerformanceUnit? performanceUnit,
+    Value<double?> targetValue = const Value.absent(),
+    Value<int?> surfaceRestBeforeSec = const Value.absent(),
+    Value<int?> msstRecommendedSec = const Value.absent(),
+    IncidentType? incident,
+    Value<String?> recoveryNote = const Value.absent(),
+    bool? isMergedFromAutoSplit,
+  }) => DiveRep(
+    id: id ?? this.id,
+    sessionId: sessionId ?? this.sessionId,
+    sequence: sequence ?? this.sequence,
+    discipline: discipline ?? this.discipline,
+    performanceValue: performanceValue ?? this.performanceValue,
+    performanceUnit: performanceUnit ?? this.performanceUnit,
+    targetValue: targetValue.present ? targetValue.value : this.targetValue,
+    surfaceRestBeforeSec: surfaceRestBeforeSec.present
+        ? surfaceRestBeforeSec.value
+        : this.surfaceRestBeforeSec,
+    msstRecommendedSec: msstRecommendedSec.present
+        ? msstRecommendedSec.value
+        : this.msstRecommendedSec,
+    incident: incident ?? this.incident,
+    recoveryNote: recoveryNote.present ? recoveryNote.value : this.recoveryNote,
+    isMergedFromAutoSplit: isMergedFromAutoSplit ?? this.isMergedFromAutoSplit,
+  );
+  DiveRep copyWithCompanion(DiveRepsCompanion data) {
+    return DiveRep(
+      id: data.id.present ? data.id.value : this.id,
+      sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
+      sequence: data.sequence.present ? data.sequence.value : this.sequence,
+      discipline: data.discipline.present
+          ? data.discipline.value
+          : this.discipline,
+      performanceValue: data.performanceValue.present
+          ? data.performanceValue.value
+          : this.performanceValue,
+      performanceUnit: data.performanceUnit.present
+          ? data.performanceUnit.value
+          : this.performanceUnit,
+      targetValue: data.targetValue.present
+          ? data.targetValue.value
+          : this.targetValue,
+      surfaceRestBeforeSec: data.surfaceRestBeforeSec.present
+          ? data.surfaceRestBeforeSec.value
+          : this.surfaceRestBeforeSec,
+      msstRecommendedSec: data.msstRecommendedSec.present
+          ? data.msstRecommendedSec.value
+          : this.msstRecommendedSec,
+      incident: data.incident.present ? data.incident.value : this.incident,
+      recoveryNote: data.recoveryNote.present
+          ? data.recoveryNote.value
+          : this.recoveryNote,
+      isMergedFromAutoSplit: data.isMergedFromAutoSplit.present
+          ? data.isMergedFromAutoSplit.value
+          : this.isMergedFromAutoSplit,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveRep(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('sequence: $sequence, ')
+          ..write('discipline: $discipline, ')
+          ..write('performanceValue: $performanceValue, ')
+          ..write('performanceUnit: $performanceUnit, ')
+          ..write('targetValue: $targetValue, ')
+          ..write('surfaceRestBeforeSec: $surfaceRestBeforeSec, ')
+          ..write('msstRecommendedSec: $msstRecommendedSec, ')
+          ..write('incident: $incident, ')
+          ..write('recoveryNote: $recoveryNote, ')
+          ..write('isMergedFromAutoSplit: $isMergedFromAutoSplit')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    sessionId,
+    sequence,
+    discipline,
+    performanceValue,
+    performanceUnit,
+    targetValue,
+    surfaceRestBeforeSec,
+    msstRecommendedSec,
+    incident,
+    recoveryNote,
+    isMergedFromAutoSplit,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DiveRep &&
+          other.id == this.id &&
+          other.sessionId == this.sessionId &&
+          other.sequence == this.sequence &&
+          other.discipline == this.discipline &&
+          other.performanceValue == this.performanceValue &&
+          other.performanceUnit == this.performanceUnit &&
+          other.targetValue == this.targetValue &&
+          other.surfaceRestBeforeSec == this.surfaceRestBeforeSec &&
+          other.msstRecommendedSec == this.msstRecommendedSec &&
+          other.incident == this.incident &&
+          other.recoveryNote == this.recoveryNote &&
+          other.isMergedFromAutoSplit == this.isMergedFromAutoSplit);
+}
+
+class DiveRepsCompanion extends UpdateCompanion<DiveRep> {
+  final Value<int> id;
+  final Value<int> sessionId;
+  final Value<int> sequence;
+  final Value<Discipline> discipline;
+  final Value<double> performanceValue;
+  final Value<PerformanceUnit> performanceUnit;
+  final Value<double?> targetValue;
+  final Value<int?> surfaceRestBeforeSec;
+  final Value<int?> msstRecommendedSec;
+  final Value<IncidentType> incident;
+  final Value<String?> recoveryNote;
+  final Value<bool> isMergedFromAutoSplit;
+  const DiveRepsCompanion({
+    this.id = const Value.absent(),
+    this.sessionId = const Value.absent(),
+    this.sequence = const Value.absent(),
+    this.discipline = const Value.absent(),
+    this.performanceValue = const Value.absent(),
+    this.performanceUnit = const Value.absent(),
+    this.targetValue = const Value.absent(),
+    this.surfaceRestBeforeSec = const Value.absent(),
+    this.msstRecommendedSec = const Value.absent(),
+    this.incident = const Value.absent(),
+    this.recoveryNote = const Value.absent(),
+    this.isMergedFromAutoSplit = const Value.absent(),
+  });
+  DiveRepsCompanion.insert({
+    this.id = const Value.absent(),
+    required int sessionId,
+    required int sequence,
+    required Discipline discipline,
+    required double performanceValue,
+    required PerformanceUnit performanceUnit,
+    this.targetValue = const Value.absent(),
+    this.surfaceRestBeforeSec = const Value.absent(),
+    this.msstRecommendedSec = const Value.absent(),
+    required IncidentType incident,
+    this.recoveryNote = const Value.absent(),
+    this.isMergedFromAutoSplit = const Value.absent(),
+  }) : sessionId = Value(sessionId),
+       sequence = Value(sequence),
+       discipline = Value(discipline),
+       performanceValue = Value(performanceValue),
+       performanceUnit = Value(performanceUnit),
+       incident = Value(incident);
+  static Insertable<DiveRep> custom({
+    Expression<int>? id,
+    Expression<int>? sessionId,
+    Expression<int>? sequence,
+    Expression<String>? discipline,
+    Expression<double>? performanceValue,
+    Expression<String>? performanceUnit,
+    Expression<double>? targetValue,
+    Expression<int>? surfaceRestBeforeSec,
+    Expression<int>? msstRecommendedSec,
+    Expression<String>? incident,
+    Expression<String>? recoveryNote,
+    Expression<bool>? isMergedFromAutoSplit,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (sessionId != null) 'session_id': sessionId,
+      if (sequence != null) 'sequence': sequence,
+      if (discipline != null) 'discipline': discipline,
+      if (performanceValue != null) 'performance_value': performanceValue,
+      if (performanceUnit != null) 'performance_unit': performanceUnit,
+      if (targetValue != null) 'target_value': targetValue,
+      if (surfaceRestBeforeSec != null)
+        'surface_rest_before_sec': surfaceRestBeforeSec,
+      if (msstRecommendedSec != null)
+        'msst_recommended_sec': msstRecommendedSec,
+      if (incident != null) 'incident': incident,
+      if (recoveryNote != null) 'recovery_note': recoveryNote,
+      if (isMergedFromAutoSplit != null)
+        'is_merged_from_auto_split': isMergedFromAutoSplit,
+    });
+  }
+
+  DiveRepsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? sessionId,
+    Value<int>? sequence,
+    Value<Discipline>? discipline,
+    Value<double>? performanceValue,
+    Value<PerformanceUnit>? performanceUnit,
+    Value<double?>? targetValue,
+    Value<int?>? surfaceRestBeforeSec,
+    Value<int?>? msstRecommendedSec,
+    Value<IncidentType>? incident,
+    Value<String?>? recoveryNote,
+    Value<bool>? isMergedFromAutoSplit,
+  }) {
+    return DiveRepsCompanion(
+      id: id ?? this.id,
+      sessionId: sessionId ?? this.sessionId,
+      sequence: sequence ?? this.sequence,
+      discipline: discipline ?? this.discipline,
+      performanceValue: performanceValue ?? this.performanceValue,
+      performanceUnit: performanceUnit ?? this.performanceUnit,
+      targetValue: targetValue ?? this.targetValue,
+      surfaceRestBeforeSec: surfaceRestBeforeSec ?? this.surfaceRestBeforeSec,
+      msstRecommendedSec: msstRecommendedSec ?? this.msstRecommendedSec,
+      incident: incident ?? this.incident,
+      recoveryNote: recoveryNote ?? this.recoveryNote,
+      isMergedFromAutoSplit:
+          isMergedFromAutoSplit ?? this.isMergedFromAutoSplit,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (sessionId.present) {
+      map['session_id'] = Variable<int>(sessionId.value);
+    }
+    if (sequence.present) {
+      map['sequence'] = Variable<int>(sequence.value);
+    }
+    if (discipline.present) {
+      map['discipline'] = Variable<String>(
+        $DiveRepsTable.$converterdiscipline.toSql(discipline.value),
+      );
+    }
+    if (performanceValue.present) {
+      map['performance_value'] = Variable<double>(performanceValue.value);
+    }
+    if (performanceUnit.present) {
+      map['performance_unit'] = Variable<String>(
+        $DiveRepsTable.$converterperformanceUnit.toSql(performanceUnit.value),
+      );
+    }
+    if (targetValue.present) {
+      map['target_value'] = Variable<double>(targetValue.value);
+    }
+    if (surfaceRestBeforeSec.present) {
+      map['surface_rest_before_sec'] = Variable<int>(
+        surfaceRestBeforeSec.value,
+      );
+    }
+    if (msstRecommendedSec.present) {
+      map['msst_recommended_sec'] = Variable<int>(msstRecommendedSec.value);
+    }
+    if (incident.present) {
+      map['incident'] = Variable<String>(
+        $DiveRepsTable.$converterincident.toSql(incident.value),
+      );
+    }
+    if (recoveryNote.present) {
+      map['recovery_note'] = Variable<String>(recoveryNote.value);
+    }
+    if (isMergedFromAutoSplit.present) {
+      map['is_merged_from_auto_split'] = Variable<bool>(
+        isMergedFromAutoSplit.value,
+      );
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveRepsCompanion(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('sequence: $sequence, ')
+          ..write('discipline: $discipline, ')
+          ..write('performanceValue: $performanceValue, ')
+          ..write('performanceUnit: $performanceUnit, ')
+          ..write('targetValue: $targetValue, ')
+          ..write('surfaceRestBeforeSec: $surfaceRestBeforeSec, ')
+          ..write('msstRecommendedSec: $msstRecommendedSec, ')
+          ..write('incident: $incident, ')
+          ..write('recoveryNote: $recoveryNote, ')
+          ..write('isMergedFromAutoSplit: $isMergedFromAutoSplit')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DiveSitesTable extends DiveSites
+    with TableInfo<$DiveSitesTable, DiveSite> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DiveSitesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _latMeta = const VerificationMeta('lat');
+  @override
+  late final GeneratedColumn<double> lat = GeneratedColumn<double>(
+    'lat',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lonMeta = const VerificationMeta('lon');
+  @override
+  late final GeneratedColumn<double> lon = GeneratedColumn<double>(
+    'lon',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _visitCountMeta = const VerificationMeta(
+    'visitCount',
+  );
+  @override
+  late final GeneratedColumn<int> visitCount = GeneratedColumn<int>(
+    'visit_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _lastVisitedAtMeta = const VerificationMeta(
+    'lastVisitedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastVisitedAt =
+      GeneratedColumn<DateTime>(
+        'last_visited_at',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    lat,
+    lon,
+    visitCount,
+    lastVisitedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'dive_sites';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DiveSite> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('lat')) {
+      context.handle(
+        _latMeta,
+        lat.isAcceptableOrUnknown(data['lat']!, _latMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_latMeta);
+    }
+    if (data.containsKey('lon')) {
+      context.handle(
+        _lonMeta,
+        lon.isAcceptableOrUnknown(data['lon']!, _lonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_lonMeta);
+    }
+    if (data.containsKey('visit_count')) {
+      context.handle(
+        _visitCountMeta,
+        visitCount.isAcceptableOrUnknown(data['visit_count']!, _visitCountMeta),
+      );
+    }
+    if (data.containsKey('last_visited_at')) {
+      context.handle(
+        _lastVisitedAtMeta,
+        lastVisitedAt.isAcceptableOrUnknown(
+          data['last_visited_at']!,
+          _lastVisitedAtMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DiveSite map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DiveSite(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      lat: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lat'],
+      )!,
+      lon: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lon'],
+      )!,
+      visitCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}visit_count'],
+      )!,
+      lastVisitedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_visited_at'],
+      ),
+    );
+  }
+
+  @override
+  $DiveSitesTable createAlias(String alias) {
+    return $DiveSitesTable(attachedDatabase, alias);
+  }
+}
+
+class DiveSite extends DataClass implements Insertable<DiveSite> {
+  final int id;
+  final String name;
+  final double lat;
+  final double lon;
+  final int visitCount;
+  final DateTime? lastVisitedAt;
+  const DiveSite({
+    required this.id,
+    required this.name,
+    required this.lat,
+    required this.lon,
+    required this.visitCount,
+    this.lastVisitedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['lat'] = Variable<double>(lat);
+    map['lon'] = Variable<double>(lon);
+    map['visit_count'] = Variable<int>(visitCount);
+    if (!nullToAbsent || lastVisitedAt != null) {
+      map['last_visited_at'] = Variable<DateTime>(lastVisitedAt);
+    }
+    return map;
+  }
+
+  DiveSitesCompanion toCompanion(bool nullToAbsent) {
+    return DiveSitesCompanion(
+      id: Value(id),
+      name: Value(name),
+      lat: Value(lat),
+      lon: Value(lon),
+      visitCount: Value(visitCount),
+      lastVisitedAt: lastVisitedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastVisitedAt),
+    );
+  }
+
+  factory DiveSite.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DiveSite(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      lat: serializer.fromJson<double>(json['lat']),
+      lon: serializer.fromJson<double>(json['lon']),
+      visitCount: serializer.fromJson<int>(json['visitCount']),
+      lastVisitedAt: serializer.fromJson<DateTime?>(json['lastVisitedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'lat': serializer.toJson<double>(lat),
+      'lon': serializer.toJson<double>(lon),
+      'visitCount': serializer.toJson<int>(visitCount),
+      'lastVisitedAt': serializer.toJson<DateTime?>(lastVisitedAt),
+    };
+  }
+
+  DiveSite copyWith({
+    int? id,
+    String? name,
+    double? lat,
+    double? lon,
+    int? visitCount,
+    Value<DateTime?> lastVisitedAt = const Value.absent(),
+  }) => DiveSite(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    lat: lat ?? this.lat,
+    lon: lon ?? this.lon,
+    visitCount: visitCount ?? this.visitCount,
+    lastVisitedAt: lastVisitedAt.present
+        ? lastVisitedAt.value
+        : this.lastVisitedAt,
+  );
+  DiveSite copyWithCompanion(DiveSitesCompanion data) {
+    return DiveSite(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      lat: data.lat.present ? data.lat.value : this.lat,
+      lon: data.lon.present ? data.lon.value : this.lon,
+      visitCount: data.visitCount.present
+          ? data.visitCount.value
+          : this.visitCount,
+      lastVisitedAt: data.lastVisitedAt.present
+          ? data.lastVisitedAt.value
+          : this.lastVisitedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveSite(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('lat: $lat, ')
+          ..write('lon: $lon, ')
+          ..write('visitCount: $visitCount, ')
+          ..write('lastVisitedAt: $lastVisitedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, name, lat, lon, visitCount, lastVisitedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DiveSite &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.lat == this.lat &&
+          other.lon == this.lon &&
+          other.visitCount == this.visitCount &&
+          other.lastVisitedAt == this.lastVisitedAt);
+}
+
+class DiveSitesCompanion extends UpdateCompanion<DiveSite> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<double> lat;
+  final Value<double> lon;
+  final Value<int> visitCount;
+  final Value<DateTime?> lastVisitedAt;
+  const DiveSitesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.lat = const Value.absent(),
+    this.lon = const Value.absent(),
+    this.visitCount = const Value.absent(),
+    this.lastVisitedAt = const Value.absent(),
+  });
+  DiveSitesCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    required double lat,
+    required double lon,
+    this.visitCount = const Value.absent(),
+    this.lastVisitedAt = const Value.absent(),
+  }) : name = Value(name),
+       lat = Value(lat),
+       lon = Value(lon);
+  static Insertable<DiveSite> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<double>? lat,
+    Expression<double>? lon,
+    Expression<int>? visitCount,
+    Expression<DateTime>? lastVisitedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (lat != null) 'lat': lat,
+      if (lon != null) 'lon': lon,
+      if (visitCount != null) 'visit_count': visitCount,
+      if (lastVisitedAt != null) 'last_visited_at': lastVisitedAt,
+    });
+  }
+
+  DiveSitesCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<double>? lat,
+    Value<double>? lon,
+    Value<int>? visitCount,
+    Value<DateTime?>? lastVisitedAt,
+  }) {
+    return DiveSitesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      lat: lat ?? this.lat,
+      lon: lon ?? this.lon,
+      visitCount: visitCount ?? this.visitCount,
+      lastVisitedAt: lastVisitedAt ?? this.lastVisitedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (lat.present) {
+      map['lat'] = Variable<double>(lat.value);
+    }
+    if (lon.present) {
+      map['lon'] = Variable<double>(lon.value);
+    }
+    if (visitCount.present) {
+      map['visit_count'] = Variable<int>(visitCount.value);
+    }
+    if (lastVisitedAt.present) {
+      map['last_visited_at'] = Variable<DateTime>(lastVisitedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveSitesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('lat: $lat, ')
+          ..write('lon: $lon, ')
+          ..write('visitCount: $visitCount, ')
+          ..write('lastVisitedAt: $lastVisitedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DiveBuddiesTable extends DiveBuddies
+    with TableInfo<$DiveBuddiesTable, DiveBuddy> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DiveBuddiesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, name, note];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'dive_buddies';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DiveBuddy> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DiveBuddy map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DiveBuddy(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $DiveBuddiesTable createAlias(String alias) {
+    return $DiveBuddiesTable(attachedDatabase, alias);
+  }
+}
+
+class DiveBuddy extends DataClass implements Insertable<DiveBuddy> {
+  final int id;
+  final String name;
+  final String? note;
+  const DiveBuddy({required this.id, required this.name, this.note});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  DiveBuddiesCompanion toCompanion(bool nullToAbsent) {
+    return DiveBuddiesCompanion(
+      id: Value(id),
+      name: Value(name),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory DiveBuddy.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DiveBuddy(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  DiveBuddy copyWith({
+    int? id,
+    String? name,
+    Value<String?> note = const Value.absent(),
+  }) => DiveBuddy(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    note: note.present ? note.value : this.note,
+  );
+  DiveBuddy copyWithCompanion(DiveBuddiesCompanion data) {
+    return DiveBuddy(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveBuddy(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, note);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DiveBuddy &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.note == this.note);
+}
+
+class DiveBuddiesCompanion extends UpdateCompanion<DiveBuddy> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String?> note;
+  const DiveBuddiesCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.note = const Value.absent(),
+  });
+  DiveBuddiesCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    this.note = const Value.absent(),
+  }) : name = Value(name);
+  static Insertable<DiveBuddy> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? note,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (note != null) 'note': note,
+    });
+  }
+
+  DiveBuddiesCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<String?>? note,
+  }) {
+    return DiveBuddiesCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      note: note ?? this.note,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DiveBuddiesCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GearPresetsTable extends GearPresets
+    with TableInfo<$GearPresetsTable, GearPreset> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GearPresetsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _weightKgMeta = const VerificationMeta(
+    'weightKg',
+  );
+  @override
+  late final GeneratedColumn<double> weightKg = GeneratedColumn<double>(
+    'weight_kg',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _suitThicknessMmMeta = const VerificationMeta(
+    'suitThicknessMm',
+  );
+  @override
+  late final GeneratedColumn<double> suitThicknessMm = GeneratedColumn<double>(
+    'suit_thickness_mm',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<FinType?, String> finType =
+      GeneratedColumn<String>(
+        'fin_type',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      ).withConverter<FinType?>($GearPresetsTable.$converterfinTypen);
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    weightKg,
+    suitThicknessMm,
+    finType,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'gear_presets';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GearPreset> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('weight_kg')) {
+      context.handle(
+        _weightKgMeta,
+        weightKg.isAcceptableOrUnknown(data['weight_kg']!, _weightKgMeta),
+      );
+    }
+    if (data.containsKey('suit_thickness_mm')) {
+      context.handle(
+        _suitThicknessMmMeta,
+        suitThicknessMm.isAcceptableOrUnknown(
+          data['suit_thickness_mm']!,
+          _suitThicknessMmMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GearPreset map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GearPreset(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      weightKg: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}weight_kg'],
+      ),
+      suitThicknessMm: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}suit_thickness_mm'],
+      ),
+      finType: $GearPresetsTable.$converterfinTypen.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}fin_type'],
+        ),
+      ),
+    );
+  }
+
+  @override
+  $GearPresetsTable createAlias(String alias) {
+    return $GearPresetsTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<FinType, String, String> $converterfinType =
+      const EnumNameConverter<FinType>(FinType.values);
+  static JsonTypeConverter2<FinType?, String?, String?> $converterfinTypen =
+      JsonTypeConverter2.asNullable($converterfinType);
+}
+
+class GearPreset extends DataClass implements Insertable<GearPreset> {
+  final int id;
+  final String name;
+  final double? weightKg;
+  final double? suitThicknessMm;
+  final FinType? finType;
+  const GearPreset({
+    required this.id,
+    required this.name,
+    this.weightKg,
+    this.suitThicknessMm,
+    this.finType,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || weightKg != null) {
+      map['weight_kg'] = Variable<double>(weightKg);
+    }
+    if (!nullToAbsent || suitThicknessMm != null) {
+      map['suit_thickness_mm'] = Variable<double>(suitThicknessMm);
+    }
+    if (!nullToAbsent || finType != null) {
+      map['fin_type'] = Variable<String>(
+        $GearPresetsTable.$converterfinTypen.toSql(finType),
+      );
+    }
+    return map;
+  }
+
+  GearPresetsCompanion toCompanion(bool nullToAbsent) {
+    return GearPresetsCompanion(
+      id: Value(id),
+      name: Value(name),
+      weightKg: weightKg == null && nullToAbsent
+          ? const Value.absent()
+          : Value(weightKg),
+      suitThicknessMm: suitThicknessMm == null && nullToAbsent
+          ? const Value.absent()
+          : Value(suitThicknessMm),
+      finType: finType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finType),
+    );
+  }
+
+  factory GearPreset.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GearPreset(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      weightKg: serializer.fromJson<double?>(json['weightKg']),
+      suitThicknessMm: serializer.fromJson<double?>(json['suitThicknessMm']),
+      finType: $GearPresetsTable.$converterfinTypen.fromJson(
+        serializer.fromJson<String?>(json['finType']),
+      ),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'weightKg': serializer.toJson<double?>(weightKg),
+      'suitThicknessMm': serializer.toJson<double?>(suitThicknessMm),
+      'finType': serializer.toJson<String?>(
+        $GearPresetsTable.$converterfinTypen.toJson(finType),
+      ),
+    };
+  }
+
+  GearPreset copyWith({
+    int? id,
+    String? name,
+    Value<double?> weightKg = const Value.absent(),
+    Value<double?> suitThicknessMm = const Value.absent(),
+    Value<FinType?> finType = const Value.absent(),
+  }) => GearPreset(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    weightKg: weightKg.present ? weightKg.value : this.weightKg,
+    suitThicknessMm: suitThicknessMm.present
+        ? suitThicknessMm.value
+        : this.suitThicknessMm,
+    finType: finType.present ? finType.value : this.finType,
+  );
+  GearPreset copyWithCompanion(GearPresetsCompanion data) {
+    return GearPreset(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      weightKg: data.weightKg.present ? data.weightKg.value : this.weightKg,
+      suitThicknessMm: data.suitThicknessMm.present
+          ? data.suitThicknessMm.value
+          : this.suitThicknessMm,
+      finType: data.finType.present ? data.finType.value : this.finType,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GearPreset(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('weightKg: $weightKg, ')
+          ..write('suitThicknessMm: $suitThicknessMm, ')
+          ..write('finType: $finType')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, weightKg, suitThicknessMm, finType);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GearPreset &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.weightKg == this.weightKg &&
+          other.suitThicknessMm == this.suitThicknessMm &&
+          other.finType == this.finType);
+}
+
+class GearPresetsCompanion extends UpdateCompanion<GearPreset> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<double?> weightKg;
+  final Value<double?> suitThicknessMm;
+  final Value<FinType?> finType;
+  const GearPresetsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.weightKg = const Value.absent(),
+    this.suitThicknessMm = const Value.absent(),
+    this.finType = const Value.absent(),
+  });
+  GearPresetsCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    this.weightKg = const Value.absent(),
+    this.suitThicknessMm = const Value.absent(),
+    this.finType = const Value.absent(),
+  }) : name = Value(name);
+  static Insertable<GearPreset> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<double>? weightKg,
+    Expression<double>? suitThicknessMm,
+    Expression<String>? finType,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (weightKg != null) 'weight_kg': weightKg,
+      if (suitThicknessMm != null) 'suit_thickness_mm': suitThicknessMm,
+      if (finType != null) 'fin_type': finType,
+    });
+  }
+
+  GearPresetsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? name,
+    Value<double?>? weightKg,
+    Value<double?>? suitThicknessMm,
+    Value<FinType?>? finType,
+  }) {
+    return GearPresetsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      weightKg: weightKg ?? this.weightKg,
+      suitThicknessMm: suitThicknessMm ?? this.suitThicknessMm,
+      finType: finType ?? this.finType,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (weightKg.present) {
+      map['weight_kg'] = Variable<double>(weightKg.value);
+    }
+    if (suitThicknessMm.present) {
+      map['suit_thickness_mm'] = Variable<double>(suitThicknessMm.value);
+    }
+    if (finType.present) {
+      map['fin_type'] = Variable<String>(
+        $GearPresetsTable.$converterfinTypen.toSql(finType.value),
+      );
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GearPresetsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('weightKg: $weightKg, ')
+          ..write('suitThicknessMm: $suitThicknessMm, ')
+          ..write('finType: $finType')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $MedicalDocsTable extends MedicalDocs
+    with TableInfo<$MedicalDocsTable, MedicalDoc> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MedicalDocsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _issuedAtMeta = const VerificationMeta(
+    'issuedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> issuedAt = GeneratedColumn<DateTime>(
+    'issued_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _expiresAtMeta = const VerificationMeta(
+    'expiresAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
+    'expires_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _filePathMeta = const VerificationMeta(
+    'filePath',
+  );
+  @override
+  late final GeneratedColumn<String> filePath = GeneratedColumn<String>(
+    'file_path',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    issuedAt,
+    expiresAt,
+    filePath,
+    note,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'medical_docs';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MedicalDoc> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('issued_at')) {
+      context.handle(
+        _issuedAtMeta,
+        issuedAt.isAcceptableOrUnknown(data['issued_at']!, _issuedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_issuedAtMeta);
+    }
+    if (data.containsKey('expires_at')) {
+      context.handle(
+        _expiresAtMeta,
+        expiresAt.isAcceptableOrUnknown(data['expires_at']!, _expiresAtMeta),
+      );
+    }
+    if (data.containsKey('file_path')) {
+      context.handle(
+        _filePathMeta,
+        filePath.isAcceptableOrUnknown(data['file_path']!, _filePathMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_filePathMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  MedicalDoc map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MedicalDoc(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      issuedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}issued_at'],
+      )!,
+      expiresAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}expires_at'],
+      ),
+      filePath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}file_path'],
+      )!,
+      note: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}note'],
+      ),
+    );
+  }
+
+  @override
+  $MedicalDocsTable createAlias(String alias) {
+    return $MedicalDocsTable(attachedDatabase, alias);
+  }
+}
+
+class MedicalDoc extends DataClass implements Insertable<MedicalDoc> {
+  final int id;
+  final DateTime issuedAt;
+  final DateTime? expiresAt;
+  final String filePath;
+  final String? note;
+  const MedicalDoc({
+    required this.id,
+    required this.issuedAt,
+    this.expiresAt,
+    required this.filePath,
+    this.note,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['issued_at'] = Variable<DateTime>(issuedAt);
+    if (!nullToAbsent || expiresAt != null) {
+      map['expires_at'] = Variable<DateTime>(expiresAt);
+    }
+    map['file_path'] = Variable<String>(filePath);
+    if (!nullToAbsent || note != null) {
+      map['note'] = Variable<String>(note);
+    }
+    return map;
+  }
+
+  MedicalDocsCompanion toCompanion(bool nullToAbsent) {
+    return MedicalDocsCompanion(
+      id: Value(id),
+      issuedAt: Value(issuedAt),
+      expiresAt: expiresAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(expiresAt),
+      filePath: Value(filePath),
+      note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+    );
+  }
+
+  factory MedicalDoc.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MedicalDoc(
+      id: serializer.fromJson<int>(json['id']),
+      issuedAt: serializer.fromJson<DateTime>(json['issuedAt']),
+      expiresAt: serializer.fromJson<DateTime?>(json['expiresAt']),
+      filePath: serializer.fromJson<String>(json['filePath']),
+      note: serializer.fromJson<String?>(json['note']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'issuedAt': serializer.toJson<DateTime>(issuedAt),
+      'expiresAt': serializer.toJson<DateTime?>(expiresAt),
+      'filePath': serializer.toJson<String>(filePath),
+      'note': serializer.toJson<String?>(note),
+    };
+  }
+
+  MedicalDoc copyWith({
+    int? id,
+    DateTime? issuedAt,
+    Value<DateTime?> expiresAt = const Value.absent(),
+    String? filePath,
+    Value<String?> note = const Value.absent(),
+  }) => MedicalDoc(
+    id: id ?? this.id,
+    issuedAt: issuedAt ?? this.issuedAt,
+    expiresAt: expiresAt.present ? expiresAt.value : this.expiresAt,
+    filePath: filePath ?? this.filePath,
+    note: note.present ? note.value : this.note,
+  );
+  MedicalDoc copyWithCompanion(MedicalDocsCompanion data) {
+    return MedicalDoc(
+      id: data.id.present ? data.id.value : this.id,
+      issuedAt: data.issuedAt.present ? data.issuedAt.value : this.issuedAt,
+      expiresAt: data.expiresAt.present ? data.expiresAt.value : this.expiresAt,
+      filePath: data.filePath.present ? data.filePath.value : this.filePath,
+      note: data.note.present ? data.note.value : this.note,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MedicalDoc(')
+          ..write('id: $id, ')
+          ..write('issuedAt: $issuedAt, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('filePath: $filePath, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, issuedAt, expiresAt, filePath, note);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MedicalDoc &&
+          other.id == this.id &&
+          other.issuedAt == this.issuedAt &&
+          other.expiresAt == this.expiresAt &&
+          other.filePath == this.filePath &&
+          other.note == this.note);
+}
+
+class MedicalDocsCompanion extends UpdateCompanion<MedicalDoc> {
+  final Value<int> id;
+  final Value<DateTime> issuedAt;
+  final Value<DateTime?> expiresAt;
+  final Value<String> filePath;
+  final Value<String?> note;
+  const MedicalDocsCompanion({
+    this.id = const Value.absent(),
+    this.issuedAt = const Value.absent(),
+    this.expiresAt = const Value.absent(),
+    this.filePath = const Value.absent(),
+    this.note = const Value.absent(),
+  });
+  MedicalDocsCompanion.insert({
+    this.id = const Value.absent(),
+    required DateTime issuedAt,
+    this.expiresAt = const Value.absent(),
+    required String filePath,
+    this.note = const Value.absent(),
+  }) : issuedAt = Value(issuedAt),
+       filePath = Value(filePath);
+  static Insertable<MedicalDoc> custom({
+    Expression<int>? id,
+    Expression<DateTime>? issuedAt,
+    Expression<DateTime>? expiresAt,
+    Expression<String>? filePath,
+    Expression<String>? note,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (issuedAt != null) 'issued_at': issuedAt,
+      if (expiresAt != null) 'expires_at': expiresAt,
+      if (filePath != null) 'file_path': filePath,
+      if (note != null) 'note': note,
+    });
+  }
+
+  MedicalDocsCompanion copyWith({
+    Value<int>? id,
+    Value<DateTime>? issuedAt,
+    Value<DateTime?>? expiresAt,
+    Value<String>? filePath,
+    Value<String?>? note,
+  }) {
+    return MedicalDocsCompanion(
+      id: id ?? this.id,
+      issuedAt: issuedAt ?? this.issuedAt,
+      expiresAt: expiresAt ?? this.expiresAt,
+      filePath: filePath ?? this.filePath,
+      note: note ?? this.note,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (issuedAt.present) {
+      map['issued_at'] = Variable<DateTime>(issuedAt.value);
+    }
+    if (expiresAt.present) {
+      map['expires_at'] = Variable<DateTime>(expiresAt.value);
+    }
+    if (filePath.present) {
+      map['file_path'] = Variable<String>(filePath.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MedicalDocsCompanion(')
+          ..write('id: $id, ')
+          ..write('issuedAt: $issuedAt, ')
+          ..write('expiresAt: $expiresAt, ')
+          ..write('filePath: $filePath, ')
+          ..write('note: $note')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1249,6 +4347,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $SessionsTable sessions = $SessionsTable(this);
   late final $PersonalBestsTable personalBests = $PersonalBestsTable(this);
   late final $SettingsTable settings = $SettingsTable(this);
+  late final $DiveSessionsTable diveSessions = $DiveSessionsTable(this);
+  late final $DiveRepsTable diveReps = $DiveRepsTable(this);
+  late final $DiveSitesTable diveSites = $DiveSitesTable(this);
+  late final $DiveBuddiesTable diveBuddies = $DiveBuddiesTable(this);
+  late final $GearPresetsTable gearPresets = $GearPresetsTable(this);
+  late final $MedicalDocsTable medicalDocs = $MedicalDocsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1258,6 +4362,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     sessions,
     personalBests,
     settings,
+    diveSessions,
+    diveReps,
+    diveSites,
+    diveBuddies,
+    gearPresets,
+    medicalDocs,
   ];
 }
 
@@ -2196,6 +5306,1762 @@ typedef $$SettingsTableProcessedTableManager =
       Setting,
       PrefetchHooks Function()
     >;
+typedef $$DiveSessionsTableCreateCompanionBuilder =
+    DiveSessionsCompanion Function({
+      Value<int> id,
+      required DateTime date,
+      required SiteType siteType,
+      Value<int?> siteId,
+      required String siteName,
+      Value<double?> lat,
+      Value<double?> lon,
+      required PurposeTag purposeTag,
+      required DiveCondition condition,
+      Value<int?> gearPresetId,
+      required DiveGear gear,
+      required List<int> buddyIds,
+      Value<String?> leaderName,
+      Value<int?> overallRating,
+      required List<String> photoPaths,
+      Value<String?> note,
+      Value<int?> linkedTrainingSessionId,
+    });
+typedef $$DiveSessionsTableUpdateCompanionBuilder =
+    DiveSessionsCompanion Function({
+      Value<int> id,
+      Value<DateTime> date,
+      Value<SiteType> siteType,
+      Value<int?> siteId,
+      Value<String> siteName,
+      Value<double?> lat,
+      Value<double?> lon,
+      Value<PurposeTag> purposeTag,
+      Value<DiveCondition> condition,
+      Value<int?> gearPresetId,
+      Value<DiveGear> gear,
+      Value<List<int>> buddyIds,
+      Value<String?> leaderName,
+      Value<int?> overallRating,
+      Value<List<String>> photoPaths,
+      Value<String?> note,
+      Value<int?> linkedTrainingSessionId,
+    });
+
+final class $$DiveSessionsTableReferences
+    extends BaseReferences<_$AppDatabase, $DiveSessionsTable, DiveSession> {
+  $$DiveSessionsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$DiveRepsTable, List<DiveRep>> _diveRepsRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.diveReps,
+    aliasName: 'dive_sessions__id__dive_reps__session_id',
+  );
+
+  $$DiveRepsTableProcessedTableManager get diveRepsRefs {
+    final manager = $$DiveRepsTableTableManager(
+      $_db,
+      $_db.diveReps,
+    ).filter((f) => f.sessionId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_diveRepsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$DiveSessionsTableFilterComposer
+    extends Composer<_$AppDatabase, $DiveSessionsTable> {
+  $$DiveSessionsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<SiteType, SiteType, String> get siteType =>
+      $composableBuilder(
+        column: $table.siteType,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
+
+  ColumnFilters<int> get siteId => $composableBuilder(
+    column: $table.siteId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get siteName => $composableBuilder(
+    column: $table.siteName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get lat => $composableBuilder(
+    column: $table.lat,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get lon => $composableBuilder(
+    column: $table.lon,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<PurposeTag, PurposeTag, String>
+  get purposeTag => $composableBuilder(
+    column: $table.purposeTag,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<DiveCondition, DiveCondition, String>
+  get condition => $composableBuilder(
+    column: $table.condition,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<int> get gearPresetId => $composableBuilder(
+    column: $table.gearPresetId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<DiveGear, DiveGear, String> get gear =>
+      $composableBuilder(
+        column: $table.gear,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
+
+  ColumnWithTypeConverterFilters<List<int>, List<int>, String> get buddyIds =>
+      $composableBuilder(
+        column: $table.buddyIds,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
+
+  ColumnFilters<String> get leaderName => $composableBuilder(
+    column: $table.leaderName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get overallRating => $composableBuilder(
+    column: $table.overallRating,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get photoPaths => $composableBuilder(
+    column: $table.photoPaths,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get linkedTrainingSessionId => $composableBuilder(
+    column: $table.linkedTrainingSessionId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  Expression<bool> diveRepsRefs(
+    Expression<bool> Function($$DiveRepsTableFilterComposer f) f,
+  ) {
+    final $$DiveRepsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.diveReps,
+      getReferencedColumn: (t) => t.sessionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DiveRepsTableFilterComposer(
+            $db: $db,
+            $table: $db.diveReps,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$DiveSessionsTableOrderingComposer
+    extends Composer<_$AppDatabase, $DiveSessionsTable> {
+  $$DiveSessionsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get siteType => $composableBuilder(
+    column: $table.siteType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get siteId => $composableBuilder(
+    column: $table.siteId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get siteName => $composableBuilder(
+    column: $table.siteName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get lat => $composableBuilder(
+    column: $table.lat,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get lon => $composableBuilder(
+    column: $table.lon,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get purposeTag => $composableBuilder(
+    column: $table.purposeTag,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get condition => $composableBuilder(
+    column: $table.condition,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get gearPresetId => $composableBuilder(
+    column: $table.gearPresetId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get gear => $composableBuilder(
+    column: $table.gear,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get buddyIds => $composableBuilder(
+    column: $table.buddyIds,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get leaderName => $composableBuilder(
+    column: $table.leaderName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get overallRating => $composableBuilder(
+    column: $table.overallRating,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get photoPaths => $composableBuilder(
+    column: $table.photoPaths,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get linkedTrainingSessionId => $composableBuilder(
+    column: $table.linkedTrainingSessionId,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DiveSessionsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DiveSessionsTable> {
+  $$DiveSessionsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<SiteType, String> get siteType =>
+      $composableBuilder(column: $table.siteType, builder: (column) => column);
+
+  GeneratedColumn<int> get siteId =>
+      $composableBuilder(column: $table.siteId, builder: (column) => column);
+
+  GeneratedColumn<String> get siteName =>
+      $composableBuilder(column: $table.siteName, builder: (column) => column);
+
+  GeneratedColumn<double> get lat =>
+      $composableBuilder(column: $table.lat, builder: (column) => column);
+
+  GeneratedColumn<double> get lon =>
+      $composableBuilder(column: $table.lon, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<PurposeTag, String> get purposeTag =>
+      $composableBuilder(
+        column: $table.purposeTag,
+        builder: (column) => column,
+      );
+
+  GeneratedColumnWithTypeConverter<DiveCondition, String> get condition =>
+      $composableBuilder(column: $table.condition, builder: (column) => column);
+
+  GeneratedColumn<int> get gearPresetId => $composableBuilder(
+    column: $table.gearPresetId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<DiveGear, String> get gear =>
+      $composableBuilder(column: $table.gear, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<List<int>, String> get buddyIds =>
+      $composableBuilder(column: $table.buddyIds, builder: (column) => column);
+
+  GeneratedColumn<String> get leaderName => $composableBuilder(
+    column: $table.leaderName,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get overallRating => $composableBuilder(
+    column: $table.overallRating,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get photoPaths =>
+      $composableBuilder(
+        column: $table.photoPaths,
+        builder: (column) => column,
+      );
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+
+  GeneratedColumn<int> get linkedTrainingSessionId => $composableBuilder(
+    column: $table.linkedTrainingSessionId,
+    builder: (column) => column,
+  );
+
+  Expression<T> diveRepsRefs<T extends Object>(
+    Expression<T> Function($$DiveRepsTableAnnotationComposer a) f,
+  ) {
+    final $$DiveRepsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.diveReps,
+      getReferencedColumn: (t) => t.sessionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DiveRepsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.diveReps,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$DiveSessionsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DiveSessionsTable,
+          DiveSession,
+          $$DiveSessionsTableFilterComposer,
+          $$DiveSessionsTableOrderingComposer,
+          $$DiveSessionsTableAnnotationComposer,
+          $$DiveSessionsTableCreateCompanionBuilder,
+          $$DiveSessionsTableUpdateCompanionBuilder,
+          (DiveSession, $$DiveSessionsTableReferences),
+          DiveSession,
+          PrefetchHooks Function({bool diveRepsRefs})
+        > {
+  $$DiveSessionsTableTableManager(_$AppDatabase db, $DiveSessionsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DiveSessionsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DiveSessionsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DiveSessionsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<DateTime> date = const Value.absent(),
+                Value<SiteType> siteType = const Value.absent(),
+                Value<int?> siteId = const Value.absent(),
+                Value<String> siteName = const Value.absent(),
+                Value<double?> lat = const Value.absent(),
+                Value<double?> lon = const Value.absent(),
+                Value<PurposeTag> purposeTag = const Value.absent(),
+                Value<DiveCondition> condition = const Value.absent(),
+                Value<int?> gearPresetId = const Value.absent(),
+                Value<DiveGear> gear = const Value.absent(),
+                Value<List<int>> buddyIds = const Value.absent(),
+                Value<String?> leaderName = const Value.absent(),
+                Value<int?> overallRating = const Value.absent(),
+                Value<List<String>> photoPaths = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+                Value<int?> linkedTrainingSessionId = const Value.absent(),
+              }) => DiveSessionsCompanion(
+                id: id,
+                date: date,
+                siteType: siteType,
+                siteId: siteId,
+                siteName: siteName,
+                lat: lat,
+                lon: lon,
+                purposeTag: purposeTag,
+                condition: condition,
+                gearPresetId: gearPresetId,
+                gear: gear,
+                buddyIds: buddyIds,
+                leaderName: leaderName,
+                overallRating: overallRating,
+                photoPaths: photoPaths,
+                note: note,
+                linkedTrainingSessionId: linkedTrainingSessionId,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required DateTime date,
+                required SiteType siteType,
+                Value<int?> siteId = const Value.absent(),
+                required String siteName,
+                Value<double?> lat = const Value.absent(),
+                Value<double?> lon = const Value.absent(),
+                required PurposeTag purposeTag,
+                required DiveCondition condition,
+                Value<int?> gearPresetId = const Value.absent(),
+                required DiveGear gear,
+                required List<int> buddyIds,
+                Value<String?> leaderName = const Value.absent(),
+                Value<int?> overallRating = const Value.absent(),
+                required List<String> photoPaths,
+                Value<String?> note = const Value.absent(),
+                Value<int?> linkedTrainingSessionId = const Value.absent(),
+              }) => DiveSessionsCompanion.insert(
+                id: id,
+                date: date,
+                siteType: siteType,
+                siteId: siteId,
+                siteName: siteName,
+                lat: lat,
+                lon: lon,
+                purposeTag: purposeTag,
+                condition: condition,
+                gearPresetId: gearPresetId,
+                gear: gear,
+                buddyIds: buddyIds,
+                leaderName: leaderName,
+                overallRating: overallRating,
+                photoPaths: photoPaths,
+                note: note,
+                linkedTrainingSessionId: linkedTrainingSessionId,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DiveSessionsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({diveRepsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (diveRepsRefs) db.diveReps],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (diveRepsRefs)
+                    await $_getPrefetchedData<
+                      DiveSession,
+                      $DiveSessionsTable,
+                      DiveRep
+                    >(
+                      currentTable: table,
+                      referencedTable: $$DiveSessionsTableReferences
+                          ._diveRepsRefsTable(db),
+                      managerFromTypedResult: (p0) =>
+                          $$DiveSessionsTableReferences(
+                            db,
+                            table,
+                            p0,
+                          ).diveRepsRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.sessionId == item.id),
+                      typedResults: items,
+                    ),
+                ];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$DiveSessionsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DiveSessionsTable,
+      DiveSession,
+      $$DiveSessionsTableFilterComposer,
+      $$DiveSessionsTableOrderingComposer,
+      $$DiveSessionsTableAnnotationComposer,
+      $$DiveSessionsTableCreateCompanionBuilder,
+      $$DiveSessionsTableUpdateCompanionBuilder,
+      (DiveSession, $$DiveSessionsTableReferences),
+      DiveSession,
+      PrefetchHooks Function({bool diveRepsRefs})
+    >;
+typedef $$DiveRepsTableCreateCompanionBuilder =
+    DiveRepsCompanion Function({
+      Value<int> id,
+      required int sessionId,
+      required int sequence,
+      required Discipline discipline,
+      required double performanceValue,
+      required PerformanceUnit performanceUnit,
+      Value<double?> targetValue,
+      Value<int?> surfaceRestBeforeSec,
+      Value<int?> msstRecommendedSec,
+      required IncidentType incident,
+      Value<String?> recoveryNote,
+      Value<bool> isMergedFromAutoSplit,
+    });
+typedef $$DiveRepsTableUpdateCompanionBuilder =
+    DiveRepsCompanion Function({
+      Value<int> id,
+      Value<int> sessionId,
+      Value<int> sequence,
+      Value<Discipline> discipline,
+      Value<double> performanceValue,
+      Value<PerformanceUnit> performanceUnit,
+      Value<double?> targetValue,
+      Value<int?> surfaceRestBeforeSec,
+      Value<int?> msstRecommendedSec,
+      Value<IncidentType> incident,
+      Value<String?> recoveryNote,
+      Value<bool> isMergedFromAutoSplit,
+    });
+
+final class $$DiveRepsTableReferences
+    extends BaseReferences<_$AppDatabase, $DiveRepsTable, DiveRep> {
+  $$DiveRepsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $DiveSessionsTable _sessionIdTable(_$AppDatabase db) =>
+      db.diveSessions.createAlias('dive_reps__session_id__dive_sessions__id');
+
+  $$DiveSessionsTableProcessedTableManager get sessionId {
+    final $_column = $_itemColumn<int>('session_id')!;
+
+    final manager = $$DiveSessionsTableTableManager(
+      $_db,
+      $_db.diveSessions,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_sessionIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$DiveRepsTableFilterComposer
+    extends Composer<_$AppDatabase, $DiveRepsTable> {
+  $$DiveRepsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sequence => $composableBuilder(
+    column: $table.sequence,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<Discipline, Discipline, String>
+  get discipline => $composableBuilder(
+    column: $table.discipline,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<double> get performanceValue => $composableBuilder(
+    column: $table.performanceValue,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<PerformanceUnit, PerformanceUnit, String>
+  get performanceUnit => $composableBuilder(
+    column: $table.performanceUnit,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<double> get targetValue => $composableBuilder(
+    column: $table.targetValue,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get surfaceRestBeforeSec => $composableBuilder(
+    column: $table.surfaceRestBeforeSec,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get msstRecommendedSec => $composableBuilder(
+    column: $table.msstRecommendedSec,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<IncidentType, IncidentType, String>
+  get incident => $composableBuilder(
+    column: $table.incident,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<String> get recoveryNote => $composableBuilder(
+    column: $table.recoveryNote,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isMergedFromAutoSplit => $composableBuilder(
+    column: $table.isMergedFromAutoSplit,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$DiveSessionsTableFilterComposer get sessionId {
+    final $$DiveSessionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.sessionId,
+      referencedTable: $db.diveSessions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DiveSessionsTableFilterComposer(
+            $db: $db,
+            $table: $db.diveSessions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$DiveRepsTableOrderingComposer
+    extends Composer<_$AppDatabase, $DiveRepsTable> {
+  $$DiveRepsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sequence => $composableBuilder(
+    column: $table.sequence,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get discipline => $composableBuilder(
+    column: $table.discipline,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get performanceValue => $composableBuilder(
+    column: $table.performanceValue,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get performanceUnit => $composableBuilder(
+    column: $table.performanceUnit,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get targetValue => $composableBuilder(
+    column: $table.targetValue,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get surfaceRestBeforeSec => $composableBuilder(
+    column: $table.surfaceRestBeforeSec,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get msstRecommendedSec => $composableBuilder(
+    column: $table.msstRecommendedSec,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get incident => $composableBuilder(
+    column: $table.incident,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get recoveryNote => $composableBuilder(
+    column: $table.recoveryNote,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isMergedFromAutoSplit => $composableBuilder(
+    column: $table.isMergedFromAutoSplit,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$DiveSessionsTableOrderingComposer get sessionId {
+    final $$DiveSessionsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.sessionId,
+      referencedTable: $db.diveSessions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DiveSessionsTableOrderingComposer(
+            $db: $db,
+            $table: $db.diveSessions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$DiveRepsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DiveRepsTable> {
+  $$DiveRepsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get sequence =>
+      $composableBuilder(column: $table.sequence, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<Discipline, String> get discipline =>
+      $composableBuilder(
+        column: $table.discipline,
+        builder: (column) => column,
+      );
+
+  GeneratedColumn<double> get performanceValue => $composableBuilder(
+    column: $table.performanceValue,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<PerformanceUnit, String>
+  get performanceUnit => $composableBuilder(
+    column: $table.performanceUnit,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<double> get targetValue => $composableBuilder(
+    column: $table.targetValue,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get surfaceRestBeforeSec => $composableBuilder(
+    column: $table.surfaceRestBeforeSec,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get msstRecommendedSec => $composableBuilder(
+    column: $table.msstRecommendedSec,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<IncidentType, String> get incident =>
+      $composableBuilder(column: $table.incident, builder: (column) => column);
+
+  GeneratedColumn<String> get recoveryNote => $composableBuilder(
+    column: $table.recoveryNote,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get isMergedFromAutoSplit => $composableBuilder(
+    column: $table.isMergedFromAutoSplit,
+    builder: (column) => column,
+  );
+
+  $$DiveSessionsTableAnnotationComposer get sessionId {
+    final $$DiveSessionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.sessionId,
+      referencedTable: $db.diveSessions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DiveSessionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.diveSessions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$DiveRepsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DiveRepsTable,
+          DiveRep,
+          $$DiveRepsTableFilterComposer,
+          $$DiveRepsTableOrderingComposer,
+          $$DiveRepsTableAnnotationComposer,
+          $$DiveRepsTableCreateCompanionBuilder,
+          $$DiveRepsTableUpdateCompanionBuilder,
+          (DiveRep, $$DiveRepsTableReferences),
+          DiveRep,
+          PrefetchHooks Function({bool sessionId})
+        > {
+  $$DiveRepsTableTableManager(_$AppDatabase db, $DiveRepsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DiveRepsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DiveRepsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DiveRepsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> sessionId = const Value.absent(),
+                Value<int> sequence = const Value.absent(),
+                Value<Discipline> discipline = const Value.absent(),
+                Value<double> performanceValue = const Value.absent(),
+                Value<PerformanceUnit> performanceUnit = const Value.absent(),
+                Value<double?> targetValue = const Value.absent(),
+                Value<int?> surfaceRestBeforeSec = const Value.absent(),
+                Value<int?> msstRecommendedSec = const Value.absent(),
+                Value<IncidentType> incident = const Value.absent(),
+                Value<String?> recoveryNote = const Value.absent(),
+                Value<bool> isMergedFromAutoSplit = const Value.absent(),
+              }) => DiveRepsCompanion(
+                id: id,
+                sessionId: sessionId,
+                sequence: sequence,
+                discipline: discipline,
+                performanceValue: performanceValue,
+                performanceUnit: performanceUnit,
+                targetValue: targetValue,
+                surfaceRestBeforeSec: surfaceRestBeforeSec,
+                msstRecommendedSec: msstRecommendedSec,
+                incident: incident,
+                recoveryNote: recoveryNote,
+                isMergedFromAutoSplit: isMergedFromAutoSplit,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int sessionId,
+                required int sequence,
+                required Discipline discipline,
+                required double performanceValue,
+                required PerformanceUnit performanceUnit,
+                Value<double?> targetValue = const Value.absent(),
+                Value<int?> surfaceRestBeforeSec = const Value.absent(),
+                Value<int?> msstRecommendedSec = const Value.absent(),
+                required IncidentType incident,
+                Value<String?> recoveryNote = const Value.absent(),
+                Value<bool> isMergedFromAutoSplit = const Value.absent(),
+              }) => DiveRepsCompanion.insert(
+                id: id,
+                sessionId: sessionId,
+                sequence: sequence,
+                discipline: discipline,
+                performanceValue: performanceValue,
+                performanceUnit: performanceUnit,
+                targetValue: targetValue,
+                surfaceRestBeforeSec: surfaceRestBeforeSec,
+                msstRecommendedSec: msstRecommendedSec,
+                incident: incident,
+                recoveryNote: recoveryNote,
+                isMergedFromAutoSplit: isMergedFromAutoSplit,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DiveRepsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({sessionId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (sessionId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.sessionId,
+                                referencedTable: $$DiveRepsTableReferences
+                                    ._sessionIdTable(db),
+                                referencedColumn: $$DiveRepsTableReferences
+                                    ._sessionIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$DiveRepsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DiveRepsTable,
+      DiveRep,
+      $$DiveRepsTableFilterComposer,
+      $$DiveRepsTableOrderingComposer,
+      $$DiveRepsTableAnnotationComposer,
+      $$DiveRepsTableCreateCompanionBuilder,
+      $$DiveRepsTableUpdateCompanionBuilder,
+      (DiveRep, $$DiveRepsTableReferences),
+      DiveRep,
+      PrefetchHooks Function({bool sessionId})
+    >;
+typedef $$DiveSitesTableCreateCompanionBuilder =
+    DiveSitesCompanion Function({
+      Value<int> id,
+      required String name,
+      required double lat,
+      required double lon,
+      Value<int> visitCount,
+      Value<DateTime?> lastVisitedAt,
+    });
+typedef $$DiveSitesTableUpdateCompanionBuilder =
+    DiveSitesCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<double> lat,
+      Value<double> lon,
+      Value<int> visitCount,
+      Value<DateTime?> lastVisitedAt,
+    });
+
+class $$DiveSitesTableFilterComposer
+    extends Composer<_$AppDatabase, $DiveSitesTable> {
+  $$DiveSitesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get lat => $composableBuilder(
+    column: $table.lat,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get lon => $composableBuilder(
+    column: $table.lon,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get visitCount => $composableBuilder(
+    column: $table.visitCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastVisitedAt => $composableBuilder(
+    column: $table.lastVisitedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DiveSitesTableOrderingComposer
+    extends Composer<_$AppDatabase, $DiveSitesTable> {
+  $$DiveSitesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get lat => $composableBuilder(
+    column: $table.lat,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get lon => $composableBuilder(
+    column: $table.lon,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get visitCount => $composableBuilder(
+    column: $table.visitCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastVisitedAt => $composableBuilder(
+    column: $table.lastVisitedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DiveSitesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DiveSitesTable> {
+  $$DiveSitesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<double> get lat =>
+      $composableBuilder(column: $table.lat, builder: (column) => column);
+
+  GeneratedColumn<double> get lon =>
+      $composableBuilder(column: $table.lon, builder: (column) => column);
+
+  GeneratedColumn<int> get visitCount => $composableBuilder(
+    column: $table.visitCount,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get lastVisitedAt => $composableBuilder(
+    column: $table.lastVisitedAt,
+    builder: (column) => column,
+  );
+}
+
+class $$DiveSitesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DiveSitesTable,
+          DiveSite,
+          $$DiveSitesTableFilterComposer,
+          $$DiveSitesTableOrderingComposer,
+          $$DiveSitesTableAnnotationComposer,
+          $$DiveSitesTableCreateCompanionBuilder,
+          $$DiveSitesTableUpdateCompanionBuilder,
+          (DiveSite, BaseReferences<_$AppDatabase, $DiveSitesTable, DiveSite>),
+          DiveSite,
+          PrefetchHooks Function()
+        > {
+  $$DiveSitesTableTableManager(_$AppDatabase db, $DiveSitesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DiveSitesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DiveSitesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DiveSitesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<double> lat = const Value.absent(),
+                Value<double> lon = const Value.absent(),
+                Value<int> visitCount = const Value.absent(),
+                Value<DateTime?> lastVisitedAt = const Value.absent(),
+              }) => DiveSitesCompanion(
+                id: id,
+                name: name,
+                lat: lat,
+                lon: lon,
+                visitCount: visitCount,
+                lastVisitedAt: lastVisitedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                required double lat,
+                required double lon,
+                Value<int> visitCount = const Value.absent(),
+                Value<DateTime?> lastVisitedAt = const Value.absent(),
+              }) => DiveSitesCompanion.insert(
+                id: id,
+                name: name,
+                lat: lat,
+                lon: lon,
+                visitCount: visitCount,
+                lastVisitedAt: lastVisitedAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DiveSitesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DiveSitesTable,
+      DiveSite,
+      $$DiveSitesTableFilterComposer,
+      $$DiveSitesTableOrderingComposer,
+      $$DiveSitesTableAnnotationComposer,
+      $$DiveSitesTableCreateCompanionBuilder,
+      $$DiveSitesTableUpdateCompanionBuilder,
+      (DiveSite, BaseReferences<_$AppDatabase, $DiveSitesTable, DiveSite>),
+      DiveSite,
+      PrefetchHooks Function()
+    >;
+typedef $$DiveBuddiesTableCreateCompanionBuilder =
+    DiveBuddiesCompanion Function({
+      Value<int> id,
+      required String name,
+      Value<String?> note,
+    });
+typedef $$DiveBuddiesTableUpdateCompanionBuilder =
+    DiveBuddiesCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<String?> note,
+    });
+
+class $$DiveBuddiesTableFilterComposer
+    extends Composer<_$AppDatabase, $DiveBuddiesTable> {
+  $$DiveBuddiesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DiveBuddiesTableOrderingComposer
+    extends Composer<_$AppDatabase, $DiveBuddiesTable> {
+  $$DiveBuddiesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DiveBuddiesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DiveBuddiesTable> {
+  $$DiveBuddiesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+}
+
+class $$DiveBuddiesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DiveBuddiesTable,
+          DiveBuddy,
+          $$DiveBuddiesTableFilterComposer,
+          $$DiveBuddiesTableOrderingComposer,
+          $$DiveBuddiesTableAnnotationComposer,
+          $$DiveBuddiesTableCreateCompanionBuilder,
+          $$DiveBuddiesTableUpdateCompanionBuilder,
+          (
+            DiveBuddy,
+            BaseReferences<_$AppDatabase, $DiveBuddiesTable, DiveBuddy>,
+          ),
+          DiveBuddy,
+          PrefetchHooks Function()
+        > {
+  $$DiveBuddiesTableTableManager(_$AppDatabase db, $DiveBuddiesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DiveBuddiesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DiveBuddiesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DiveBuddiesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+              }) => DiveBuddiesCompanion(id: id, name: name, note: note),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                Value<String?> note = const Value.absent(),
+              }) => DiveBuddiesCompanion.insert(id: id, name: name, note: note),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DiveBuddiesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DiveBuddiesTable,
+      DiveBuddy,
+      $$DiveBuddiesTableFilterComposer,
+      $$DiveBuddiesTableOrderingComposer,
+      $$DiveBuddiesTableAnnotationComposer,
+      $$DiveBuddiesTableCreateCompanionBuilder,
+      $$DiveBuddiesTableUpdateCompanionBuilder,
+      (DiveBuddy, BaseReferences<_$AppDatabase, $DiveBuddiesTable, DiveBuddy>),
+      DiveBuddy,
+      PrefetchHooks Function()
+    >;
+typedef $$GearPresetsTableCreateCompanionBuilder =
+    GearPresetsCompanion Function({
+      Value<int> id,
+      required String name,
+      Value<double?> weightKg,
+      Value<double?> suitThicknessMm,
+      Value<FinType?> finType,
+    });
+typedef $$GearPresetsTableUpdateCompanionBuilder =
+    GearPresetsCompanion Function({
+      Value<int> id,
+      Value<String> name,
+      Value<double?> weightKg,
+      Value<double?> suitThicknessMm,
+      Value<FinType?> finType,
+    });
+
+class $$GearPresetsTableFilterComposer
+    extends Composer<_$AppDatabase, $GearPresetsTable> {
+  $$GearPresetsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get weightKg => $composableBuilder(
+    column: $table.weightKg,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get suitThicknessMm => $composableBuilder(
+    column: $table.suitThicknessMm,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<FinType?, FinType, String> get finType =>
+      $composableBuilder(
+        column: $table.finType,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
+}
+
+class $$GearPresetsTableOrderingComposer
+    extends Composer<_$AppDatabase, $GearPresetsTable> {
+  $$GearPresetsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get weightKg => $composableBuilder(
+    column: $table.weightKg,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get suitThicknessMm => $composableBuilder(
+    column: $table.suitThicknessMm,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get finType => $composableBuilder(
+    column: $table.finType,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$GearPresetsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GearPresetsTable> {
+  $$GearPresetsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<double> get weightKg =>
+      $composableBuilder(column: $table.weightKg, builder: (column) => column);
+
+  GeneratedColumn<double> get suitThicknessMm => $composableBuilder(
+    column: $table.suitThicknessMm,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<FinType?, String> get finType =>
+      $composableBuilder(column: $table.finType, builder: (column) => column);
+}
+
+class $$GearPresetsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GearPresetsTable,
+          GearPreset,
+          $$GearPresetsTableFilterComposer,
+          $$GearPresetsTableOrderingComposer,
+          $$GearPresetsTableAnnotationComposer,
+          $$GearPresetsTableCreateCompanionBuilder,
+          $$GearPresetsTableUpdateCompanionBuilder,
+          (
+            GearPreset,
+            BaseReferences<_$AppDatabase, $GearPresetsTable, GearPreset>,
+          ),
+          GearPreset,
+          PrefetchHooks Function()
+        > {
+  $$GearPresetsTableTableManager(_$AppDatabase db, $GearPresetsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GearPresetsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GearPresetsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GearPresetsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<double?> weightKg = const Value.absent(),
+                Value<double?> suitThicknessMm = const Value.absent(),
+                Value<FinType?> finType = const Value.absent(),
+              }) => GearPresetsCompanion(
+                id: id,
+                name: name,
+                weightKg: weightKg,
+                suitThicknessMm: suitThicknessMm,
+                finType: finType,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String name,
+                Value<double?> weightKg = const Value.absent(),
+                Value<double?> suitThicknessMm = const Value.absent(),
+                Value<FinType?> finType = const Value.absent(),
+              }) => GearPresetsCompanion.insert(
+                id: id,
+                name: name,
+                weightKg: weightKg,
+                suitThicknessMm: suitThicknessMm,
+                finType: finType,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$GearPresetsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GearPresetsTable,
+      GearPreset,
+      $$GearPresetsTableFilterComposer,
+      $$GearPresetsTableOrderingComposer,
+      $$GearPresetsTableAnnotationComposer,
+      $$GearPresetsTableCreateCompanionBuilder,
+      $$GearPresetsTableUpdateCompanionBuilder,
+      (
+        GearPreset,
+        BaseReferences<_$AppDatabase, $GearPresetsTable, GearPreset>,
+      ),
+      GearPreset,
+      PrefetchHooks Function()
+    >;
+typedef $$MedicalDocsTableCreateCompanionBuilder =
+    MedicalDocsCompanion Function({
+      Value<int> id,
+      required DateTime issuedAt,
+      Value<DateTime?> expiresAt,
+      required String filePath,
+      Value<String?> note,
+    });
+typedef $$MedicalDocsTableUpdateCompanionBuilder =
+    MedicalDocsCompanion Function({
+      Value<int> id,
+      Value<DateTime> issuedAt,
+      Value<DateTime?> expiresAt,
+      Value<String> filePath,
+      Value<String?> note,
+    });
+
+class $$MedicalDocsTableFilterComposer
+    extends Composer<_$AppDatabase, $MedicalDocsTable> {
+  $$MedicalDocsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get issuedAt => $composableBuilder(
+    column: $table.issuedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get filePath => $composableBuilder(
+    column: $table.filePath,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MedicalDocsTableOrderingComposer
+    extends Composer<_$AppDatabase, $MedicalDocsTable> {
+  $$MedicalDocsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get issuedAt => $composableBuilder(
+    column: $table.issuedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get filePath => $composableBuilder(
+    column: $table.filePath,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MedicalDocsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MedicalDocsTable> {
+  $$MedicalDocsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get issuedAt =>
+      $composableBuilder(column: $table.issuedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiresAt =>
+      $composableBuilder(column: $table.expiresAt, builder: (column) => column);
+
+  GeneratedColumn<String> get filePath =>
+      $composableBuilder(column: $table.filePath, builder: (column) => column);
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+}
+
+class $$MedicalDocsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MedicalDocsTable,
+          MedicalDoc,
+          $$MedicalDocsTableFilterComposer,
+          $$MedicalDocsTableOrderingComposer,
+          $$MedicalDocsTableAnnotationComposer,
+          $$MedicalDocsTableCreateCompanionBuilder,
+          $$MedicalDocsTableUpdateCompanionBuilder,
+          (
+            MedicalDoc,
+            BaseReferences<_$AppDatabase, $MedicalDocsTable, MedicalDoc>,
+          ),
+          MedicalDoc,
+          PrefetchHooks Function()
+        > {
+  $$MedicalDocsTableTableManager(_$AppDatabase db, $MedicalDocsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MedicalDocsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MedicalDocsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MedicalDocsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<DateTime> issuedAt = const Value.absent(),
+                Value<DateTime?> expiresAt = const Value.absent(),
+                Value<String> filePath = const Value.absent(),
+                Value<String?> note = const Value.absent(),
+              }) => MedicalDocsCompanion(
+                id: id,
+                issuedAt: issuedAt,
+                expiresAt: expiresAt,
+                filePath: filePath,
+                note: note,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required DateTime issuedAt,
+                Value<DateTime?> expiresAt = const Value.absent(),
+                required String filePath,
+                Value<String?> note = const Value.absent(),
+              }) => MedicalDocsCompanion.insert(
+                id: id,
+                issuedAt: issuedAt,
+                expiresAt: expiresAt,
+                filePath: filePath,
+                note: note,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MedicalDocsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MedicalDocsTable,
+      MedicalDoc,
+      $$MedicalDocsTableFilterComposer,
+      $$MedicalDocsTableOrderingComposer,
+      $$MedicalDocsTableAnnotationComposer,
+      $$MedicalDocsTableCreateCompanionBuilder,
+      $$MedicalDocsTableUpdateCompanionBuilder,
+      (
+        MedicalDoc,
+        BaseReferences<_$AppDatabase, $MedicalDocsTable, MedicalDoc>,
+      ),
+      MedicalDoc,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2208,4 +7074,16 @@ class $AppDatabaseManager {
       $$PersonalBestsTableTableManager(_db, _db.personalBests);
   $$SettingsTableTableManager get settings =>
       $$SettingsTableTableManager(_db, _db.settings);
+  $$DiveSessionsTableTableManager get diveSessions =>
+      $$DiveSessionsTableTableManager(_db, _db.diveSessions);
+  $$DiveRepsTableTableManager get diveReps =>
+      $$DiveRepsTableTableManager(_db, _db.diveReps);
+  $$DiveSitesTableTableManager get diveSites =>
+      $$DiveSitesTableTableManager(_db, _db.diveSites);
+  $$DiveBuddiesTableTableManager get diveBuddies =>
+      $$DiveBuddiesTableTableManager(_db, _db.diveBuddies);
+  $$GearPresetsTableTableManager get gearPresets =>
+      $$GearPresetsTableTableManager(_db, _db.gearPresets);
+  $$MedicalDocsTableTableManager get medicalDocs =>
+      $$MedicalDocsTableTableManager(_db, _db.medicalDocs);
 }

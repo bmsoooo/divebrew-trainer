@@ -110,6 +110,8 @@ Future<void> clearHistory(AppDatabase db) async {
   await db.transaction(() async {
     await db.delete(db.sessions).go();
     await db.delete(db.personalBests).go();
+    await db.delete(db.diveReps).go();
+    await db.delete(db.diveSessions).go();
   });
 }
 
@@ -119,6 +121,8 @@ Future<void> resetAll(AppDatabase db) async {
   await db.transaction(() async {
     await db.delete(db.sessions).go();
     await db.delete(db.personalBests).go();
+    await db.delete(db.diveReps).go();
+    await db.delete(db.diveSessions).go();
     await db.delete(db.trainingTables).go();
   });
   await seedPresetsIfEmpty(db);

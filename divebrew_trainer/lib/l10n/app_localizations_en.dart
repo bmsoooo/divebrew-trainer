@@ -281,6 +281,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tabHistory => 'History';
 
   @override
+  String get tabLogbook => 'Logbook';
+
+  @override
+  String get logbookNew => 'New Log';
+
+  @override
+  String get logbookEdit => 'Edit Log';
+
+  @override
+  String get logbookSave => 'Save';
+
+  @override
   String get tableListIntro =>
       'CO2 tables shrink recovery breathing; O2 tables extend the hold';
 

@@ -82,3 +82,86 @@ String encodeRoundResults(List<RoundResult> results) =>
 List<RoundResult> decodeRoundResults(String json) => (jsonDecode(json) as List)
     .map((e) => RoundResult.fromJson(e as Map<String, dynamic>))
     .toList();
+
+// Logbook Enums
+enum SiteType { pool, sea, lake }
+enum PurposeTag { training, leisure, spearfishing, photo, competitionPractice, other }
+enum ConditionSource { auto, manual }
+enum FinType { monofin, bifin, barefoot }
+enum IncidentType { none, samba, blackout }
+enum RecoveryType { normal, delayed, assisted }
+enum Discipline { sta, dyn, dnf, cwt, cwtb, cnf, fim, custom }
+enum PerformanceUnit { sec, m }
+
+class DiveCondition {
+  final double? waveHeightM;
+  final double? waterTempC;
+  final double? waveDirectionDeg;
+  final double? visibilityM;
+  final ConditionSource source;
+
+  const DiveCondition({
+    this.waveHeightM,
+    this.waterTempC,
+    this.waveDirectionDeg,
+    this.visibilityM,
+    this.source = ConditionSource.manual,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'waveHeightM': waveHeightM,
+        'waterTempC': waterTempC,
+        'waveDirectionDeg': waveDirectionDeg,
+        'visibilityM': visibilityM,
+        'source': source.name,
+      };
+
+  DiveCondition copyWith({
+    double? waveHeightM,
+    double? waterTempC,
+    double? waveDirectionDeg,
+    double? visibilityM,
+    ConditionSource? source,
+  }) {
+    return DiveCondition(
+      waveHeightM: waveHeightM ?? this.waveHeightM,
+      waterTempC: waterTempC ?? this.waterTempC,
+      waveDirectionDeg: waveDirectionDeg ?? this.waveDirectionDeg,
+      visibilityM: visibilityM ?? this.visibilityM,
+      source: source ?? this.source,
+    );
+  }
+
+  factory DiveCondition.fromJson(Map<String, dynamic> json) => DiveCondition(
+        waveHeightM: (json['waveHeightM'] as num?)?.toDouble(),
+        waterTempC: (json['waterTempC'] as num?)?.toDouble(),
+        waveDirectionDeg: (json['waveDirectionDeg'] as num?)?.toDouble(),
+        visibilityM: (json['visibilityM'] as num?)?.toDouble(),
+        source: ConditionSource.values.firstWhere(
+          (e) => e.name == json['source'],
+          orElse: () => ConditionSource.manual,
+        ),
+      );
+}
+
+class DiveGear {
+  final double? weightKg;
+  final double? suitThicknessMm;
+  final FinType? finType;
+
+  const DiveGear({this.weightKg, this.suitThicknessMm, this.finType});
+
+  Map<String, dynamic> toJson() => {
+        'weightKg': weightKg,
+        'suitThicknessMm': suitThicknessMm,
+        'finType': finType?.name,
+      };
+
+  factory DiveGear.fromJson(Map<String, dynamic> json) => DiveGear(
+        weightKg: (json['weightKg'] as num?)?.toDouble(),
+        suitThicknessMm: (json['suitThicknessMm'] as num?)?.toDouble(),
+        finType: json['finType'] != null
+            ? FinType.values.firstWhere((e) => e.name == json['finType'])
+            : null,
+      );
+}

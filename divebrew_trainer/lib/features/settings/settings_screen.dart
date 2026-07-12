@@ -8,8 +8,8 @@ import '../../data/link_launcher.dart';
 import '../../data/presets.dart';
 import '../../l10n/app_localizations.dart';
 
-/// pubspec version 1.0.0+1 과 일치 — 릴리스 시 함께 갱신.
-const _appVersion = '1.0.0 (1)';
+/// pubspec version 1.1.0+2 과 일치 — 릴리스 시 함께 갱신.
+const _appVersion = '1.1.0 (2)';
 const _instagramUrl = 'https://instagram.com/divebrew.soo';
 const _contactEmail = 'divebrew@gmail.com';
 const _contactMailto =

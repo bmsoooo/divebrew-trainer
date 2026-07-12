@@ -7,20 +7,39 @@ import 'tables.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(tables: [TrainingTables, Sessions, PersonalBests, Settings])
+@DriftDatabase(tables: [
+  TrainingTables,
+  Sessions,
+  PersonalBests,
+  Settings,
+  DiveSessions,
+  DiveReps,
+  DiveSites,
+  DiveBuddies,
+  GearPresets,
+  MedicalDocs,
+])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   AppDatabase.forTesting(super.connection);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onUpgrade: (m, from, to) async {
           if (from < 2) {
             await m.createTable(settings);
+          }
+          if (from < 3) {
+            await m.createTable(diveSessions);
+            await m.createTable(diveReps);
+            await m.createTable(diveSites);
+            await m.createTable(diveBuddies);
+            await m.createTable(gearPresets);
+            await m.createTable(medicalDocs);
           }
         },
       );

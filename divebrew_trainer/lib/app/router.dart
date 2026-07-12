@@ -6,6 +6,8 @@ import '../data/database.dart';
 import '../features/guide/guide_screen.dart';
 import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/logbook/logbook_edit_screen.dart';
+import '../features/logbook/logbook_screen.dart';
 import '../features/license/license_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/session/session_screen.dart';
@@ -54,6 +56,12 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
               GoRoute(
                 path: '/history',
                 builder: (context, state) => HistoryScreen(db: db),
+              ),
+            ]),
+            StatefulShellBranch(routes: [
+              GoRoute(
+                path: '/logbook',
+                builder: (context, state) => LogbookScreen(db: db),
               ),
             ]),
             StatefulShellBranch(routes: [
@@ -133,6 +141,19 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
           parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) => LicenseScreen(db: db),
         ),
+        GoRoute(
+          path: '/logbook/new',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => LogbookEditScreen(db: db),
+        ),
+        GoRoute(
+          path: '/logbook/edit/:id',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) => LogbookEditScreen(
+            db: db,
+            sessionId: int.parse(state.pathParameters['id']!),
+          ),
+        ),
       ],
     );
 
@@ -169,6 +190,11 @@ class _TabShell extends StatelessWidget {
             icon: const Icon(Icons.schedule_outlined),
             selectedIcon: const Icon(Icons.schedule),
             label: l10n.tabHistory,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.menu_book_outlined),
+            selectedIcon: const Icon(Icons.menu_book),
+            label: l10n.tabLogbook,
           ),
           NavigationDestination(
             icon: const Icon(Icons.settings_outlined),
