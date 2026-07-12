@@ -8,6 +8,7 @@ import '../features/history/history_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/logbook/logbook_edit_screen.dart';
 import '../features/logbook/logbook_screen.dart';
+import '../features/logbook/logbook_share_screen.dart';
 import '../features/license/license_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/session/session_screen.dart';
@@ -153,6 +154,14 @@ GoRouter createRouter(AppDatabase db, ConsentState consent) => GoRouter(
             db: db,
             sessionId: int.parse(state.pathParameters['id']!),
           ),
+        ),
+        GoRoute(
+          path: '/logbook/share',
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) {
+            final session = state.extra as DiveSession;
+            return LogbookShareScreen(db: db, session: session);
+          },
         ),
       ],
     );

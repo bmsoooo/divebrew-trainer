@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:go_router/go_router.dart';
 
 
 
@@ -43,6 +44,8 @@ class _LogbookEditScreenState extends State<LogbookEditScreen> {
   DiveCondition _condition = const DiveCondition(source: ConditionSource.manual);
   bool _isLoadingLocation = false;
   bool _isLoadingSession = false;
+
+  DiveSession? _loadedSession;
   
   String _leaderName = '';
   String _note = '';
@@ -77,6 +80,7 @@ class _LogbookEditScreenState extends State<LogbookEditScreen> {
     try {
       final session = await _repository.getSession(id);
       if (session == null) return;
+      _loadedSession = session;
       final reps = await _repository.getRepsForSession(id);
       
       setState(() {
@@ -298,11 +302,29 @@ class _LogbookEditScreenState extends State<LogbookEditScreen> {
       appBar: AppBar(
         title: Text(isNew ? l10n.logbookNew : l10n.logbookEdit),
         actions: [
-          if (!isNew)
+          if (!isNew) ...[
+            IconButton(
+              icon: const Icon(Icons.ios_share),
+              tooltip: '공유 카드 만들기',
+              onPressed: () {
+                if (_photoPaths.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('사진을 먼저 추가해주세요.')),
+                  );
+                  return;
+                }
+                if (_loadedSession != null) {
+                  // To ensure any recent edits are reflected, we should save first,
+                  // but for MVP, we just pass the _loadedSession.
+                  context.push('/logbook/share', extra: _loadedSession!);
+                }
+              },
+            ),
             IconButton(
               icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
               onPressed: _confirmDelete,
             ),
+          ],
           TextButton(
             onPressed: _save,
             child: Text(l10n.logbookSave),

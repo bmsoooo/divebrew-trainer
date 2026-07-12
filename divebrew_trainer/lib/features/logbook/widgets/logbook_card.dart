@@ -1,9 +1,6 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../data/database.dart';
 import '../../../data/models.dart';
@@ -18,84 +15,7 @@ class LogbookCard extends StatelessWidget {
     required this.onTap,
   });
 
-  Future<void> _shareToInstagram(BuildContext context) async {
-    try {
-      final controller = ScreenshotController();
-      final theme = Theme.of(context);
-      
-      // 공유 전용 UI를 캡처
-      final imageBytes = await controller.captureFromWidget(
-        Material(
-          child: Container(
-            width: 400,
-            height: 500,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [theme.colorScheme.primary, theme.colorScheme.tertiary],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (session.photoPaths.isNotEmpty)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: kIsWeb
-                        ? Image.network(session.photoPaths.first, width: 200, height: 200, fit: BoxFit.cover)
-                        : Image.file(File(session.photoPaths.first), width: 200, height: 200, fit: BoxFit.cover),
-                  )
-                else
-                  const Icon(Icons.water, size: 100, color: Colors.white),
-                const SizedBox(height: 24),
-                Text(
-                  'DiveBrew Log',
-                  style: theme.textTheme.headlineSmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  session.siteName,
-                  style: theme.textTheme.titleMedium?.copyWith(color: Colors.white70),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildTag(context, DateFormat('yy.MM.dd').format(session.date)),
-                    const SizedBox(width: 8),
-                    _buildTag(context, _getPurposeText(session.purposeTag)),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        context: context,
-        delay: const Duration(milliseconds: 100),
-      );
 
-      final xFile = XFile.fromData(
-        imageBytes,
-        mimeType: 'image/png',
-        name: 'divebrew_log_${session.id}.png',
-      );
-
-      // ignore: deprecated_member_use
-      await Share.shareXFiles(
-        [xFile],
-        text: '다이브브루에서 기록한 프리다이빙 로그입니다! 🌊\n장소: ${session.siteName}',
-      );
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('공유 중 오류가 발생했습니다: $e')),
-        );
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,8 +101,16 @@ class LogbookCard extends StatelessWidget {
               // 공유 버튼
               IconButton(
                 icon: const Icon(Icons.ios_share),
-                onPressed: () => _shareToInstagram(context),
-                tooltip: '인스타그램 공유',
+                onPressed: () {
+                  if (session.photoPaths.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('사진을 먼저 추가해주세요.')),
+                    );
+                  } else {
+                    context.push('/logbook/share', extra: session);
+                  }
+                },
+                tooltip: '공유 카드 만들기',
               ),
             ],
           ),
