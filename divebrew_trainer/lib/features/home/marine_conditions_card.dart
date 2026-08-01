@@ -204,48 +204,125 @@ class _ConditionBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Container(
-              width: 7,
-              height: 7,
-              decoration: BoxDecoration(
-                color: rating.color,
-                shape: BoxShape.circle,
+        // 다이빙 상태 배지
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: rating.color.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: rating.color.withValues(alpha: 0.4)),
+          ),
+          child: Row(
+            children: [
+              Icon(rating.icon, color: rating.color, size: 20),
+              const SizedBox(width: 8),
+              Text(
+                rating.label,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: rating.color,
+                ),
               ),
-            ),
-            const SizedBox(width: 7),
-            Text(
-              rating.label,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: rating.color,
+              const Spacer(),
+              Text(
+                l10n.marineUpdatedAt(_time(condition.observedAt)),
+                style: const TextStyle(fontSize: 11, color: mist),
               ),
-            ),
-            const Spacer(),
-            Text(
-              l10n.marineUpdatedAt(_time(condition.observedAt)),
-              style: const TextStyle(fontSize: 11, color: mist),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 14),
+
+        // 수온·파고·파향 수치 (색상 강조)
         Row(
           children: [
             _Reading(
               label: l10n.marineWave,
               value: '${condition.waveHeightM.toStringAsFixed(1)} m',
+              valueColor: condition.waveHeightM > 1.2
+                  ? const Color(0xFFFF6B6B)
+                  : condition.waveHeightM > 0.6
+                      ? snorkelYellow
+                      : const Color(0xFF4ADE80),
             ),
             _Reading(
               label: l10n.marineWaterTemp,
               value: '${condition.seaSurfaceTemperatureC.toStringAsFixed(1)}°',
+              valueColor: condition.seaSurfaceTemperatureC < 14
+                  ? const Color(0xFF60A5FA)
+                  : condition.seaSurfaceTemperatureC < 20
+                      ? foam
+                      : const Color(0xFF4ADE80),
             ),
             _Reading(
               label: l10n.marineWaveDirection,
               value: l10n.marineFrom(_direction(l10n, condition.waveDirection)),
             ),
           ],
+        ),
+        const SizedBox(height: 14),
+
+        // 수트 추천 & 물때 정보
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: midWater.withValues(alpha: 0.6),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 수트 추천
+              Row(
+                children: [
+                  const Icon(Icons.checkroom, color: snorkelYellow, size: 18),
+                  const SizedBox(width: 8),
+                  Text(
+                    '추천 수트',
+                    style: utilityLabelStyle.copyWith(fontSize: 11),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      condition.suitRecommendation,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: foam,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              // 물때 정보 (KHOA 데이터가 있을 때만)
+              if (condition.tide != null) ...[
+                const SizedBox(height: 10),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.waves, color: Color(0xFF60A5FA), size: 18),
+                    const SizedBox(width: 8),
+                    Text(
+                      '물때',
+                      style: utilityLabelStyle.copyWith(fontSize: 11),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        condition.tide!,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: foam,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ],
+          ),
         ),
       ],
     );
@@ -270,17 +347,18 @@ class _ConditionBody extends StatelessWidget {
     AppLocalizations l10n,
     DiveSuitability suitability,
   ) => switch (suitability) {
-    DiveSuitability.favorable => _Rating(l10n.marineFavorable, snorkelYellow),
-    DiveSuitability.caution => _Rating(l10n.marineCaution, mist),
-    DiveSuitability.avoid => _Rating(l10n.marineAvoid, const Color(0xFFFF6B6B)),
+    DiveSuitability.favorable => _Rating(l10n.marineFavorable, const Color(0xFF4ADE80), Icons.check_circle),
+    DiveSuitability.caution => _Rating(l10n.marineCaution, snorkelYellow, Icons.warning_amber_rounded),
+    DiveSuitability.avoid => _Rating(l10n.marineAvoid, const Color(0xFFFF6B6B), Icons.dangerous),
   };
 }
 
 class _Reading extends StatelessWidget {
   final String label;
   final String value;
+  final Color? valueColor;
 
-  const _Reading({required this.label, required this.value});
+  const _Reading({required this.label, required this.value, this.valueColor});
 
   @override
   Widget build(BuildContext context) => Expanded(
@@ -293,10 +371,10 @@ class _Reading extends StatelessWidget {
           value,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w700,
-            color: foam,
+            color: valueColor ?? foam,
           ),
         ),
       ],
@@ -363,6 +441,7 @@ class _SurfaceTracePainter extends CustomPainter {
 class _Rating {
   final String label;
   final Color color;
+  final IconData icon;
 
-  const _Rating(this.label, this.color);
+  const _Rating(this.label, this.color, this.icon);
 }
