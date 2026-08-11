@@ -153,7 +153,10 @@ class _MarineConditionsCardState extends State<MarineConditionsCard> {
               else if (snapshot.hasError || condition == null)
                 _FailureState(onRetry: _retry)
               else
-                _ConditionBody(condition: condition),
+                _ConditionBody(
+                  condition: condition,
+                  siteName: _siteName(l10n, _site),
+                ),
               const SizedBox(height: 12),
               Text(
                 l10n.marineDisclaimer,
@@ -194,8 +197,12 @@ class _MarineConditionsCardState extends State<MarineConditionsCard> {
 
 class _ConditionBody extends StatelessWidget {
   final MarineCondition condition;
+  final String siteName;
 
-  const _ConditionBody({required this.condition});
+  const _ConditionBody({
+    required this.condition,
+    required this.siteName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +311,7 @@ class _ConditionBody extends StatelessWidget {
                     const Icon(Icons.waves, color: Color(0xFF60A5FA), size: 18),
                     const SizedBox(width: 8),
                     Text(
-                      '물때',
+                      _tideLabel(siteName, condition.tideStationName),
                       style: utilityLabelStyle.copyWith(fontSize: 11),
                     ),
                     const SizedBox(width: 8),
@@ -330,6 +337,16 @@ class _ConditionBody extends StatelessWidget {
 
   String _time(DateTime time) =>
       '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+
+  String _tideLabel(String siteName, String? tideStationName) {
+    if (tideStationName == null || tideStationName.isEmpty) return '물때';
+    final cleanSite = siteName.replaceAll(' ', '');
+    final cleanStation = tideStationName.replaceAll(' ', '');
+    if (cleanSite == cleanStation || cleanSite.contains(cleanStation) || cleanStation.contains(cleanSite)) {
+      return '물때';
+    }
+    return '물때($tideStationName)';
+  }
 
   String _direction(AppLocalizations l10n, WaveDirection direction) =>
       switch (direction) {

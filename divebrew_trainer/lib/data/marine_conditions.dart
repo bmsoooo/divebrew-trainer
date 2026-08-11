@@ -21,6 +21,16 @@ class DiveSite {
   });
 }
 
+class TideForecastResult {
+  final String tideText;
+  final String stationName;
+
+  const TideForecastResult({
+    required this.tideText,
+    required this.stationName,
+  });
+}
+
 const diveSites = [
   DiveSite(id: 'goseong', latitude: 38.3806, longitude: 128.4677, khoaObsCode: 'DT_0004'),
   DiveSite(id: 'sokcho', latitude: 38.2070, longitude: 128.5918, khoaPlaceCode: 'SS1', khoaObsCode: 'DT_0004'),
@@ -59,6 +69,7 @@ class MarineCondition {
   final double waveDirectionDegrees;
   final DateTime observedAt;
   final String? tide;
+  final String? tideStationName;
   final DiveSuitability? apiSuitability; // KHOA에서 제공하는 totalIndex 기반
 
   const MarineCondition({
@@ -67,6 +78,7 @@ class MarineCondition {
     required this.waveDirectionDegrees,
     required this.observedAt,
     this.tide,
+    this.tideStationName,
     this.apiSuitability,
   });
 
@@ -105,10 +117,15 @@ class MarineForecastRepository {
   Future<MarineCondition> load(DiveSite site) async {
     final khoa = KhoaMarineApi();
     String? tideForecast;
+    String? tideStationName;
 
     if (site.khoaObsCode != null) {
       try {
-        tideForecast = await khoa.fetchTideForecast(site.khoaObsCode!);
+        final tideResult = await khoa.fetchTideForecast(site.khoaObsCode!);
+        if (tideResult != null) {
+          tideForecast = tideResult.tideText;
+          tideStationName = tideResult.stationName;
+        }
       } catch (_) {}
     }
 
@@ -117,7 +134,7 @@ class MarineForecastRepository {
         final result = await khoa.fetchSkinScubaIndex(site.khoaPlaceCode!);
         if (result != null) {
           final combinedTide = (result.tide != null && tideForecast != null)
-              ? '${result.tide} / $tideForecast'
+              ? '${result.tide}\n$tideForecast'
               : (tideForecast ?? result.tide);
 
           return MarineCondition(
@@ -126,6 +143,7 @@ class MarineForecastRepository {
             waveDirectionDegrees: result.waveDirectionDegrees,
             observedAt: result.observedAt,
             tide: combinedTide,
+            tideStationName: tideStationName ?? result.tideStationName,
             apiSuitability: result.apiSuitability,
           );
         }
@@ -141,6 +159,7 @@ class MarineForecastRepository {
       waveDirectionDegrees: openMeteoResult.waveDirectionDegrees,
       observedAt: openMeteoResult.observedAt,
       tide: tideForecast,
+      tideStationName: tideStationName,
       apiSuitability: openMeteoResult.apiSuitability,
     );
   }

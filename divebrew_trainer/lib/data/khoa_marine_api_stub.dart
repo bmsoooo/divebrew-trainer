@@ -3,5 +3,5 @@ import 'marine_conditions.dart';
 
 class KhoaMarineApi {
   Future<MarineCondition?> fetchSkinScubaIndex(String placeCode) async => null;
-  Future<String?> fetchTideForecast(String obsCode) async => null;
+  Future<TideForecastResult?> fetchTideForecast(String obsCode) async => null;
 }
