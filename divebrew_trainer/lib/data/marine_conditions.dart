@@ -57,24 +57,24 @@ class TideStation {
 }
 
 const skinScubaStations = [
-  SkinScubaStation(code: 'SS1', name: '동명항', latitude: 38.2097, longitude: 128.6136),
-  SkinScubaStation(code: 'SS2', name: '남애항', latitude: 37.9442, longitude: 128.7951),
-  SkinScubaStation(code: 'SS3', name: '강문해변', latitude: 37.8025, longitude: 128.934),
-  SkinScubaStation(code: 'SS4', name: '오산항', latitude: 36.8856, longitude: 129.429),
-  SkinScubaStation(code: 'SS5', name: '월포해수욕장', latitude: 36.1961, longitude: 129.4123),
-  SkinScubaStation(code: 'SS6', name: '구조라해수욕장', latitude: 34.8058, longitude: 128.6874),
-  SkinScubaStation(code: 'SS7', name: '미조도', latitude: 34.7209, longitude: 128.0551),
-  SkinScubaStation(code: 'SS8', name: '거문도', latitude: 34.0239, longitude: 127.328),
-  SkinScubaStation(code: 'SS9', name: '성산일출봉', latitude: 33.4534, longitude: 126.9453),
-  SkinScubaStation(code: 'SS10', name: '문섬', latitude: 33.2273, longitude: 126.568),
-  SkinScubaStation(code: 'SS11', name: '홍도', latitude: 34.67377, longitude: 125.1996),
+  SkinScubaStation(code: 'SS1', name: '속초(동명항)', latitude: 38.2097, longitude: 128.6136),
+  SkinScubaStation(code: 'SS2', name: '양양(남애항)', latitude: 37.9442, longitude: 128.7951),
+  SkinScubaStation(code: 'SS3', name: '강릉(강문해변)', latitude: 37.8025, longitude: 128.934),
+  SkinScubaStation(code: 'SS4', name: '울진(오산항)', latitude: 36.8856, longitude: 129.429),
+  SkinScubaStation(code: 'SS5', name: '포항(월포)', latitude: 36.1961, longitude: 129.4123),
+  SkinScubaStation(code: 'SS6', name: '거제(구조라)', latitude: 34.8058, longitude: 128.6874),
+  SkinScubaStation(code: 'SS7', name: '남해(미조도)', latitude: 34.7209, longitude: 128.0551),
+  SkinScubaStation(code: 'SS8', name: '여수(거문도)', latitude: 34.0239, longitude: 127.328),
+  SkinScubaStation(code: 'SS9', name: '서귀포(성산)', latitude: 33.4534, longitude: 126.9453),
+  SkinScubaStation(code: 'SS10', name: '서귀포(문섬)', latitude: 33.2273, longitude: 126.568),
+  SkinScubaStation(code: 'SS11', name: '신안(홍도)', latitude: 34.67377, longitude: 125.1996),
   SkinScubaStation(code: 'SS12', name: '울릉도', latitude: 37.55982, longitude: 130.9003),
-  SkinScubaStation(code: 'SS13', name: '어영', latitude: 33.5196, longitude: 126.4849),
-  SkinScubaStation(code: 'SS14', name: '태종대', latitude: 35.0598, longitude: 129.0775),
-  SkinScubaStation(code: 'SS15', name: '격렬비열도', latitude: 36.61711, longitude: 125.56112),
-  SkinScubaStation(code: 'SS16', name: '추자도', latitude: 33.97684, longitude: 126.2661),
-  SkinScubaStation(code: 'SS17', name: '욕지도', latitude: 34.6276, longitude: 128.2977),
-  SkinScubaStation(code: 'SS18', name: '추암', latitude: 37.4793, longitude: 129.1617),
+  SkinScubaStation(code: 'SS13', name: '제주(어영)', latitude: 33.5196, longitude: 126.4849),
+  SkinScubaStation(code: 'SS14', name: '부산(태종대)', latitude: 35.0598, longitude: 129.0775),
+  SkinScubaStation(code: 'SS15', name: '태안(격렬비열도)', latitude: 36.61711, longitude: 125.56112),
+  SkinScubaStation(code: 'SS16', name: '제주(추자도)', latitude: 33.97684, longitude: 126.2661),
+  SkinScubaStation(code: 'SS17', name: '통영(욕지도)', latitude: 34.6276, longitude: 128.2977),
+  SkinScubaStation(code: 'SS18', name: '동해(추암)', latitude: 37.4793, longitude: 129.1617),
 ];
 
 const tideStations = [
@@ -288,7 +288,7 @@ class MarineForecastRepository {
       if (result != null) {
         waveHeight = result.waveHeightM;
         waterTemp = result.seaSurfaceTemperatureC;
-        waveStationName = result.tideStationName ?? closestScubaStation.name;
+        waveStationName = closestScubaStation.name;
         suitability = result.apiSuitability;
       }
     }

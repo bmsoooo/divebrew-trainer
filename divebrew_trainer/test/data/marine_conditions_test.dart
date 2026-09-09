@@ -51,7 +51,7 @@ void main() {
       expect(condition.waveHeightM, 0.4);
       expect(condition.seaSurfaceTemperatureC, 22.6);
       expect(condition.tideStationName, '속초');
-      expect(condition.waveStationName, '동명항');
+      expect(condition.waveStationName, '속초(동명항)');
       expect(condition.tide, contains('오전: 만조 00:47'));
       expect(condition.suitability, DiveSuitability.favorable);
     });
