@@ -65,7 +65,7 @@ void main() {
     expect(find.text('데이터 관리'), findsOneWidget);
     expect(find.text('이 기기에만 저장'), findsOneWidget);
     expect(find.text('앱 정보'), findsOneWidget);
-    expect(find.text('1.0.0 (1)'), findsOneWidget);
+    expect(find.text('1.1.0 (2)'), findsOneWidget);
   });
 
   testWidgets('훈련 기록 삭제 — 확인을 눌러야 실행된다', (tester) async {

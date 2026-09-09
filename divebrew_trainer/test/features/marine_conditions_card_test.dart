@@ -3,10 +3,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:divebrew_trainer/data/marine_conditions.dart';
+import 'package:divebrew_trainer/data/khoa_marine_api.dart';
 import 'package:divebrew_trainer/features/home/marine_conditions_card.dart';
 import 'package:divebrew_trainer/l10n/app_localizations.dart';
+import '../mock_geolocator.dart';
+
+class MockKhoaMarineApi extends KhoaMarineApi {
+  final bool shouldFail;
+
+  MockKhoaMarineApi({this.shouldFail = false});
+
+  @override
+  Future<MarineCondition?> fetchSkinScubaIndex(String placeCode) async {
+    if (shouldFail) throw StateError('API fetch failed');
+    if (placeCode == 'SS1') {
+      return MarineCondition(
+        waveHeightM: 0.4,
+        seaSurfaceTemperatureC: 21.5,
+        waveDirectionDegrees: 45,
+        observedAt: DateTime(2026, 7, 10, 9, 30),
+        tideStationName: '동명항',
+        apiSuitability: DiveSuitability.favorable,
+      );
+    }
+    return null;
+  }
+
+  @override
+  Future<TideForecastResult?> fetchTideForecast(String obsCode) async {
+    if (shouldFail) throw StateError('API fetch failed');
+    if (obsCode == 'DT_0012') {
+      return const TideForecastResult(
+        tideText: '오전: 만조 00:47 (1.5m)\n오후: 간조 13:05 (0.2m)',
+        stationName: '속초',
+      );
+    }
+    return null;
+  }
+}
 
 void main() {
+  setUp(() {
+    mockGeolocator();
+  });
+
   Widget buildApp(MarineForecastRepository repository) => MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
@@ -16,14 +56,7 @@ void main() {
 
   testWidgets('파고, 수온, 파향과 적합도를 표시한다', (tester) async {
     final repository = MarineForecastRepository(
-      loader: (uri) async => {
-        'current': {
-          'time': '2026-07-10T09:30',
-          'wave_height': 0.4,
-          'wave_direction': 45,
-          'sea_surface_temperature': 21.5,
-        },
-      },
+      khoa: MockKhoaMarineApi(),
     );
 
     await tester.pumpWidget(buildApp(repository));
@@ -32,12 +65,13 @@ void main() {
     expect(find.text('입수 전 현장 확인'), findsOneWidget);
     expect(find.text('0.4 m'), findsOneWidget);
     expect(find.text('21.5°'), findsOneWidget);
-    expect(find.text('북동쪽에서'), findsOneWidget);
+    // KHOA 스킨스쿠버 지수는 기본적으로 파향을 제공하지 않아 0.0(북쪽)으로 표기
+    expect(find.text('북쪽에서'), findsOneWidget);
   });
 
   testWidgets('예보 요청이 실패하면 재시도 안내를 표시한다', (tester) async {
     final repository = MarineForecastRepository(
-      loader: (uri) async => throw StateError('network unavailable'),
+      khoa: MockKhoaMarineApi(shouldFail: true),
     );
 
     await tester.pumpWidget(buildApp(repository));

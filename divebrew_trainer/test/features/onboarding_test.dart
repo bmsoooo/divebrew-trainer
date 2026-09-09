@@ -6,11 +6,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:divebrew_trainer/app/consent_state.dart';
 import 'package:divebrew_trainer/data/database.dart';
 import 'package:divebrew_trainer/main.dart';
+import '../mock_geolocator.dart';
 
 void main() {
   late AppDatabase db;
 
   setUp(() {
+    mockGeolocator();
     db = AppDatabase.forTesting(NativeDatabase.memory());
   });
 

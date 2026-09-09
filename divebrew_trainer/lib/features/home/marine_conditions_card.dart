@@ -243,28 +243,43 @@ class _ConditionBody extends StatelessWidget {
 
         // 수온·파고·파향 수치 (색상 강조)
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _Reading(
               label: l10n.marineWave,
-              value: '${condition.waveHeightM.toStringAsFixed(1)} m',
-              valueColor: condition.waveHeightM > 1.2
-                  ? const Color(0xFFFF6B6B)
-                  : condition.waveHeightM > 0.6
-                      ? snorkelYellow
-                      : const Color(0xFF4ADE80),
+              value: condition.waveHeightM != null
+                  ? '${condition.waveHeightM!.toStringAsFixed(1)} m'
+                  : '관측소 정보 없음',
+              valueColor: condition.waveHeightM == null
+                  ? mist
+                  : condition.waveHeightM! > 1.2
+                      ? const Color(0xFFFF6B6B)
+                      : condition.waveHeightM! > 0.6
+                          ? snorkelYellow
+                          : const Color(0xFF4ADE80),
+              stationName: condition.waveStationName,
             ),
             _Reading(
               label: l10n.marineWaterTemp,
-              value: '${condition.seaSurfaceTemperatureC.toStringAsFixed(1)}°',
-              valueColor: condition.seaSurfaceTemperatureC < 14
-                  ? const Color(0xFF60A5FA)
-                  : condition.seaSurfaceTemperatureC < 20
-                      ? foam
-                      : const Color(0xFF4ADE80),
+              value: condition.seaSurfaceTemperatureC != null
+                  ? '${condition.seaSurfaceTemperatureC!.toStringAsFixed(1)}°'
+                  : '관측소 정보 없음',
+              valueColor: condition.seaSurfaceTemperatureC == null
+                  ? mist
+                  : condition.seaSurfaceTemperatureC! < 14
+                      ? const Color(0xFF60A5FA)
+                      : condition.seaSurfaceTemperatureC! < 20
+                          ? foam
+                          : const Color(0xFF4ADE80),
+              stationName: condition.waveStationName,
             ),
             _Reading(
               label: l10n.marineWaveDirection,
-              value: l10n.marineFrom(_direction(l10n, condition.waveDirection)),
+              value: condition.waveHeightM != null
+                  ? l10n.marineFrom(_direction(l10n, condition.waveDirection))
+                  : '관측소 정보 없음',
+              valueColor: condition.waveHeightM == null ? mist : foam,
+              stationName: condition.waveStationName,
             ),
           ],
         ),
@@ -310,9 +325,24 @@ class _ConditionBody extends StatelessWidget {
                   children: [
                     const Icon(Icons.waves, color: Color(0xFF60A5FA), size: 18),
                     const SizedBox(width: 8),
-                    Text(
-                      _tideLabel(siteName, condition.tideStationName),
-                      style: utilityLabelStyle.copyWith(fontSize: 11),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _tideLabel(siteName, condition.tideStationName),
+                          style: utilityLabelStyle.copyWith(fontSize: 11),
+                        ),
+                        if (condition.tideStationName != null && condition.tideStationName!.isNotEmpty) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            '${condition.tideStationName} 조위관측소',
+                            style: const TextStyle(
+                              fontSize: 8.5,
+                              color: mist,
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -374,8 +404,14 @@ class _Reading extends StatelessWidget {
   final String label;
   final String value;
   final Color? valueColor;
+  final String? stationName;
 
-  const _Reading({required this.label, required this.value, this.valueColor});
+  const _Reading({
+    required this.label,
+    required this.value,
+    this.valueColor,
+    this.stationName,
+  });
 
   @override
   Widget build(BuildContext context) => Expanded(
@@ -394,6 +430,18 @@ class _Reading extends StatelessWidget {
             color: valueColor ?? foam,
           ),
         ),
+        if (stationName != null && stationName!.isNotEmpty) ...[
+          const SizedBox(height: 2),
+          Text(
+            '$stationName 기준',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 9,
+              color: mist,
+            ),
+          ),
+        ],
       ],
     ),
   );

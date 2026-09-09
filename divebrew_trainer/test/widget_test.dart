@@ -6,8 +6,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:divebrew_trainer/app/consent_state.dart';
 import 'package:divebrew_trainer/data/database.dart';
 import 'package:divebrew_trainer/main.dart';
+import 'mock_geolocator.dart';
 
 void main() {
+  setUp(() {
+    mockGeolocator();
+  });
+
   testWidgets('동의 완료 상태면 홈 화면이 표시된다', (WidgetTester tester) async {
     final db = AppDatabase.forTesting(NativeDatabase.memory());
     addTearDown(db.close);
